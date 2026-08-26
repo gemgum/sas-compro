@@ -26,21 +26,20 @@
 
 <!-- ═══ NAV ═══ -->
 <header class="sticky top-0 z-50 bg-cream/85 backdrop-blur-sm">
-  <nav class="mx-auto flex max-w-[1200px] items-center px-6 py-5">
-    <a href="#top" class="text-[15px] font-extrabold tracking-wide text-blue">SARTHLUTIONS</a>
+  <nav class="mx-auto flex max-w-[1200px] items-center px-6 py-3">
+    <a href="#top" class="shrink-0"><img src="assets/logo.webp" alt="Sarthlutions" class="brand-logo h-12 w-auto"></a>
 
     <ul class="ml-auto hidden items-center gap-9 text-[15px] font-medium text-blue lg:flex">
       <li><a href="#top" class="nav-link inline-flex items-center" aria-current="true">Home</a></li>
       <li><a href="#layanan" class="nav-link inline-flex items-center">Services</a></li>
       <li><a href="#klien" class="nav-link inline-flex items-center">Our Clients</a></li>
-      <li><a href="#kontak" class="nav-link inline-flex items-center">Contact</a></li>
+      <li><a href="#tentang" class="nav-link inline-flex items-center">About Us</a></li>
       <li class="group relative">
-        <a href="#tentang" class="nav-link inline-flex items-center gap-1.5">
-          About Us
+        <a href="#alur" class="nav-link inline-flex items-center gap-1.5">
+          More
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <ul class="invisible absolute right-0 top-full w-44 rounded-md bg-white py-1.5 text-sm shadow-lg ring-1 ring-blue/10 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-          <li><a href="#tentang" class="block px-4 py-2 hover:bg-blue/10" data-en="About the Company">Tentang Kami</a></li>
           <li><a href="#alur" class="block px-4 py-2 hover:bg-blue/10">How We Work</a></li>
           <li><a href="#keunggulan" class="block px-4 py-2 hover:bg-blue/10">Why Choose Us</a></li>
           <li><a href="#sertifikat" class="block px-4 py-2 hover:bg-blue/10">Certificate</a></li>
@@ -48,6 +47,7 @@
           <li><a href="#faq" class="block px-4 py-2 hover:bg-blue/10">FAQ</a></li>
         </ul>
       </li>
+      <li><a href="#kontak" class="nav-link inline-flex items-center">Contact</a></li>
     </ul>
 
 
@@ -74,9 +74,9 @@
   </nav>
 </header>
 
-<section id="top" class="g-hero flex min-h-[calc(100vh-68px)] flex-col">
+<section id="top" class="g-hero flex min-h-[calc(100vh-72px)] flex-col">
   <div class="flex flex-1 items-center">
-    <div class="mx-auto w-full max-w-[1200px] px-6 py-20">
+    <div class="mx-auto w-full max-w-[1200px] px-6 py-16">
       <p class="text-xs font-semibold uppercase tracking-[0.28em] text-blue/60" data-en="PT Sarana Artha Solusi &amp;middot; South Jakarta">PT Sarana Artha Solusi &middot; Jakarta Selatan</p>
       <h1 class="mt-6 text-[44px] font-extrabold leading-[1.03] tracking-tight text-blue sm:text-7xl lg:text-[88px]">SARTH<wbr>LUTIONS</h1>
       <p class="mt-5 text-2xl italic text-blue/90 sm:text-3xl">Secure. Smart. Scalable.</p>
@@ -87,11 +87,6 @@
       </div>
     </div>
   </div>
-
-  <a href="#layanan" class="mx-auto mb-2 flex flex-col items-center gap-1.5 pb-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-blue/50 transition hover:text-blue">
-    scroll
-    <svg width="14" height="20" viewBox="0 0 14 20" fill="none" aria-hidden="true"><path d="M7 1v16m0 0 5-5m-5 5-5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
 
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
     <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
@@ -117,11 +112,11 @@
     </div>
   </div>
 
-  <dl class="mx-auto grid max-w-3xl grid-cols-1 gap-y-10 px-6 pb-14 text-center sm:grid-cols-3">
-    <div><dt class="text-5xl font-extrabold text-blue">50+</dt><dd class="mt-2 text-soft" data-en="projects delivered">proyek diserahkan</dd></div><div><dt class="text-5xl font-extrabold text-blue">30+</dt><dd class="mt-2 text-soft" data-en="organizations served">organisasi dilayani</dd></div><div><dt class="text-5xl font-extrabold text-blue">15+</dt><dd class="mt-2 text-soft" data-en="certified professionals">profesional bersertifikat</dd></div>
+  <dl class="mx-auto grid max-w-3xl grid-cols-3 gap-x-4 gap-y-10 px-6 pb-14 text-center">
+    <div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">50+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-en="projects delivered">proyek diserahkan</dd></div><div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">30+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-en="organizations served">organisasi dilayani</dd></div><div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">15+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-en="certified professionals">profesional bersertifikat</dd></div>
   </dl>
 
-  <ul class="mx-auto grid max-w-[1200px] gap-6 px-6 pb-16 sm:grid-cols-3">
+  <ul class="mx-auto mt-10 grid max-w-[1200px] gap-6 px-6 pb-16 sm:grid-cols-3">
     <li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
       <h2 class="text-lg font-bold text-blue">Security First</h2>
       <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Every system we touch is designed to withstand real-world attacks.">Setiap sistem yang kami sentuh dirancang untuk menahan serangan nyata.</p>
@@ -183,12 +178,7 @@
 
 <section id="layanan" class="pb-6 pt-2">
   <div class="mx-auto max-w-[1200px] px-6">
-    <div class="flex items-start justify-between gap-6">
-      <div>
-        <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Services</h2>
-        <p class="mt-3 max-w-md leading-snug text-soft" data-en="Four connected capabilities that cover the full lifecycle of a secure digital system — from protecting what you already run to building what comes next.">Empat kemampuan yang saling terhubung, mencakup seluruh daur hidup sistem digital yang aman — dari melindungi yang sudah berjalan sampai membangun yang berikutnya.</p>
-      </div>
-    </div>
+    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Services</h2>
   </div>
 
   <ul class="mx-auto mt-10 grid max-w-[1200px] grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -249,8 +239,7 @@
 <section id="alur" class="py-6">
   <div class="mx-auto max-w-[1200px] px-6">
     <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">How We Work</h2>
-    <p class="mt-3 max-w-lg leading-snug text-soft" data-en="A structured engagement model that keeps every project predictable, transparent, and accountable.">Model kerja terstruktur yang menjaga setiap proyek tetap terduga, transparan, dan bisa dipertanggungjawabkan.</p>
-    <ol class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+    <ol class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
       <li class="border-t-2 border-teal/30 pt-5">
         <span class="text-sm font-bold tracking-[0.2em] text-teal">01</span>
         <h3 class="mt-2 text-xl font-bold text-blue">Discover</h3>
@@ -282,7 +271,6 @@
   </svg>
   <div class="mx-auto max-w-[1200px] px-6 pt-10">
     <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Clients</h2>
-    <p class="mt-3 max-w-lg text-soft" data-en="Organizations that trusted us to build, modernize, and secure their systems.">Organisasi yang mempercayakan pembangunan dan pengamanan sistemnya kepada kami.</p>
   </div>
 
   <!-- Deretan berjalan: daftar logo ditulis dua kali; salinan kedua aria-hidden
@@ -335,7 +323,6 @@
 <section id="keunggulan" class="py-6">
   <div class="mx-auto max-w-[1200px] px-6">
     <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Why Choose Us</h2>
-    <p class="mt-3 max-w-lg leading-snug text-soft" data-en="We are not just a technology provider — we are your partner in building systems that stay safe as they grow.">Kami bukan sekadar penyedia teknologi — kami mitra Anda dalam membangun sistem yang tetap aman saat ia tumbuh.</p>
     <ul class="mt-10 grid gap-6 sm:grid-cols-2">
       <li class="rounded-lg border-l-4 border-teal bg-white p-7 shadow-sm ring-1 ring-blue/5">
         <h3 class="text-lg font-bold text-blue">Security-First Engineering</h3>
@@ -360,78 +347,38 @@
   </svg>
   <div class="mx-auto max-w-[1200px] px-6 pt-10">
     <h1 class="text-5xl font-extrabold text-blue sm:text-6xl">Certificate</h1>
-    <p class="mt-3 max-w-lg leading-snug text-soft" data-en="The offensive and application-security certifications our engineers hold. Every assessment is run by someone actually certified to run it.">Sertifikasi ofensif dan keamanan aplikasi yang dipegang engineer kami. Pengujian dikerjakan orang yang memang tersertifikasi untuk itu.</p>
   </div>
 
-  <!-- VERIFIKASI: nama panjang dan penerbit untuk CM-Pen, CCEP, dan C3SA belum
-       dipastikan — lengkapi sebelum halaman ini dipublikasikan. -->
-  <ul class="mx-auto mt-10 grid max-w-[1200px] grid-cols-1 gap-4 px-6 pb-24 sm:grid-cols-2 lg:grid-cols-3">
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CEH</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Ethical Hacker</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">EC-Council</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">eWPTX</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Web Application Penetration Tester eXtreme</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">INE Security</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CRTP</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Red Team Professional</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">Altered Security</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CRTA</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Red Team Analyst</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">CyberWarFare Labs</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">Web-RTA</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Web Red Team Analyst</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">CyberWarFare Labs</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">API-RTA</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">API Red Team Analyst</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">CyberWarFare Labs</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">eJPT</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Junior Penetration Tester</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">INE Security</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CM-Pen</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Mobile Penetration Tester</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal" data-en="Issuer — to be confirmed">Penerbit — mohon dilengkapi</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CCEP</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Cyber Exploitation Professional</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal" data-en="Issuer — to be confirmed">Penerbit — mohon dilengkapi</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CAP</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified AppSec Practitioner</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">The SecOps Group</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">CNSP</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Network Security Practitioner</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">The SecOps Group</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">EHE</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Ethical Hacking Essentials</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal">EC-Council</p>
-      </li>
-      <li class="rounded-lg border-l-4 border-teal bg-white/95 p-5 shadow-sm ring-1 ring-blue/10">
-        <h3 class="text-lg font-bold text-blue">C3SA</h3>
-        <p class="mt-1 text-sm leading-snug text-soft">Certified Cyber Security Analyst</p>
-        <p class="mt-2 text-xs font-medium tracking-wide text-teal" data-en="Issuer — to be confirmed">Penerbit — mohon dilengkapi</p>
-      </li>
-  </ul>
+  <!-- VERIFIKASI: CCEP dan C3SA belum punya berkas logo — lengkapi, atau coret dari
+       daftar sertifikasi kalau memang tidak dipegang lagi. -->
+  <div class="marquee marquee--certs mt-10 mb-16">
+    <ul class="marquee__track">
+      <li><img src="assets/certs/ceh.png" alt="CEH — Certified Ethical Hacker" loading="lazy"></li>
+      <li><img src="assets/certs/ewptx.png" alt="eWPTX — Web Application Penetration Tester eXtreme" loading="lazy"></li>
+      <li><img src="assets/certs/crtp.png" alt="CRTP — Certified Red Team Professional" loading="lazy"></li>
+      <li><img src="assets/certs/crta.png" alt="CRTA — Certified Red Team Analyst" loading="lazy"></li>
+      <li><img src="assets/certs/web_rta.png" alt="Web-RTA — Web Red Team Analyst" loading="lazy"></li>
+      <li><img src="assets/certs/api_rta.png" alt="API-RTA — API Red Team Analyst" loading="lazy"></li>
+      <li><img src="assets/certs/ejpt.png" alt="eJPT — Junior Penetration Tester" loading="lazy"></li>
+      <li><img src="assets/certs/cmpen_android.png" alt="CM-Pen Android — Certified Mobile Penetration Tester" loading="lazy"></li>
+      <li><img src="assets/certs/cmpen_ios.png" alt="CM-Pen iOS — Certified Mobile Penetration Tester" loading="lazy"></li>
+      <li><img src="assets/certs/cap.png" alt="CAP — Certified AppSec Practitioner" loading="lazy"></li>
+      <li><img src="assets/certs/cnsp.png" alt="CNSP — Certified Network Security Practitioner" loading="lazy"></li>
+      <li><img src="assets/certs/ehe.png" alt="EHE — Ethical Hacking Essentials" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/ceh.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/ewptx.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/crtp.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/crta.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/web_rta.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/api_rta.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/ejpt.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/cmpen_android.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/cmpen_ios.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/cap.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/cnsp.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img src="assets/certs/ehe.png" alt="" loading="lazy"></li>
+    </ul>
+  </div>
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
     <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
   </svg>
@@ -441,7 +388,6 @@
 <section id="teknologi" class="py-14">
   <div class="mx-auto max-w-[1200px] px-6">
     <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Technology &amp; Competencies</h2>
-    <p class="mt-3 max-w-lg leading-snug text-soft" data-en="Modern tooling and established standards, chosen for what the problem needs — not for what is fashionable.">Perkakas modern dan standar mapan, dipilih menurut kebutuhan masalahnya — bukan menurut yang sedang tren.</p>
     <ul class="mt-10 flex flex-wrap gap-3">
       <li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Web &amp; Mobile</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Cloud &amp; DevOps</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Data &amp; Analytics</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">AI &amp; Automation</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Offensive Security</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Network &amp; Infrastructure</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">API &amp; Integration</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Identity &amp; Access</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Compliance &amp; Audit</li>
     </ul>
@@ -461,30 +407,7 @@
 <section id="faq" class="pb-4 pt-8">
   <div class="mx-auto max-w-[1200px] px-6">
     <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">FAQ</h2>
-    <p class="mt-3 text-soft"><span data-en="The questions that come up most often before a contract is signed. Not answered here?">Pertanyaan yang paling sering masuk sebelum kontrak ditandatangani. Tidak ketemu jawabannya?</span> <a href="#kontak" class="font-medium text-teal hover:underline" data-en="Send us your question.">Kirim pertanyaan Anda.</a></p>
-
-    <div class="mt-10 grid items-center gap-10 lg:grid-cols-[380px_1fr]">
-      <div class="mx-auto"><svg viewBox="0 0 320 250" class="w-full max-w-[300px]" role="img" aria-label="Ilustrasi dukungan pelanggan">
-        <ellipse cx="150" cy="216" rx="122" ry="20" fill="#d6eef0"/>
-        <path d="M262 150c14-6 26-22 22-40-16 2-30 16-30 30M282 128c10-14 8-32-4-42-10 10-12 28-6 40" fill="#cbe9ec"/>
-        <rect x="90" y="150" width="120" height="60" rx="6" fill="#1c2747"/>
-        <rect x="98" y="157" width="104" height="45" rx="3" fill="#2f7f96"/>
-        <rect x="72" y="210" width="156" height="8" rx="4" fill="#0f1830"/>
-        <path d="M116 150c0-19 15-34 34-34s34 15 34 34z" fill="#f5c33b"/>
-        <circle cx="150" cy="100" r="21" fill="#f0b49c"/>
-        <path d="M129 98c0-13 9-23 21-23s21 10 21 23c0-7-9-11-21-11s-21 4-21 11z" fill="#232f57"/>
-        <rect x="122" y="94" width="12" height="20" rx="6" fill="#232f57"/>
-        <rect x="166" y="94" width="12" height="20" rx="6" fill="#232f57"/>
-        <path d="M128 90h44" stroke="#232f57" stroke-width="7" stroke-linecap="round"/>
-        <g fill="#fff">
-          <circle cx="56" cy="46" r="24" fill="#19b1b4"/><circle cx="56" cy="46" r="12" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M56 38v8l6 4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <circle cx="242" cy="40" r="26" fill="#1b3a6b"/><circle cx="242" cy="34" r="7"/><path d="M230 52c0-7 5-11 12-11s12 4 12 11z"/>
-          <circle cx="30" cy="112" r="18" fill="#19b1b4"/><path d="M36 105a6 6 0 0 0-8 8l-6 6 4 4 6-6a6 6 0 0 0 8-8l-4 4-4-4z"/>
-          <circle cx="276" cy="116" r="21" fill="#6fc9cb"/><circle cx="276" cy="116" r="6" fill="#fff"/><path d="M276 100v6M276 126v6M260 116h6M286 116h6M265 105l4 4M283 123l4 4M287 105l-4 4M269 123l-4 4" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-          <rect x="150" y="14" width="66" height="40" rx="14" fill="#1b3a6b"/><path d="M166 54l-6 12 16-12z" fill="#1b3a6b"/>
-          <circle cx="169" cy="34" r="3.5"/><circle cx="183" cy="34" r="3.5"/><circle cx="197" cy="34" r="3.5"/>
-        </g>
-      </svg></div>
+    <div class="mt-10 grid items-center gap-10 lg:grid-cols-[1fr_380px]">
       <div class="space-y-2.5">
       <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5" open>
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
@@ -526,9 +449,30 @@
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
           <span data-en="How much does it cost?">Berapa biayanya?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="Every scope is different, so we price per engagement rather than from a rate card. Contact us through the form or at contact@sarthlutions.id for a proposal; the first scoping session is free.">Tiap lingkup berbeda, jadi biayanya kami hitung per kebutuhan — bukan daftar harga. Hubungi kami lewat formulir atau contact@sarthlutions.id untuk penawaran; sesi pemetaan kebutuhan pertama gratis.</p>
+        <p class="mt-3 text-sm text-soft"><span data-en="Every scope is different, so we price per engagement rather than from a rate card. The first scoping session is free.">Tiap lingkup berbeda, jadi biayanya kami hitung per kebutuhan — bukan daftar harga. Sesi pemetaan kebutuhan pertama gratis.</span> <a href="#kontak" class="font-medium text-teal hover:underline" data-en="Send us your question.">Kirim pertanyaan Anda.</a></p>
       </details>
       </div>
+      <div class="mx-auto"><svg viewBox="0 0 320 250" class="w-full max-w-[300px]" role="img" aria-label="Ilustrasi dukungan pelanggan">
+        <ellipse cx="150" cy="216" rx="122" ry="20" fill="#d6eef0"/>
+        <path d="M262 150c14-6 26-22 22-40-16 2-30 16-30 30M282 128c10-14 8-32-4-42-10 10-12 28-6 40" fill="#cbe9ec"/>
+        <rect x="90" y="150" width="120" height="60" rx="6" fill="#1c2747"/>
+        <rect x="98" y="157" width="104" height="45" rx="3" fill="#2f7f96"/>
+        <rect x="72" y="210" width="156" height="8" rx="4" fill="#0f1830"/>
+        <path d="M116 150c0-19 15-34 34-34s34 15 34 34z" fill="#f5c33b"/>
+        <circle cx="150" cy="100" r="21" fill="#f0b49c"/>
+        <path d="M129 98c0-13 9-23 21-23s21 10 21 23c0-7-9-11-21-11s-21 4-21 11z" fill="#232f57"/>
+        <rect x="122" y="94" width="12" height="20" rx="6" fill="#232f57"/>
+        <rect x="166" y="94" width="12" height="20" rx="6" fill="#232f57"/>
+        <path d="M128 90h44" stroke="#232f57" stroke-width="7" stroke-linecap="round"/>
+        <g fill="#fff">
+          <circle cx="56" cy="46" r="24" fill="#19b1b4"/><circle cx="56" cy="46" r="12" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M56 38v8l6 4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="242" cy="40" r="26" fill="#1b3a6b"/><circle cx="242" cy="34" r="7"/><path d="M230 52c0-7 5-11 12-11s12 4 12 11z"/>
+          <circle cx="30" cy="112" r="18" fill="#19b1b4"/><path d="M36 105a6 6 0 0 0-8 8l-6 6 4 4 6-6a6 6 0 0 0 8-8l-4 4-4-4z"/>
+          <circle cx="276" cy="116" r="21" fill="#6fc9cb"/><circle cx="276" cy="116" r="6" fill="#fff"/><path d="M276 100v6M276 126v6M260 116h6M286 116h6M265 105l4 4M283 123l4 4M287 105l-4 4M269 123l-4 4" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <rect x="150" y="14" width="66" height="40" rx="14" fill="#1b3a6b"/><path d="M166 54l-6 12 16-12z" fill="#1b3a6b"/>
+          <circle cx="169" cy="34" r="3.5"/><circle cx="183" cy="34" r="3.5"/><circle cx="197" cy="34" r="3.5"/>
+        </g>
+      </svg></div>
     </div>
   </div>
 </section>
@@ -544,60 +488,18 @@
     <p class="mt-5 max-w-xl text-lg text-white/85" data-en="Let us discuss your challenges and design the right solution — from the first assessment through to delivery and continuous improvement.">Mari bahas tantangan Anda dan rancang solusi yang tepat — dari asesmen pertama sampai penyerahan dan perbaikan berkelanjutan.</p>
     <a href="mailto:contact@sarthlutions.id" class="mt-9 inline-block rounded-md bg-white px-8 py-3.5 text-sm font-semibold text-blue shadow-lg transition hover:bg-white/90" data-en="Schedule a consultation">Jadwalkan konsultasi</a>
   </div>
-</section>
 
-<section id="kontak" aria-label="Lokasi kantor">
-  <iframe title="Peta lokasi kantor Sarthlutions, Jakarta Selatan"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=106.7900%2C-6.2900%2C106.8500%2C-6.2300&amp;layer=mapnik&amp;marker=-6.2600%2C106.8200"
-          class="block h-[380px] w-full border-0 sm:h-[460px]" loading="lazy"></iframe>
-</section>
-
-<section class="g-band">
-  <div class="mx-auto grid max-w-[1200px] gap-10 px-6 py-12 sm:grid-cols-3">
-    <div>
-      <h2 class="text-3xl font-bold text-blue">Office</h2>
-      <p class="mt-3 text-lg leading-snug text-blue" data-en="PT Sarana Artha Solusi&lt;br&gt;South Jakarta, DKI Jakarta">PT Sarana Artha Solusi<br>Jakarta Selatan, DKI Jakarta</p>
-    </div>
-    <div>
-      <h2 class="text-3xl font-bold text-white">Contact Us</h2>
-      <p class="mt-3 flex items-center gap-2 text-lg text-white">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
-        www.sarthlutions.id
-      </p>
-      <p class="mt-2 flex items-center gap-2 text-lg text-white">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        contact@sarthlutions.id
-      </p>
-      <p class="mt-5 text-sm text-white/80" data-en="Monday–Friday · 09.00–18.00 WIB">Senin–Jumat · 09.00–18.00 WIB</p>
-    </div>
-    <div>
-      <h2 class="text-3xl font-bold text-white">Social Media</h2>
-      <ul class="mt-4 flex gap-3">
-        <li><a href="#" aria-label="Instagram" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#e1306c] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-ig"/></svg></a></li>
-        <li><a href="#" aria-label="GitHub" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#181717] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-gh"/></svg></a></li>
-        <li><a href="#" aria-label="Telegram" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#26a5e4] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-tg"/></svg></a></li>
-        <li><a href="#" aria-label="WhatsApp" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#25d366] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg></a></li>
-      </ul>
-    </div>
-  </div>
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
     <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
   </svg>
 </section>
 
-<section class="pb-16 pt-2">
+<section id="kontak" class="pb-16 pt-2">
   <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Join Updates</h2>
+    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Contact Us</h2>
     <p class="mt-3 text-soft">Keep in Touch With Us</p>
 
-    <div class="mt-10 grid gap-12 lg:grid-cols-[420px_1fr]">
-      <div class="grid grid-cols-2 gap-4">
-        <img src="https://picsum.photos/seed/ct1/500/560" alt="" class="h-full w-full rounded-md object-cover" loading="lazy">
-        <img src="https://picsum.photos/seed/ct2/500/380" alt="" class="w-full rounded-md object-cover" loading="lazy">
-        <img src="https://picsum.photos/seed/ct3/500/380" alt="" class="w-full rounded-md object-cover" loading="lazy">
-        <img src="https://picsum.photos/seed/ct4/500/380" alt="" class="w-full rounded-md object-cover" loading="lazy">
-      </div>
-
+    <div class="mt-10 max-w-3xl">
       <form action="#" method="post" class="space-y-5">
         <div class="grid gap-5 sm:grid-cols-2">
           <label><span class="sr-only" data-en="Name">Nama</span>
@@ -618,6 +520,7 @@
         </div>
         <p class="text-right text-xs text-soft" data-en="This form is not wired to a backend yet.">Form ini belum tersambung ke backend.</p>
       </form>
+
     </div>
   </div>
 </section>
@@ -627,6 +530,8 @@
     <path fill="#fbfdfd" d="M0,0 H1440 V46 C1360,34 1260,18 1120,14 C900,8 720,48 520,72 C320,96 150,88 0,52 Z"/>
   </svg>
 
+  <!-- Sprite sosial: dipakai oleh ikon di #kontak (blok gradien di atas).
+       Chrome tidak menyelesaikan <use> ke berkas SVG luar, jadi harus inline. -->
   <svg width="0" height="0" class="absolute" aria-hidden="true"><defs>
     <symbol id="i-ig" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0m0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84M12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4m6.41-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44"/></symbol>
     <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58l-.01-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.41-1.31.75-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.46-2.38 1.23-3.22-.13-.3-.54-1.52.11-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.28-1.23 3.28-1.23.65 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.81 5.63-5.48 5.92.43.36.81 1.1.81 2.22l-.01 3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .3"/></symbol>
@@ -635,21 +540,13 @@
   </defs></svg>
 
   <div class="mx-auto max-w-[1200px] px-6">
-    <div class="-mt-4 flex flex-col items-start gap-3 sm:-mt-12 sm:items-end">
-      <h2 class="text-2xl font-bold">Social Media</h2>
-      <ul class="flex gap-3">
-        <li><a href="#" aria-label="Instagram" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#e1306c] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-ig"/></svg></a></li>
-        <li><a href="#" aria-label="GitHub" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#181717] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-gh"/></svg></a></li>
-        <li><a href="#" aria-label="Telegram" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#26a5e4] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-tg"/></svg></a></li>
-        <li><a href="#" aria-label="WhatsApp" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#25d366] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg></a></li>
-      </ul>
-    </div>
-
-    <div class="grid gap-10 pb-8 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-10 pb-10 pt-4 sm:grid-cols-2 lg:grid-cols-4">
       <div>
         <h3 class="text-2xl font-bold">Company</h3>
-        <p class="mt-3 max-w-[15rem] text-sm text-white/85" data-en="PT Sarana Artha Solusi. Helping organizations build, secure, and scale their digital systems.">PT Sarana Artha Solusi. Membantu organisasi membangun, mengamankan, dan menskalakan sistem digitalnya.</p>
-        <p class="mt-6 text-sm text-white/90">Mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: contact@sarthlutions.id<br>Website : www.sarthlutions.id</p>
+        <p class="mt-3 text-sm leading-relaxed text-white/85" data-en="PT Sarana Artha Solusi&lt;br&gt;South Jakarta, DKI Jakarta">PT Sarana Artha Solusi<br>Jakarta Selatan, DKI Jakarta</p>
+        <p class="mt-4 text-sm text-white/90"><a class="hover:text-white" href="mailto:contact@sarthlutions.id">contact@sarthlutions.id</a></p>
+        <!-- DUMMY: nomor karangan, diminta sebagai isian sementara. Ganti sebelum rilis. -->
+        <p class="mt-1 text-sm text-white/90"><a class="hover:text-white" href="tel:+622150218899">+62 21 5021 8899</a></p>
       </div>
       <div>
         <h3 class="text-2xl font-bold">Our Service</h3>
@@ -661,24 +558,20 @@
         </ul>
       </div>
       <div>
-        <h3 class="text-2xl font-bold">Legal</h3>
-        <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-white/90 marker:text-white/45">
-          <li><a class="hover:text-white" href="#">Terms &amp; Condition</a></li>
-          <li><a class="hover:text-white" href="#">License Agreement</a></li>
-        </ul>
-        <h3 class="mt-7 text-2xl font-bold">Support</h3>
+        <h3 class="text-2xl font-bold">Support</h3>
         <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-white/90 marker:text-white/45">
           <li><a class="hover:text-white" href="#faq">FAQ</a></li>
           <li><a class="hover:text-white" href="#kontak">CONTACT</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="text-2xl font-bold">Subscription</h3>
-        <p class="mt-3 max-w-[15rem] text-sm text-white/85" data-en="Threat briefings and engineering notes, one email a month.">Ringkasan ancaman dan catatan teknis, satu email per bulan.</p>
-        <form class="mt-16 flex overflow-hidden rounded bg-white p-1" action="#" method="post">
-          <input type="email" name="email" required placeholder="your@mail.com" aria-label="Alamat email" class="min-w-0 flex-1 px-3 py-1.5 text-sm text-ink outline-none placeholder:text-soft">
-          <button class="px-3 text-sm font-semibold text-blue">Subscribe</button>
-        </form>
+        <h3 class="text-2xl font-bold">Social Media</h3>
+        <ul class="mt-4 flex gap-3">
+          <li><a href="#" aria-label="Instagram" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#e1306c] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-ig"/></svg></a></li>
+          <li><a href="#" aria-label="GitHub" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#181717] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-gh"/></svg></a></li>
+          <li><a href="#" aria-label="Telegram" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#26a5e4] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-tg"/></svg></a></li>
+          <li><a href="#" aria-label="WhatsApp" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-[#25d366] shadow"><svg width="22" height="22" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg></a></li>
+        </ul>
       </div>
     </div>
   </div>

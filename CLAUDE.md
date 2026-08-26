@@ -9,7 +9,9 @@ A single-page company profile ("compro") for **PT Sarana Artha Solusi**, trading
 AI agent development, and IT procurement. Tagline: *Secure. Smart. Scalable.*
 
 ```
+TODO.md                                 audit findings, ranked — read before "is this done?"
 index.html                              the whole site — every section lives here
+assets/logo.webp                        the PT lockup (shield + wordmark), client-supplied
 assets/style.css                        brand tokens, gradients, dividers, service card, marquee, nav
 assets/app.js                           language switch + marquee drag + nav scrollspy
 Company Profile Sarthlutions - EN.docx  the client's own profile deck — content source
@@ -37,24 +39,30 @@ the Indonesian.
 
 ## What is built
 
+Section headings stand alone — the intro paragraph that used to sit under `Our Services`,
+`How We Work`, `Our Clients`, `Why Choose Us`, `Certificate`, `Technology & Competencies`,
+and `FAQ` was removed on request. Heading → content gap is a uniform `mt-10`; keep it that
+way if a section is added.
+
 Every section below is live in `index.html`. "Source" says where its words came from —
 that matters, because roughly half the page is the client's own copy and the rest is
 filler waiting to be replaced (see *Placeholders* near the end).
 
 | # | Section | Holds | Source |
 |---|---|---|---|
-| — | Hero (`#top`) | full-viewport gradient: eyebrow, `SARTH`+`LUTIONS` wordmark, tagline, four-service line, two CTAs, scroll cue | docx cover |
+| — | Nav | `assets/logo.webp` lockup (blend-multiply), links, `ID`/`EN` switch |  |
+| — | Hero (`#top`) | full-viewport gradient: eyebrow, `SARTH`+`LUTIONS` wordmark, tagline, four-service line, two CTAs. No scroll cue — removed, do not add one back | docx cover |
 | 1 | About Us (`#tentang`) | 3 paragraphs + rotated photo collage, stats `<dl>`, 3 pillars, Vision, Mission, 5 Values | docx §01–02 |
 | 2 | Our Services (`#layanan`) | 4 `.svc-card`s with line-art icons and tag rows | docx §03 |
 | 3 | How We Work (`#alur`) | 5 numbered steps: Discover → Design → Develop → Deliver → Optimize | docx §04 |
 | 4 | Our Clients (`#klien`) | gradient block, drag-scrollable strip of 17 real logos in `assets/clients/`; also the top-level "Our Clients" nav item | primevora.id (same owner) |
 | 5 | Why Choose Us (`#keunggulan`) | 4 differentiator cards | docx §05 |
-| 6 | Certificate (`#sertifikat`) | gradient block, 13 certification cards | user-supplied list |
+| 6 | Certificate (`#sertifikat`) | gradient block, second logo marquee — 12 badges in `assets/certs/` | primevora.id (same owner) |
 | 7 | Technology (`#teknologi`) | 9 competency chips + standards block | docx §08 |
-| 8 | FAQ (`#faq`) | 7 `<details>` + illustration | **invented** |
-| 9 | CTA | gradient block, "Ready when you are" | docx CTA page |
-| 10 | Contact (`#kontak`) | OSM map, gradient band, Join Updates form | docx contact page |
-| — | Footer | 4 columns, social sprite, subscribe form | Figma template |
+| 8 | FAQ (`#faq`) | 7 `<details>` + illustration; the "contact us" link lives inside the cost answer | **invented** |
+| 9 | CTA | gradient block, "Ready when you are" — CTA only now, the contact block moved out | docx CTA page |
+| 10 | Contact Us (`#kontak`) | cream section: heading + the form alone, capped at `max-w-3xl` | docx contact page |
+| — | Footer | 4 columns: Company (address/email/phone), Our Service, Support, Social Media | Figma template |
 
 ## Not building: a PDF export
 
@@ -113,6 +121,17 @@ This is the one thing that will bite you. Changing a brand color means editing b
 
 | Where | Names | Consumed by |
 |---|---|---|
+`.g-band` is gone, and so is the gradient-on-gradient problem it was written for: the
+contact block moved out of the CTA section entirely and is now a **cream** section, so
+the CTA's closing `.wave` carries the only boundary. Its text went back to navy/soft —
+it had been white for the one revision it spent on a gradient.
+
+`assets/logo.webp` is an RGB WEBP with a **white plate, no alpha**. `.brand-logo` sets
+`mix-blend-mode: multiply` so the plate melts into the cream header instead of showing
+as a box — no re-cut file needed. That trick only works on a light background: putting
+this logo on `.g-foot` or `.g-hero`'s dark end needs a real transparent or knocked-out
+version.
+
 | `assets/style.css` `:root` | `--navy --navy-deep --navy-mid --teal-deep --teal --cream --soft` | the hand-written classes: `.g-hero .g-band .g-foot .squiggle .svc-card .marquee .nav-link` |
 | `index.html` `<style type="text/tailwindcss">` `@theme` | `--color-blue --color-blue-deep --color-teal --color-cream --color-soft --color-ink` | Tailwind utilities: `text-blue`, `bg-blue`, `text-soft`, `bg-cream`, … |
 
@@ -140,8 +159,8 @@ style choice:
 
 Current order: hero (gradient) → about + stats + vision/mission/values → *squiggle* →
 services → *squiggle* → workflow → clients (gradient) → why-choose-us → certificate
-(gradient) → technology → *squiggle* → FAQ → CTA (gradient) → map → contact band
-(gradient) → join updates → footer.
+(gradient) → technology → *squiggle* → FAQ → CTA (gradient) → contact (cream) → footer
+(gradient).
 
 `#klien` and `#sertifikat` are both `.g-hero` blocks, so their own waves carry every
 boundary they touch — no `*squiggle*` sits next to either, nor between the certificate
@@ -155,19 +174,23 @@ nav underline.
 **Nav underline** — the active nav item is *not* hardcoded. An `IntersectionObserver`
 watches every section id in the `OWNER` map and sets `aria-current` on the matching
 `.nav-link`; the underline itself is drawn by `.nav-link[aria-current="true"]` in
-`style.css`. Sections reachable only from the "About Us" dropdown (`alur`, `keunggulan`,
-`tentang`, `sertifikat`, `teknologi`, `faq`) all map to `#tentang`, so exactly
-one top-level item is ever active. **Adding a section with an id means adding it to
+`style.css`. Nav is `Home · Services · Our Clients · About Us · More ▾ · Contact`:
+`About Us` is a plain link owning only `#tentang`, and the sections behind the **More**
+dropdown (`keunggulan`, `sertifikat`, `teknologi`, `faq`) map to `#alur` — the dropdown
+trigger's own href — so exactly one top-level item is ever active. `OWNER`'s keys are
+kept in **document order**; the `.pop()` that picks the current section relies on it. **Adding a section with an id means adding it to
 `OWNER`**, or the underline sticks on the previous item while that section is on screen.
 Check both directions:
 
 ```bash
 python3 -c "
 import re
-ids = set(re.findall(r'<section[^>]*id=\"([a-z]+)\"', open('index.html').read()))
-own = set(re.findall(r'(\w+):\s*.#', open('assets/app.js').read()))
-print('section without OWNER:', sorted(ids-own) or '-')
-print('OWNER without section:', sorted(own-ids) or '-')"
+s = open('index.html').read()
+own = re.findall(r\"(\w+): '#\", open('assets/app.js').read())
+sec = set(re.findall(r'<section[^>]*id=\"([a-z]+)\"', s))
+print('section without OWNER:', sorted(sec - set(own)) or '-')
+print('OWNER without target:', [k for k in own if f'id=\"{k}\"' not in s] or '-')
+print('OWNER in document order:', own == sorted(own, key=lambda k: s.index(f'id=\"{k}\"')))"
 ```
 
 ## Bilingual copy (ID / EN)
@@ -184,7 +207,8 @@ Consequences worth knowing before editing copy:
 - **`data-en` replaces the whole element.** Never put it on an element that also holds
   markup you care about — the FAQ `<summary>` (it holds the `+`/`×` span), the About Us
   lead paragraph (it holds the bolded company name), the FAQ intro (it holds a link).
-  Those have a plain `<span data-en="…">` wrapped around the *text* instead. The one
+  Those have a plain `<span data-en="…">` wrapped around the *text* instead — the FAQ
+  cost answer is one of them, since it ends with the link to `#kontak`. The one
   deliberate exception is the contact-band address, whose `data-en` carries its `<br>`.
 - Section headings, service names, the five step names, the values, the certificate
   names, and the technology chips are English in both languages, so they carry no
@@ -192,9 +216,15 @@ Consequences worth knowing before editing copy:
 - Adding a paragraph means adding its `data-en` in the same edit, or it will stay
   Indonesian when the page is switched to English.
 
-## Client logo marquee
+## Logo marquees (`#klien`, `#sertifikat`)
 
-`#klien` is a native scroll container, not a CSS keyframe animation. `.marquee` is
+Two of them, same machinery: `.marquee` in `#klien` for client logos and
+`.marquee.marquee--certs` in `#sertifikat` for certification badges. `app.js` runs
+`querySelectorAll('.marquee').forEach(…)`, so each strip keeps its own `pos`/`drag` —
+adding a third needs no JS change. `.marquee--certs` only overrides the image size
+(badges are squarer than wordmarks).
+
+Each one is a native scroll container, not a CSS keyframe animation. `.marquee` is
 `overflow-x: auto` with the scrollbar hidden; `app.js` advances `scrollLeft` by 0.5px
 per frame and the same `put()` wraps it modulo **half the scrollWidth** — which only
 lines up because the 17 `<li>` are written **twice** in `index.html` (second copy
@@ -207,16 +237,26 @@ horizontal panning to that handler while leaving vertical page scroll to the bro
 and `prefers-reduced-motion` skips the rAF loop only — dragging still works.
 
 It does **not** pause on hover — asked for twice, once to add it and once to take it
-back out. Only an active drag holds it. `.marquee` needs its `padding: 22px 0`: the
-container clips, and the hover `scale(1.18)` would be cut off without that room. Logos
-stay in full colour — no grayscale filter, asked for explicitly. The section sits on
-`.g-hero` like `#sertifikat`, so the strip needs no background of its own.
+back out. Only an active drag holds it. Hovering scales the logo under the cursor to
+`1.18`, which is why `.marquee` needs its `padding: 22px 0` — the container clips, and
+the enlarged logo would be cut off without that room. Logos stay in full colour: no
+grayscale filter, asked for explicitly. Both strips sit on a `.g-hero` block, so neither
+needs a background of its own.
 
-The logos are the client's own, lifted from **primevora.id** (same owner, a Flutter
-app — the list came from its `assets/AssetManifest.bin.json`, base64 inside JSON).
-They are not split by service line: the source site does not say which client was
+Below 640px a media query shrinks both strips — logo height, badge height, track gap and
+container padding — so more than a logo or two fits on a phone.
+
+Both logo sets are the client's own, lifted from **primevora.id** (same owner, a Flutter
+app — the file list came from its `assets/AssetManifest.bin.json`, base64 inside JSON).
+
+Clients are not split by service line: the source site does not say which client was
 software work and which was a pentest, so the earlier two-group / tab layout is gone.
 Bringing categories back needs that mapping from the client, not a guess.
+
+The certificate strip replaced 13 text cards (name / long name / issuer). primevora has
+no badge for **CCEP** or **C3SA**, so those two are not in the strip — see the
+`<!-- VERIFIKASI -->` comment above it. `emapt`, `oscp`, and `iso_27001` exist there too
+but were not on the user's list, so they were not brought over.
 
 ## Service cards (CSS, not JS)
 
@@ -251,9 +291,11 @@ buttons whose only job is `rail.scrollBy({left: dir * rail.clientWidth * 0.8})`.
 These replaced libraries on purpose. Don't swap them back:
 
 - `<details>` — FAQ accordion and the mobile menu (both work with JS disabled)
-- OpenStreetMap `<iframe>` — the contact map (no API key, no JS)
+- OpenStreetMap `<iframe>` — the contact map, right-hand column of `#kontak` (no API key, no JS)
 - Inline `<symbol>` sprite in the footer — social icons; Chrome does not resolve
-  `<use>` against an external SVG file, so it has to be inline in the document.
+  `<use>` against an external SVG file, so it has to be inline in the document. It is
+  **consumed by `#kontak`, higher up the page**: `<use href="#i-ig">` resolves by id
+  regardless of document order, so deleting the footer would silently blank those icons.
 
 ## Sections deliberately removed
 
@@ -276,7 +318,9 @@ divider on each side.
 
 The **stats strip** came out for the same reason, then went back in with the docx's own
 numbers (50+ projects, 30+ organizations, 15+ certified professionals). It now lives
-inside the About section as a centred 3-column `<dl>`. Those figures are the client's
+inside the About section as a centred `<dl>` that stays **3 columns at every width** (not
+`grid-cols-1 sm:grid-cols-3`) — the three figures are meant to read as one row on a phone
+too, so `dt`/`dd` carry small-then-large type instead of stacking. Those figures are the client's
 claim, not an invention — but they still date from the docx, so re-check them before a
 launch rather than assuming they are current.
 
@@ -293,6 +337,22 @@ Everything below is invented filler that the docx does not cover. Replace before
   network, 4-hour incident response) are the remaining guesses
 - the FAQ illustration — a hand-drawn SVG standing in for the Figma asset
 - the contact form, which has no backend and says so on the page
+
+Gone for good, not placeholders: the OSM map, the Join Updates photo collage, the footer
+**Legal** and **Subscription** columns, and the footer's Mail/Website lines. The section
+formerly titled *Join Updates* is now *Contact Us*; note that its right column repeats
+"Contact Us" as a sub-heading — asked for that way.
+
+Contact details now live in **one** place: the footer's Company column — address, then
+`contact@sarthlutions.id`, then a marked phone placeholder. `#kontak` itself is the form
+and nothing else; the Office block, the Social Media block and the map were all removed
+from it across successive passes. The office hours line (`Senin–Jumat · 09.00–18.00 WIB`)
+is gone from the page entirely.
+
+The **phone number `+62 21 5021 8899` is made up.** The docx has none and neither does
+primevora; a dummy was asked for explicitly as a stand-in. It carries a `<!-- DUMMY -->`
+comment above it — that comment is the only thing separating it from a real number on a
+live page, so replace it before launch and do not delete the marker until you do.
 
 Certificate names for **CM-Pen**, **CCEP**, and **C3SA** are unconfirmed — the page
 prints `Penerbit — mohon dilengkapi` for their issuers, and there is a

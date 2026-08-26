@@ -16,11 +16,10 @@ if (langButtons.length) {
   if (saved === 'en') apply('en');
 }
 
-// Deretan logo klien: jalan terus tanpa berhenti, tapi bisa ditarik kiri-kanan
+// Deretan logo (klien & sertifikasi): jalan terus tanpa berhenti, tapi bisa ditarik kiri-kanan
 // dengan klik-tahan (hanya selama ditarik jalannya ditunda).
 // Daftar logo ditulis dua kali di HTML, jadi setengah scrollWidth = satu putaran.
-const marquee = document.querySelector('.marquee');
-if (marquee) {
+document.querySelectorAll('.marquee').forEach(marquee => {
   let pos = 0, drag = null;
   const put = v => {
     const loop = marquee.scrollWidth / 2 || 1;
@@ -44,13 +43,15 @@ if (marquee) {
   const endDrag = () => { drag = null; marquee.classList.remove('is-dragging'); };
   marquee.addEventListener('pointerup', endDrag);
   marquee.addEventListener('pointercancel', endDrag);
-}
+});
 
 // Garis bawah nav mengikuti section yang sedang dibaca. Section di dalam dropdown
-// "About Us" dipetakan ke induknya, supaya selalu ada tepat satu yang aktif.
-const OWNER = { top: '#top', layanan: '#layanan', klien: '#klien', kontak: '#kontak',
-                alur: '#tentang', keunggulan: '#tentang', tentang: '#tentang',
-                sertifikat: '#tentang', teknologi: '#tentang', faq: '#tentang' };
+// "More" dipetakan ke induknya (#alur, tujuan tautan More), supaya selalu ada
+// tepat satu yang aktif. About Us berdiri sendiri.
+// Urutan kunci = urutan section di halaman; .pop() di bawah bergantung padanya.
+const OWNER = { top: '#top', tentang: '#tentang', layanan: '#layanan', alur: '#alur',
+                klien: '#klien', keunggulan: '#alur', sertifikat: '#alur',
+                teknologi: '#alur', faq: '#alur', kontak: '#kontak' };
 const navLinks = document.querySelectorAll('.nav-link');
 const watched = Object.keys(OWNER).map(id => document.getElementById(id)).filter(Boolean);
 

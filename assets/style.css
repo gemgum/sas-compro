@@ -19,7 +19,6 @@ body { background: var(--cream); }
   background-image: linear-gradient(118deg,
     #fbfdfd 0%, #e6f2f4 24%, #a5d7dd 44%, #4aacba 62%, #21758b 80%, #1b3a6b 100%);
 }
-.g-band { background-image: linear-gradient(90deg, #e6f2f4 0%, #4aacba 52%, #21758b 100%); }
 .g-foot { background-image: linear-gradient(135deg, #1b3a6b 0%, #21758b 58%, #19b1b4 100%); }
 
 /* ── Kartu layanan ──────────────────────────────────────────────────
@@ -83,9 +82,15 @@ body { background: var(--cream); }
   transition: transform .3s cubic-bezier(.2,.7,.2,1);
 }
 .marquee img:hover { transform: scale(1.18); }
+/* Lencana sertifikasi lebih persegi daripada logo klien — beri ruang lebih tinggi */
+.marquee--certs img { height: 96px; max-width: 150px; }
 
 /* ── Lain-lain ──────────────────────────────────────────────────── */
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+/* Logo lockup PT: berkas WEBP tanpa alpha, latarnya putih. multiply membuat
+   plat putih itu lebur ke krem header, jadi tidak perlu file baru. */
+.brand-logo { mix-blend-mode: multiply; }
 
 /* Sakelar bahasa di nav */
 .lang { display: inline-flex; overflow: hidden; border-radius: 6px;
@@ -103,6 +108,14 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 
 :where(a, button, summary, input, textarea):focus-visible {
   outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px;
+}
+
+/* Layar kecil: logo dan jaraknya dikecilkan supaya muat beberapa dalam satu layar */
+@media (max-width: 640px) {
+  .marquee { padding: 14px 0; }
+  .marquee__track { gap: 40px; }
+  .marquee img { height: 46px; max-width: 150px; }
+  .marquee--certs img { height: 58px; max-width: 92px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
