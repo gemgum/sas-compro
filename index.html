@@ -5,29 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sarthlutions — Secure. Smart. Scalable.</title>
 <meta name="description" content="PT Sarana Artha Solusi (Sarthlutions): cyber security, software development, AI agent development, dan IT procurement untuk organisasi di Indonesia.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<link rel="canonical" href="https://www.sarthlutions.id/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sarthlutions">
+<meta property="og:url" content="https://www.sarthlutions.id/">
+<meta property="og:title" content="Sarthlutions — Secure. Smart. Scalable.">
+<meta property="og:description" content="PT Sarana Artha Solusi: cyber security, software development, AI agent development, dan IT procurement untuk organisasi di Indonesia.">
+<meta property="og:image" content="https://www.sarthlutions.id/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="id_ID">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1b3a6b">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<style type="text/tailwindcss">
-  @theme {
-    --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-    --color-blue: #1b3a6b;        /* navy — heading, nav, teks di atas latar terang */
-    --color-blue-deep: #142c52;   /* hover */
-    --color-teal: #19b1b4;        /* aksen */
-    --color-cream: #fbfdfd;
-    --color-soft: #98a4a9;
-    --color-ink: #22303a;
-  }
-</style>
+<link rel="stylesheet" href="assets/tailwind.css">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="font-sans text-ink">
 
+<a href="#konten" data-en="Skip to content"
+   class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-blue focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">Lewati ke konten</a>
+
 <!-- ═══ NAV ═══ -->
 <header class="sticky top-0 z-50 bg-cream/85 backdrop-blur-sm">
   <nav class="mx-auto flex max-w-[1200px] items-center px-6 py-3">
-    <a href="#top" class="shrink-0"><img src="assets/logo.webp" alt="Sarthlutions" class="brand-logo h-12 w-auto"></a>
+    <a href="#top" class="shrink-0"><img width="195" height="160" src="assets/logo-nav.webp" alt="Sarthlutions" class="brand-logo h-12 w-auto"></a>
 
     <ul class="ml-auto hidden items-center gap-9 text-[15px] font-medium text-blue lg:flex">
       <li><a href="#top" class="nav-link inline-flex items-center" aria-current="true">Home</a></li>
@@ -74,6 +82,8 @@
   </nav>
 </header>
 
+<main id="konten">
+
 <section id="top" class="g-hero flex min-h-[calc(100vh-72px)] flex-col">
   <div class="flex flex-1 items-center">
     <div class="mx-auto w-full max-w-[1200px] px-6 py-16">
@@ -96,7 +106,7 @@
 <section id="tentang" class="bg-gradient-to-br from-cream via-cream to-[#e3f1f3]">
   <div class="mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-12 lg:grid-cols-2 lg:py-16">
     <div>
-      <h1 class="text-5xl font-extrabold text-blue sm:text-6xl">About Us</h1>
+      <h2 class="text-5xl font-extrabold text-blue sm:text-6xl">About Us</h2>
       <div class="mt-8 space-y-4 text-lg leading-relaxed text-soft">
         <p><span class="font-semibold text-blue">PT Sarana Artha Solusi</span><span data-en=" — known as Sarthlutions — is an Indonesian technology company that helps organizations build, secure, and scale their digital systems."> — dikenal sebagai Sarthlutions — adalah perusahaan teknologi Indonesia yang membantu organisasi membangun, mengamankan, dan menskalakan sistem digitalnya.</span></p>
         <p data-en="We bring together offensive security expertise, modern software engineering, and applied artificial intelligence, so that every solution we deliver is not only functional, but resilient and ready for what comes next.">Kami menyatukan keahlian offensive security, rekayasa perangkat lunak modern, dan penerapan kecerdasan buatan, sehingga setiap solusi yang kami serahkan bukan sekadar berfungsi, tetapi tahan terhadap gangguan dan siap untuk kebutuhan berikutnya.</p>
@@ -105,9 +115,9 @@
     </div>
     <div class="flex justify-center py-6">
       <div class="grid w-[300px] rotate-45 scale-[0.707] grid-cols-3 gap-2 sm:w-[440px]">
-        <div></div><img src="https://picsum.photos/seed/dia1/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><div></div>
-        <img src="https://picsum.photos/seed/dia2/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><img src="https://picsum.photos/seed/dia3/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><img src="https://picsum.photos/seed/dia4/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy">
-        <div></div><img src="https://picsum.photos/seed/dia5/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><div></div>
+        <div></div><img width="500" height="500" src="https://picsum.photos/seed/dia1/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><div></div>
+        <img width="500" height="500" src="https://picsum.photos/seed/dia2/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><img width="500" height="500" src="https://picsum.photos/seed/dia3/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><img width="500" height="500" src="https://picsum.photos/seed/dia4/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy">
+        <div></div><img width="500" height="500" src="https://picsum.photos/seed/dia5/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><div></div>
       </div>
     </div>
   </div>
@@ -118,52 +128,52 @@
 
   <ul class="mx-auto mt-10 grid max-w-[1200px] gap-6 px-6 pb-16 sm:grid-cols-3">
     <li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h2 class="text-lg font-bold text-blue">Security First</h2>
+      <h3 class="text-lg font-bold text-blue">Security First</h3>
       <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Every system we touch is designed to withstand real-world attacks.">Setiap sistem yang kami sentuh dirancang untuk menahan serangan nyata.</p>
     </li><li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h2 class="text-lg font-bold text-blue">Technology Forward</h2>
+      <h3 class="text-lg font-bold text-blue">Technology Forward</h3>
       <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We adopt automation and AI where it creates measurable value.">Kami memakai otomasi dan AI di tempat yang memberi nilai terukur.</p>
     </li><li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h2 class="text-lg font-bold text-blue">Partnership Driven</h2>
+      <h3 class="text-lg font-bold text-blue">Partnership Driven</h3>
       <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We stay involved long after go-live, not only until handover.">Kami tetap terlibat lama setelah go-live, bukan sampai serah terima saja.</p>
     </li>
   </ul>
 
   <div class="mx-auto grid max-w-[1200px] gap-6 px-6 sm:grid-cols-2">
     <div class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h2 class="text-xl font-bold text-blue">Vision</h2>
+      <h3 class="text-xl font-bold text-blue">Vision</h3>
       <p class="mt-3 text-soft" data-en="To become a trusted technology partner that makes Indonesia&#x27;s digital ecosystem safer, smarter, and more competitive.">Menjadi mitra teknologi tepercaya yang membuat ekosistem digital Indonesia lebih aman, lebih cerdas, dan lebih berdaya saing.</p>
     </div>
     <div class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h2 class="text-xl font-bold text-blue">Mission</h2>
-      <ul class="mt-3 list-disc space-y-1.5 pl-5 text-soft marker:text-teal">
+      <h3 class="text-xl font-bold text-blue">Mission</h3>
+      <ul class="mt-3 list-disc space-y-1.5 pl-5 text-soft marker:text-teal-deep">
         <li data-en="Deliver secure, reliable, and measurable technology solutions.">Menyerahkan solusi teknologi yang aman, andal, dan terukur.</li><li data-en="Make advanced security and AI capabilities accessible to organizations of every size.">Membuat kemampuan keamanan dan AI tingkat lanjut terjangkau bagi organisasi segala ukuran.</li><li data-en="Build long-term partnerships grounded in integrity and transparency.">Membangun kemitraan jangka panjang berlandaskan integritas dan transparansi.</li><li data-en="Grow local talent that can compete at an international standard.">Menumbuhkan talenta lokal yang mampu bersaing di tingkat internasional.</li>
       </ul>
     </div>
   </div>
 
   <div class="mx-auto max-w-[1200px] px-6 py-16">
-    <h2 class="text-2xl font-bold text-blue">Our Values</h2>
+    <h3 class="text-2xl font-bold text-blue">Our Values</h3>
     <ol class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
       <li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">01</span>
-        <h3 class="mt-2 text-lg font-bold text-blue">Integrity</h3>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">01</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Integrity</h4>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We say what we find, and we find what matters.">Kami menyampaikan apa yang kami temukan, dan mencari yang benar-benar penting.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">02</span>
-        <h3 class="mt-2 text-lg font-bold text-blue">Security First</h3>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">02</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Security First</h4>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Security is a starting requirement, never an add-on.">Keamanan adalah syarat awal, bukan tambahan.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">03</span>
-        <h3 class="mt-2 text-lg font-bold text-blue">Innovation</h3>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">03</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Innovation</h4>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We keep pace with technology so our clients do not have to.">Kami mengikuti perkembangan teknologi supaya klien tidak perlu.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">04</span>
-        <h3 class="mt-2 text-lg font-bold text-blue">Collaboration</h3>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">04</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Collaboration</h4>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We work inside your team, not across a wall.">Kami bekerja di dalam tim Anda, bukan dari seberang tembok.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">05</span>
-        <h3 class="mt-2 text-lg font-bold text-blue">Real Impact</h3>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">05</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Real Impact</h4>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Success is measured by outcomes, not deliverables.">Keberhasilan diukur dari hasil, bukan dari daftar keluaran.</p>
       </li>
     </ol>
@@ -241,23 +251,23 @@
     <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">How We Work</h2>
     <ol class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
       <li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">01</span>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">01</span>
         <h3 class="mt-2 text-xl font-bold text-blue">Discover</h3>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We map your business goals, technical landscape, and risk exposure.">Kami petakan tujuan bisnis, lanskap teknis, dan paparan risiko Anda.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">02</span>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">02</span>
         <h3 class="mt-2 text-xl font-bold text-blue">Design</h3>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We architect a solution that fits your budget, timeline, and compliance needs.">Kami rancang solusi yang sesuai anggaran, tenggat, dan kebutuhan kepatuhan.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">03</span>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">03</span>
         <h3 class="mt-2 text-xl font-bold text-blue">Develop</h3>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Our engineers build and test to a defined quality and security standard.">Engineer kami membangun dan menguji dengan standar mutu dan keamanan yang ditetapkan.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">04</span>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">04</span>
         <h3 class="mt-2 text-xl font-bold text-blue">Deliver</h3>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We implement, migrate, document, and train your team for adoption.">Kami terapkan, migrasikan, dokumentasikan, dan latih tim Anda agar sistemnya benar-benar dipakai.</p>
       </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal">05</span>
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">05</span>
         <h3 class="mt-2 text-xl font-bold text-blue">Optimize</h3>
         <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We monitor, review, and improve continuously after go-live.">Kami pantau, tinjau, dan perbaiki terus-menerus setelah go-live.</p>
       </li>
@@ -277,40 +287,40 @@
        supaya lingkarannya mulus tanpa dibacakan ulang oleh screen reader. -->
   <div class="marquee mt-10 mb-4">
     <ul class="marquee__track">
-      <li><img src="assets/clients/asaba.png" alt="Asaba" loading="lazy"></li>
-      <li><img src="assets/clients/bank_aceh.png" alt="Bank Aceh" loading="lazy"></li>
-      <li><img src="assets/clients/bank_bni.png" alt="BNI" loading="lazy"></li>
-      <li><img src="assets/clients/bank_bsi.png" alt="Bank Syariah Indonesia" loading="lazy"></li>
-      <li><img src="assets/clients/bank_btn.png" alt="BTN" loading="lazy"></li>
-      <li><img src="assets/clients/bank_mandiri.png" alt="Bank Mandiri" loading="lazy"></li>
-      <li><img src="assets/clients/bank_mandiri_taspen.png" alt="Bank Mandiri Taspen" loading="lazy"></li>
-      <li><img src="assets/clients/bank_resona.png" alt="Bank Resona Perdania" loading="lazy"></li>
-      <li><img src="assets/clients/bni_life.png" alt="BNI Life" loading="lazy"></li>
-      <li><img src="assets/clients/idx.png" alt="Bursa Efek Indonesia" loading="lazy"></li>
-      <li><img src="assets/clients/inddigo.png" alt="Inddigo" loading="lazy"></li>
-      <li><img src="assets/clients/indonesia_re.png" alt="Indonesia Re" loading="lazy"></li>
-      <li><img src="assets/clients/linc_group.png" alt="Linc Group" loading="lazy"></li>
-      <li><img src="assets/clients/loyalid.png" alt="LoyalID" loading="lazy"></li>
-      <li><img src="assets/clients/pegadaian.png" alt="Pegadaian" loading="lazy"></li>
-      <li><img src="assets/clients/timor_telecom.png" alt="Timor Telecom" loading="lazy"></li>
-      <li><img src="assets/clients/woori.png" alt="Bank Woori Saudara" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/asaba.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_aceh.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_bni.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_bsi.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_btn.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_mandiri.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_mandiri_taspen.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bank_resona.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/bni_life.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/idx.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/inddigo.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/indonesia_re.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/linc_group.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/loyalid.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/pegadaian.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/timor_telecom.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/clients/woori.png" alt="" loading="lazy"></li>
+      <li><img width="640" height="123" src="assets/clients/asaba.png" alt="Asaba" loading="lazy"></li>
+      <li><img width="704" height="160" src="assets/clients/bank_aceh.png" alt="Bank Aceh" loading="lazy"></li>
+      <li><img width="552" height="160" src="assets/clients/bank_bni.png" alt="BNI" loading="lazy"></li>
+      <li><img width="573" height="160" src="assets/clients/bank_bsi.png" alt="Bank Syariah Indonesia" loading="lazy"></li>
+      <li><img width="286" height="160" src="assets/clients/bank_btn.png" alt="BTN" loading="lazy"></li>
+      <li><img width="548" height="160" src="assets/clients/bank_mandiri.png" alt="Bank Mandiri" loading="lazy"></li>
+      <li><img width="312" height="160" src="assets/clients/bank_mandiri_taspen.png" alt="Bank Mandiri Taspen" loading="lazy"></li>
+      <li><img width="126" height="160" src="assets/clients/bank_resona.png" alt="Bank Resona Perdania" loading="lazy"></li>
+      <li><img width="314" height="160" src="assets/clients/bni_life.png" alt="BNI Life" loading="lazy"></li>
+      <li><img width="212" height="160" src="assets/clients/idx.png" alt="Bursa Efek Indonesia" loading="lazy"></li>
+      <li><img width="485" height="160" src="assets/clients/inddigo.png" alt="Inddigo" loading="lazy"></li>
+      <li><img width="297" height="160" src="assets/clients/indonesia_re.png" alt="Indonesia Re" loading="lazy"></li>
+      <li><img width="213" height="160" src="assets/clients/linc_group.png" alt="Linc Group" loading="lazy"></li>
+      <li><img width="161" height="160" src="assets/clients/loyalid.png" alt="LoyalID" loading="lazy"></li>
+      <li><img width="250" height="130" src="assets/clients/pegadaian.png" alt="Pegadaian" loading="lazy"></li>
+      <li><img width="210" height="138" src="assets/clients/timor_telecom.png" alt="Timor Telecom" loading="lazy"></li>
+      <li><img width="477" height="160" src="assets/clients/woori.png" alt="Bank Woori Saudara" loading="lazy"></li>
+      <li aria-hidden="true"><img width="640" height="123" src="assets/clients/asaba.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="704" height="160" src="assets/clients/bank_aceh.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="552" height="160" src="assets/clients/bank_bni.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="573" height="160" src="assets/clients/bank_bsi.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="286" height="160" src="assets/clients/bank_btn.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="548" height="160" src="assets/clients/bank_mandiri.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="312" height="160" src="assets/clients/bank_mandiri_taspen.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="126" height="160" src="assets/clients/bank_resona.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="314" height="160" src="assets/clients/bni_life.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="212" height="160" src="assets/clients/idx.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="485" height="160" src="assets/clients/inddigo.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="297" height="160" src="assets/clients/indonesia_re.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="213" height="160" src="assets/clients/linc_group.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="161" height="160" src="assets/clients/loyalid.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="250" height="130" src="assets/clients/pegadaian.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="210" height="138" src="assets/clients/timor_telecom.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="477" height="160" src="assets/clients/woori.png" alt="" loading="lazy"></li>
     </ul>
   </div>
 
@@ -346,37 +356,37 @@
     <path fill="#fbfdfd" d="M0,0 H1440 V46 C1360,34 1260,18 1120,14 C900,8 720,48 520,72 C320,96 150,88 0,52 Z"/>
   </svg>
   <div class="mx-auto max-w-[1200px] px-6 pt-10">
-    <h1 class="text-5xl font-extrabold text-blue sm:text-6xl">Certificate</h1>
+    <h2 class="text-5xl font-extrabold text-blue sm:text-6xl">Certificate</h2>
   </div>
 
   <!-- VERIFIKASI: CCEP dan C3SA belum punya berkas logo — lengkapi, atau coret dari
        daftar sertifikasi kalau memang tidak dipegang lagi. -->
   <div class="marquee marquee--certs mt-10 mb-16">
     <ul class="marquee__track">
-      <li><img src="assets/certs/ceh.png" alt="CEH — Certified Ethical Hacker" loading="lazy"></li>
-      <li><img src="assets/certs/ewptx.png" alt="eWPTX — Web Application Penetration Tester eXtreme" loading="lazy"></li>
-      <li><img src="assets/certs/crtp.png" alt="CRTP — Certified Red Team Professional" loading="lazy"></li>
-      <li><img src="assets/certs/crta.png" alt="CRTA — Certified Red Team Analyst" loading="lazy"></li>
-      <li><img src="assets/certs/web_rta.png" alt="Web-RTA — Web Red Team Analyst" loading="lazy"></li>
-      <li><img src="assets/certs/api_rta.png" alt="API-RTA — API Red Team Analyst" loading="lazy"></li>
-      <li><img src="assets/certs/ejpt.png" alt="eJPT — Junior Penetration Tester" loading="lazy"></li>
-      <li><img src="assets/certs/cmpen_android.png" alt="CM-Pen Android — Certified Mobile Penetration Tester" loading="lazy"></li>
-      <li><img src="assets/certs/cmpen_ios.png" alt="CM-Pen iOS — Certified Mobile Penetration Tester" loading="lazy"></li>
-      <li><img src="assets/certs/cap.png" alt="CAP — Certified AppSec Practitioner" loading="lazy"></li>
-      <li><img src="assets/certs/cnsp.png" alt="CNSP — Certified Network Security Practitioner" loading="lazy"></li>
-      <li><img src="assets/certs/ehe.png" alt="EHE — Ethical Hacking Essentials" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/ceh.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/ewptx.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/crtp.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/crta.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/web_rta.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/api_rta.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/ejpt.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/cmpen_android.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/cmpen_ios.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/cap.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/cnsp.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img src="assets/certs/ehe.png" alt="" loading="lazy"></li>
+      <li><img width="242" height="200" src="assets/certs/ceh.png" alt="CEH — Certified Ethical Hacker" loading="lazy"></li>
+      <li><img width="151" height="200" src="assets/certs/ewptx.png" alt="eWPTX — Web Application Penetration Tester eXtreme" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/crtp.png" alt="CRTP — Certified Red Team Professional" loading="lazy"></li>
+      <li><img width="210" height="200" src="assets/certs/crta.png" alt="CRTA — Certified Red Team Analyst" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/web_rta.png" alt="Web-RTA — Web Red Team Analyst" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/api_rta.png" alt="API-RTA — API Red Team Analyst" loading="lazy"></li>
+      <li><img width="269" height="200" src="assets/certs/ejpt.png" alt="eJPT — Junior Penetration Tester" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/cmpen_android.png" alt="CM-Pen Android — Certified Mobile Penetration Tester" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/cmpen_ios.png" alt="CM-Pen iOS — Certified Mobile Penetration Tester" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/cap.png" alt="CAP — Certified AppSec Practitioner" loading="lazy"></li>
+      <li><img width="200" height="200" src="assets/certs/cnsp.png" alt="CNSP — Certified Network Security Practitioner" loading="lazy"></li>
+      <li><img width="261" height="193" src="assets/certs/ehe.png" alt="EHE — Ethical Hacking Essentials" loading="lazy"></li>
+      <li aria-hidden="true"><img width="242" height="200" src="assets/certs/ceh.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="151" height="200" src="assets/certs/ewptx.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/crtp.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="210" height="200" src="assets/certs/crta.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/web_rta.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/api_rta.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="269" height="200" src="assets/certs/ejpt.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/cmpen_android.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/cmpen_ios.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/cap.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="200" height="200" src="assets/certs/cnsp.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="261" height="193" src="assets/certs/ehe.png" alt="" loading="lazy"></li>
     </ul>
   </div>
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
@@ -449,7 +459,7 @@
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
           <span data-en="How much does it cost?">Berapa biayanya?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
         </summary>
-        <p class="mt-3 text-sm text-soft"><span data-en="Every scope is different, so we price per engagement rather than from a rate card. The first scoping session is free.">Tiap lingkup berbeda, jadi biayanya kami hitung per kebutuhan — bukan daftar harga. Sesi pemetaan kebutuhan pertama gratis.</span> <a href="#kontak" class="font-medium text-teal hover:underline" data-en="Send us your question.">Kirim pertanyaan Anda.</a></p>
+        <p class="mt-3 text-sm text-soft"><span data-en="Every scope is different, so we price per engagement rather than from a rate card. The first scoping session is free.">Tiap lingkup berbeda, jadi biayanya kami hitung per kebutuhan — bukan daftar harga. Sesi pemetaan kebutuhan pertama gratis.</span> <a href="#kontak" class="font-medium text-teal-deep hover:underline" data-en="Send us your question.">Kirim pertanyaan Anda.</a></p>
       </details>
       </div>
       <div class="mx-auto"><svg viewBox="0 0 320 250" class="w-full max-w-[300px]" role="img" aria-label="Ilustrasi dukungan pelanggan">
@@ -504,26 +514,29 @@
         <div class="grid gap-5 sm:grid-cols-2">
           <label><span class="sr-only" data-en="Name">Nama</span>
             <input required name="nama" type="text" autocomplete="name" placeholder="Your Name"
-                   class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/45 focus:ring-2 focus:ring-blue/30"></label>
+                   class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/70 focus:ring-2 focus:ring-blue/30"></label>
           <label><span class="sr-only">Email</span>
             <input required name="email" type="email" autocomplete="email" placeholder="your@mail.com"
-                   class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/45 focus:ring-2 focus:ring-blue/30"></label>
+                   class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/70 focus:ring-2 focus:ring-blue/30"></label>
         </div>
         <label class="block"><span class="sr-only" data-en="Subject">Subjek</span>
           <input required name="subjek" type="text" placeholder="Subject"
-                 class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/45 focus:ring-2 focus:ring-blue/30"></label>
+                 class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/70 focus:ring-2 focus:ring-blue/30"></label>
         <label class="block"><span class="sr-only" data-en="Message">Pesan</span>
           <textarea required name="pesan" rows="8" placeholder="Message"
-                    class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/45 focus:ring-2 focus:ring-blue/30"></textarea></label>
+                    class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none placeholder:text-blue/70 focus:ring-2 focus:ring-blue/30"></textarea></label>
         <div class="flex justify-end">
           <button type="submit" class="rounded-md bg-blue px-14 py-3 font-semibold text-white transition hover:bg-blue-deep">Send</button>
         </div>
         <p class="text-right text-xs text-soft" data-en="This form is not wired to a backend yet.">Form ini belum tersambung ke backend.</p>
+        <p id="kirim-status" hidden role="status" class="rounded-md bg-blue/5 px-4 py-3 text-sm text-blue ring-1 ring-blue/10" data-en="Nothing was sent — this form has no backend yet. Please email contact@sarthlutions.id in the meantime; your text is still in the fields, ready to copy.">Pesan belum terkirim &mdash; form ini memang belum punya backend. Sementara ini silakan email ke contact@sarthlutions.id; isian Anda masih utuh di kolomnya, tinggal disalin.</p>
       </form>
 
     </div>
   </div>
 </section>
+</main>
+
 <!-- ═══ FOOTER ═══ -->
 <footer class="g-foot relative text-white">
   <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">

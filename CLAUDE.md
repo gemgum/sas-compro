@@ -9,15 +9,37 @@ A single-page company profile ("compro") for **PT Sarana Artha Solusi**, trading
 AI agent development, and IT procurement. Tagline: *Secure. Smart. Scalable.*
 
 ```
+README.md                               how to run/edit it, for a human
 TODO.md                                 audit findings, ranked — read before "is this done?"
+check.mjs                               structural checks over index.html
+test-marquee.mjs                        runs app.js against a stub DOM — the D1/D2/D3 behaviours
+serve.mjs                               dependency-free static server, localhost only
 index.html                              the whole site — every section lives here
-assets/logo.webp                        the PT lockup (shield + wordmark), client-supplied
-assets/style.css                        brand tokens, gradients, dividers, service card, marquee, nav
-assets/app.js                           language switch + marquee drag + nav scrollspy
+assets/tailwind.src.css                 build input: @import + the @theme tokens
+assets/tailwind.css                     BUILT — never edit by hand, `npm run css` overwrites it
+assets/style.css                        hand-written: gradients, dividers, service card, marquee, nav
+assets/app.js                           menu, form guard, language switch, marquee drag, nav scrollspy
+assets/logo.webp                        the PT lockup, client-supplied master — keep full size
+assets/logo-nav.webp                    160px-tall derivative, the one the page loads
+assets/{favicon,apple-touch-icon,og}.png  generated from the logo, see *Regenerating the icons*
 Company Profile Sarthlutions - EN.docx  the client's own profile deck — content source
 ```
 
-No build step, no locally installed dependencies.
+**There is a build step now.** Tailwind used to compile in the browser from a CDN
+script; it is a one-shot CLI build instead (audit item C1). `npm i` once, then:
+
+```bash
+npm run css          # assets/tailwind.src.css → assets/tailwind.css, minified
+npm run css:watch    # same, rebuilding on change
+npm test             # test-marquee.mjs + check.mjs, exits 1 on failure
+npm run serve        # node serve.mjs → http://localhost:8000
+```
+
+**Adding a Tailwind class to `index.html` does nothing until you re-run `npm run css`.**
+The scanner reads `index.html` (declared via `@source` in the input file) at build time,
+so an unbuilt class is silently dead — this is the single easiest way to be confused by
+this repo now. `node_modules/` is gitignored; `assets/tailwind.css` is committed so the
+site still works for anyone who just opens `index.html`.
 
 **The .docx is the authority on company copy.** Section text (about, vision, mission,
 values, service descriptions, the five-step method, why-choose-us, competencies,
@@ -25,11 +47,10 @@ contact details) was translated from it into Indonesian. When copy is disputed, 
 the docx rather than guessing — extract it with:
 
 ```bash
-python3 -c "
-import zipfile,re,html
-x=zipfile.ZipFile('Company Profile Sarthlutions - EN.docx').read('word/document.xml').decode()
-x=x.replace('</w:p>','\n').replace('<w:tab/>','  ')
-print('\n'.join(l for l in html.unescape(re.sub(r'<[^>]+>','',x)).split('\n') if l.strip()))"
+unzip -p "Company Profile Sarthlutions - EN.docx" word/document.xml \
+| perl -pe 's{</w:p>}{\n}g; s{<w:tab/>}{  }g; s{<[^>]+>}{}g;
+            s{&lt;}{<}g; s{&gt;}{>}g; s{&quot;}{"}g; s{&amp;}{&}g' \
+| grep -v "^[[:space:]]*$"
 ```
 
 Headings stay in English (`Our Services`, `How We Work`, `Why Choose Us`) in **both**
@@ -78,42 +99,40 @@ before any code is written:
 
 ## Running it
 
-There is no build, lint, or test command. Open `index.html` in a browser, or serve it:
+`npm run serve`, then http://localhost:8000. **The toolchain is Node only — no Python.**
+`serve.mjs` is a ~50-line static server with no dependencies (binds `127.0.0.1`, refuses
+dotfiles and `node_modules`); `check.mjs` and `test-marquee.mjs` are the lint/test stand-in.
 
-```bash
-python3 -m http.server 8000     # then http://localhost:8000
-```
+Needs network at runtime: Google Fonts (Outfit) and the remaining `picsum.photos`
+placeholder images. Everything else — CSS, JS, all logos, the icons — is local.
 
-Needs network at runtime: Tailwind v4 browser build (CDN, compiles in-page),
-Google Fonts (Outfit), `picsum.photos` placeholder images, and an OpenStreetMap
-`<iframe>` for the contact map.
+### Regenerating the icons
+
+`assets/favicon.png`, `assets/apple-touch-icon.png` and `assets/og.png` are derived from
+`assets/logo.webp`: the favicon pair is the **shield only** (the lockup's wordmark is
+illegible at 32px), cropped at the widest blank row between shield and wordmark, with
+white knocked out to transparent; the OG card is the full lockup centred on cream at
+1200×630. If the logo is ever replaced, regenerate all three rather than scaling the new
+file directly.
 
 ### The check to run after editing `index.html`
 
-Nothing here is compiled, so structural mistakes fail silently. This catches the
-four that actually happen — duplicate ids, dead anchors, unbalanced tags, and a
-`data-en` that would clobber nested markup:
-
 ```bash
-python3 - <<'PY'
-import re, collections, html.parser
-s = open('index.html').read()
-ids = re.findall(r'\bid="([^"]+)"', s)
-print('dup ids:', [i for i,n in collections.Counter(ids).items() if n>1] or '-')
-print('dead anchors:', [a for a in sorted(set(re.findall(r'href="#([a-z-]+)"', s))) if a not in ids] or '-')
-for m in re.finditer(r'<(\w+)[^>]*data-en="([^"]*)"[^>]*>(.*?)</\1>', s, re.S):
-    if '<' in m.group(3): print('data-en over markup:', m.group(3)[:60].replace('\n',' '))
-VOID = set('area base br col embed hr img input link meta param source track wbr use path circle rect ellipse polygon line stop iframe'.split())
-class C(html.parser.HTMLParser):
-    def __init__(s): super().__init__(); s.stack=[]; s.bad=[]
-    def handle_starttag(s,t,a):
-        if t not in VOID: s.stack.append(t)
-    def handle_endtag(s,t):
-        if t in VOID: return
-        s.stack.pop() if s.stack and s.stack[-1]==t else s.bad.append(t)
-c=C(); c.feed(s); print('unclosed:', c.stack or '-', 'mismatched:', c.bad or '-')
-PY
+npm test              # test-marquee.mjs + check.mjs
 ```
+
+Nothing here is compiled by hand, so structural mistakes fail silently. `check.mjs`
+catches the ones that have actually happened: duplicate ids, dead anchors, unbalanced
+tags, a `data-en` that would clobber nested markup, a missing local file, `OWNER` drifting
+out of sync (or out of document order), a marquee list that is no longer written twice,
+and — the quietest of all — **a Tailwind class that was never built**. Add a case to it
+rather than inventing a new one-off snippet.
+
+`test-marquee.mjs` is the other half: it loads `assets/app.js` with `new Function` over a
+stub DOM and drives the marquee — visibility, motion preference, screen width, thousands
+of frames. It exists because none of that is visible in the markup, and all three bugs it
+covers only appear on a particular screen or a particular OS setting. Every assertion in
+it was checked by mutating `app.js` until it failed; keep that habit if you add one.
 
 ## Brand colors are defined in TWO places
 
@@ -133,7 +152,13 @@ this logo on `.g-foot` or `.g-hero`'s dark end needs a real transparent or knock
 version.
 
 | `assets/style.css` `:root` | `--navy --navy-deep --navy-mid --teal-deep --teal --cream --soft` | the hand-written classes: `.g-hero .g-band .g-foot .squiggle .svc-card .marquee .nav-link` |
-| `index.html` `<style type="text/tailwindcss">` `@theme` | `--color-blue --color-blue-deep --color-teal --color-cream --color-soft --color-ink` | Tailwind utilities: `text-blue`, `bg-blue`, `text-soft`, `bg-cream`, … |
+| `assets/tailwind.src.css` `@theme` | `--color-blue --color-blue-deep --color-teal --color-cream --color-soft --color-ink` | Tailwind utilities: `text-blue`, `bg-blue`, `text-soft`, `bg-cream`, … |
+
+`--color-teal` (`#19b1b4`) is **not a text colour** — it is 2.6:1 on cream, which fails
+WCAG AA. Text that needs to read as teal uses `--color-teal-deep` (`#21758b`, 5.17:1);
+`--color-teal` stays for borders, the squiggle, and card accents. `--soft` is `#69777d`
+for the same reason — the original `#98a4a9` was 2.5:1 behind roughly every paragraph on
+the page. Re-check any new colour pair against 4.5:1 before using it for text.
 
 `--color-blue` is **navy** (`#1b3a6b`), not blue — the name is left over from an
 earlier palette and is used by hundreds of utility classes, so it was not renamed.
@@ -168,8 +193,18 @@ and the FAQ. A squiggle there would divide cream from cream with nothing in betw
 
 ## JS contracts (`assets/app.js`)
 
-No framework, three behaviours: the language switch, the client marquee, and the
-nav underline.
+No framework, five small behaviours in file order: mobile-menu close, contact-form
+submit guard, language switch, logo marquees, nav underline.
+
+**Mobile menu** — `<details>` in the header does not close itself when a link inside it
+is chosen, so the panel stays over the section just navigated to. One delegated click
+listener sets `open = false`. Scoped to `header details`; the FAQ accordions are also
+`<details>` and must keep their own behaviour.
+
+**Contact form guard** — the form has no backend and `action="#"` would POST to the same
+URL, reloading the page and wiping every field. The submit handler calls
+`preventDefault()`, reveals `#kirim-status`, and leaves the typed text in place so it can
+still be copied. Delete the handler only together with a real endpoint.
 
 **Nav underline** — the active nav item is *not* hardcoded. An `IntersectionObserver`
 watches every section id in the `OWNER` map and sets `aria-current` on the matching
@@ -180,18 +215,7 @@ dropdown (`keunggulan`, `sertifikat`, `teknologi`, `faq`) map to `#alur` — the
 trigger's own href — so exactly one top-level item is ever active. `OWNER`'s keys are
 kept in **document order**; the `.pop()` that picks the current section relies on it. **Adding a section with an id means adding it to
 `OWNER`**, or the underline sticks on the previous item while that section is on screen.
-Check both directions:
-
-```bash
-python3 -c "
-import re
-s = open('index.html').read()
-own = re.findall(r\"(\w+): '#\", open('assets/app.js').read())
-sec = set(re.findall(r'<section[^>]*id=\"([a-z]+)\"', s))
-print('section without OWNER:', sorted(sec - set(own)) or '-')
-print('OWNER without target:', [k for k in own if f'id=\"{k}\"' not in s] or '-')
-print('OWNER in document order:', own == sorted(own, key=lambda k: s.index(f'id=\"{k}\"')))"
-```
+`check.mjs` verifies both directions, plus the key order.
 
 ## Bilingual copy (ID / EN)
 
@@ -230,6 +254,15 @@ per frame and the same `put()` wraps it modulo **half the scrollWidth** — whic
 lines up because the 17 `<li>` are written **twice** in `index.html` (second copy
 `aria-hidden`, so a screen reader reads each client once). Add or remove a logo in
 *both* copies or the loop jumps.
+
+A seamless wrap also needs half the track to be at least as wide as the container,
+otherwise `scrollLeft` clamps at the end and the strip stalls before jumping back. Two
+copies are not enough on a very wide screen, so `fill()` **doubles** the track (never
+appends a single copy — that would break "half the track is a whole number of copies")
+until `scrollWidth >= clientWidth * 2`, and re-checks on resize. The rAF loop is gated on
+an `IntersectionObserver` and on `prefers-reduced-motion`, both live: off-screen strips
+schedule no frames at all, and changing the OS motion setting stops or restarts them
+without a reload.
 
 Doing it through `scrollLeft` instead of `translateX` is what makes click-drag
 possible: pointer events just set the same value. `touch-action: pan-y` hands

@@ -1,0 +1,16 @@
+/* Sumber build Tailwind. Ubah token di sini, lalu jalankan:
+     npx @tailwindcss/cli@4 -i assets/tailwind.src.css -o assets/tailwind.css --minify
+   Hasilnya assets/tailwind.css yang dipakai index.html. */
+@import "tailwindcss";
+@source "../index.html";
+
+@theme {
+    --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    --color-blue: #1b3a6b;        /* navy — heading, nav, teks di atas latar terang */
+    --color-blue-deep: #142c52;   /* hover */
+    --color-teal: #19b1b4;        /* aksen non-teks: garis, border, squiggle */
+    --color-teal-deep: #21758b;   /* teal untuk TEKS — #19b1b4 hanya 2.6:1 di krem */
+    --color-cream: #fbfdfd;
+    --color-soft: #69777d;        /* 4.5:1 di krem; #98a4a9 dulu hanya 2.5:1 */
+    --color-ink: #22303a;
+  }
