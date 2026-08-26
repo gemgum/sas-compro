@@ -1,0 +1,111 @@
+/* Palet diambil dari logo: navy #1b3a6b → teal #19b1b4.
+   Sisanya: dua divider (blob wave, squiggle) dan gradient — hal yang tidak
+   masuk akal ditulis sebagai utility Tailwind. */
+
+:root {
+  --navy:      #1b3a6b;   /* heading, logo, nav aktif */
+  --navy-deep: #142c52;   /* hover */
+  --navy-mid:  #234e86;
+  --teal-deep: #21758b;
+  --teal:      #19b1b4;   /* aksen, squiggle, link kecil */
+  --cream:     #fbfdfd;   /* latar halaman — off-white dingin */
+  --soft:      #98a4a9;   /* teks sekunder */
+}
+
+body { background: var(--cream); }
+
+/* ── Gradient ───────────────────────────────────────────────────── */
+.g-hero {
+  background-image: linear-gradient(118deg,
+    #fbfdfd 0%, #e6f2f4 24%, #a5d7dd 44%, #4aacba 62%, #21758b 80%, #1b3a6b 100%);
+}
+.g-band { background-image: linear-gradient(90deg, #e6f2f4 0%, #4aacba 52%, #21758b 100%); }
+.g-foot { background-image: linear-gradient(135deg, #1b3a6b 0%, #21758b 58%, #19b1b4 100%); }
+
+/* ── Kartu layanan ──────────────────────────────────────────────────
+   Pola dari gamatecha.com: ikon line-art 100px di alur normal (bukan
+   di belakang overlay), kartu terangkat saat hover, cincin gradient
+   muncul di tepinya. Cincin memakai trik mask agar hanya 1px tepi yang
+   terwarnai tanpa perlu elemen kedua. */
+.svc-card {
+  position: relative; padding: 32px; overflow: hidden;
+  background: #fff; border: 1px solid rgba(27,58,107,.10); border-radius: 12px;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), background .3s, border-color .3s;
+}
+.svc-card::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit;
+  padding: 1px; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: linear-gradient(135deg, transparent, var(--teal), transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.svc-card:hover { transform: translateY(-6px); background: #f7fcfc; border-color: transparent; }
+.svc-card:hover::after { opacity: 1; }
+
+.svc-card__art {
+  width: 100px; height: 100px; color: rgba(27,58,107,.30);
+  transition: transform .5s cubic-bezier(.2,.7,.2,1), color .3s;
+}
+.svc-card:hover .svc-card__art { color: var(--navy); transform: rotate(-4deg) scale(1.05); }
+.svc-card__accent { stroke: var(--teal); }
+
+/* ── Divider 1: blob wave ───────────────────────────────────────── */
+.wave { display: block; width: 100%; height: clamp(48px, 7vw, 120px); }
+.wave--flip { transform: scaleX(-1); }
+
+/* ── Divider 2: squiggle (tiga garis sinus bersilangan) ─────────── */
+.squiggle { display: block; width: 100%; height: clamp(40px, 5.5vw, 84px); }
+.squiggle path {
+  fill: none; stroke: var(--teal); stroke-width: 2;
+  vector-effect: non-scaling-stroke;   /* preserveAspectRatio=none akan menggepengkan stroke */
+}
+
+/* ── Deretan logo klien berjalan ────────────────────────────────── */
+/* Wadahnya scroll-container biasa: app.js yang menggeser scrollLeft, jadi
+   klik-tahan-geser dan swipe layar sentuh ikut jalan tanpa kode tambahan.
+   padding-y memberi ruang untuk logo yang membesar saat hover — tanpa itu
+   overflow memotongnya. */
+.marquee {
+  overflow-x: auto; overflow-y: hidden;
+  padding: 22px 0; cursor: grab;
+  touch-action: pan-y;   /* geser mendatar milik app.js, gulir tegak tetap milik halaman */
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee::-webkit-scrollbar { display: none; }
+.marquee.is-dragging { cursor: grabbing; user-select: none; }
+.marquee__track { display: flex; align-items: center; gap: 72px; width: max-content; }
+.marquee img {
+  height: 76px; width: auto; max-width: 260px; object-fit: contain;
+  -webkit-user-drag: none; user-select: none;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.marquee img:hover { transform: scale(1.18); }
+
+/* ── Lain-lain ──────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+/* Sakelar bahasa di nav */
+.lang { display: inline-flex; overflow: hidden; border-radius: 6px;
+        border: 1px solid color-mix(in srgb, var(--navy) 25%, transparent); }
+.lang button { padding: .2rem .55rem; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+               color: color-mix(in srgb, var(--navy) 55%, transparent); transition: background .15s, color .15s; }
+.lang button:hover { background: color-mix(in srgb, var(--navy) 8%, transparent); }
+.lang button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+
+/* Garis bawah nav: statusnya atribut (aria-current), bukan class yang di-toggle.
+   app.js hanya mengubah atributnya. */
+.nav-link { border-bottom: 3px solid transparent; padding-bottom: .375rem; transition: border-color .15s; }
+.nav-link:hover { border-bottom-color: color-mix(in srgb, var(--navy) 40%, transparent); }
+.nav-link[aria-current="true"] { border-bottom-color: var(--navy); }
+
+:where(a, button, summary, input, textarea):focus-visible {
+  outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
