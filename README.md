@@ -44,6 +44,39 @@ npm test
 
 Keluar `1` kalau ada yang gagal. Jalankan sebelum commit.
 
+## Deploy
+
+Situs statis murni — tidak ada backend, tidak ada proses yang jalan di server.
+Yang perlu naik cuma `index.html` + `assets/`. **Jalankan `npm run css` dan
+`npm test` dulu**; `assets/tailwind.css` ikut di-commit, jadi server tidak
+perlu Node sama sekali.
+
+```bash
+rsync -avz --delete \
+  --exclude 'assets/logo.webp' --exclude 'assets/tailwind.src.css' \
+  --exclude '*:Zone.Identifier' \
+  index.html assets root@SERVER:/var/www/sarthlutions/
+```
+
+(~480 KB. `assets/logo.webp` master dan `tailwind.src.css` tidak dipakai halaman.)
+
+Blok nginx minimal:
+
+```nginx
+server {
+  listen 80;
+  server_name sarthlutions.id www.sarthlutions.id;
+  root /var/www/sarthlutions;
+  index index.html;
+  location ~* \.(css|js|png|webp)$ { expires 30d; add_header Cache-Control "public"; }
+}
+```
+
+Lalu `certbot --nginx -d sarthlutions.id -d www.sarthlutions.id` untuk HTTPS —
+`canonical`, `og:url`, dan `og:image` di `<head>` sudah menunjuk
+`https://www.sarthlutions.id/`, jadi domain lain berarti mengganti ketiganya
+sekaligus (`check.mjs` gagal kalau ketiganya tidak seasal).
+
 ## Isi berkas
 
 ```
