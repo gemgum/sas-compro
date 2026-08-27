@@ -44,38 +44,42 @@ npm test
 
 Keluar `1` kalau ada yang gagal. Jalankan sebelum commit.
 
-## Deploy
+## Deploy — GitHub Pages
 
-Situs statis murni — tidak ada backend, tidak ada proses yang jalan di server.
-Yang perlu naik cuma `index.html` + `assets/`. **Jalankan `npm run css` dan
-`npm test` dulu**; `assets/tailwind.css` ikut di-commit, jadi server tidak
-perlu Node sama sekali.
+Situs tayang di **https://sarthlutions.gemgum.fun/** lewat GitHub Pages, langsung
+dari branch `main` (root). Tidak ada server, tidak ada build di sisi GitHub —
+`assets/tailwind.css` ikut di-commit, jadi yang di-push itulah yang disajikan.
+
+**Cara update kalau ada konten baru:**
 
 ```bash
-rsync -avz --delete \
-  --exclude 'assets/logo.webp' --exclude 'assets/tailwind.src.css' \
-  --exclude '*:Zone.Identifier' \
-  index.html assets root@SERVER:/var/www/sarthlutions/
+# 1. sunting index.html / assets/style.css / assets/app.js
+npm run css      # WAJIB kalau menambah kelas Tailwind baru di index.html
+npm test         # harus hijau; check.mjs menangkap kelas yang belum di-build
+git add -A && git commit -m "apa yang diubah" && git push
 ```
 
-(~480 KB. `assets/logo.webp` master dan `tailwind.src.css` tidak dipakai halaman.)
+Push ke `main` = deploy. GitHub membangun ulang sekitar 1 menit; kalau halaman
+masih lama, hard refresh (`Ctrl+Shift+R`). Status build ada di tab **Actions**
+repo — merah berarti tidak tayang.
 
-Blok nginx minimal:
+Yang tidak boleh disentuh saat update:
 
-```nginx
-server {
-  listen 80;
-  server_name sarthlutions.id www.sarthlutions.id;
-  root /var/www/sarthlutions;
-  index index.html;
-  location ~* \.(css|js|png|webp)$ { expires 30d; add_header Cache-Control "public"; }
-}
-```
+| Berkas | Kenapa |
+|---|---|
+| `CNAME` | isinya `sarthlutions.gemgum.fun`; mengubah/menghapusnya melepas domainnya |
+| `.nojekyll` | mematikan pemrosesan Jekyll; tanpa ini Pages bisa menelan berkas tertentu |
+| `assets/tailwind.css` | hasil build — `npm run css` yang menulisnya, bukan tangan |
 
-Lalu `certbot --nginx -d sarthlutions.id -d www.sarthlutions.id` untuk HTTPS —
-`canonical`, `og:url`, dan `og:image` di `<head>` sudah menunjuk
-`https://www.sarthlutions.id/`, jadi domain lain berarti mengganti ketiganya
-sekaligus (`check.mjs` gagal kalau ketiganya tidak seasal).
+Dua jebakan isi halaman: paragraf baru **wajib** ikut membawa `data-en`-nya (kalau
+tidak, ia tetap Indonesia saat disetel ke Inggris), dan section baru ber-`id`
+**wajib** didaftarkan di `OWNER` (`assets/app.js`) atau garis bawah nav macet.
+`npm test` menangkap yang kedua, tidak yang pertama.
+
+Kalau nanti pindah ke domain asli (`sarthlutions.id`): ganti isi `CNAME`, ganti
+`canonical` + `og:url` + `og:image` di `<head>` bertiga sekaligus (`check.mjs`
+gagal kalau tidak seasal), lalu arahkan DNS-nya — CNAME `www` → `gemgum.github.io`,
+dan A `@` → `185.199.108–111.153`.
 
 ## Isi berkas
 
