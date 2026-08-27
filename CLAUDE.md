@@ -83,7 +83,7 @@ filler waiting to be replaced (see *Placeholders* near the end).
 | 8 | FAQ (`#faq`) | 7 `<details>` + illustration; the "contact us" link lives inside the cost answer | **invented** |
 | 9 | CTA | gradient block, "Ready when you are" — CTA only now, the contact block moved out | docx CTA page |
 | 10 | Contact Us (`#kontak`) | cream section: heading + the form alone, capped at `max-w-3xl` | docx contact page |
-| — | Footer | 4 columns: Company (address/email/phone), Our Service, Support, Social Media | Figma template |
+| — | Footer | 3 columns: Company (address/email/phone), Our Service, Support. The **Social Media** column and its inline `<symbol>` sprite were removed — the four icons were all `href="#"` and the accounts do not exist yet; a `<!-- SOSIAL -->` comment marks the spot, and commit `41456ce` still has the markup | Figma template |
 
 ## Not building: a PDF export
 
@@ -160,11 +160,22 @@ WCAG AA. Text that needs to read as teal uses `--color-teal-deep` (`#21758b`, 5.
 for the same reason — the original `#98a4a9` was 2.5:1 behind roughly every paragraph on
 the page. Re-check any new colour pair against 4.5:1 before using it for text.
 
+`.g-foot` (CTA block + footer) ends at **`#17808f`**, not `--teal` `#19b1b4`: white text on
+`#19b1b4` is 2.6:1. At `#17808f` solid white is 4.65:1, which is why every `text-white/85`
+and `text-white/90` in those two blocks was flattened to solid `text-white` — at 85% opacity
+the blend drops back to 3.8:1. Keep new footer text solid.
+
 `--color-blue` is **navy** (`#1b3a6b`), not blue — the name is left over from an
 earlier palette and is used by hundreds of utility classes, so it was not renamed.
 
 A third spot: the page background color is hardcoded as `fill="#fbfdfd"` inside
-each wave `<svg>` (5 of them). It must equal `--cream` or the waves show a seam.
+each wave `<svg>` (5 of them). It must equal `--cream` or the waves show a seam. A fourth:
+`<meta name="theme-color">` is also `#fbfdfd`, because the top of the page is the cream
+header — set it to the gradient navy and Android paints a mismatched bar above it.
+
+**Deploying to another domain** means changing three values together — `canonical`,
+`og:url`, `og:image` — flagged by a `<!-- DOMAIN -->` comment in `<head>`. They must be
+absolute (crawlers do not run JS or guess a host); `check.mjs` fails if they disagree.
 
 Palette source: sampled from the client's logo — navy `#1b3a6b` → teal `#19b1b4`.
 
@@ -204,7 +215,19 @@ listener sets `open = false`. Scoped to `header details`; the FAQ accordions are
 **Contact form guard** — the form has no backend and `action="#"` would POST to the same
 URL, reloading the page and wiping every field. The submit handler calls
 `preventDefault()`, reveals `#kirim-status`, and leaves the typed text in place so it can
-still be copied. Delete the handler only together with a real endpoint.
+still be copied. Delete the handler only together with a real endpoint. A `<noscript>`
+block covers the JS-off case, where that POST still happens.
+
+Its fields carry **visible** labels, not `sr-only` ones, and no placeholders. The earlier
+version had it backwards: the only visible text was an English placeholder (`Your Name`,
+`Subject`) on an Indonesian page, the language switch could not reach it, and the label
+vanished the moment anyone typed. Visible label + no placeholder removes all three
+problems and needs no placeholder-translation machinery.
+
+**Escape on the More dropdown** — the dropdown is opened by CSS (`group-hover` /
+`group-focus-within`), so there is no JS state to close. Escape just blurs the active
+element, which drops `:focus-within`. Do not add `aria-expanded`: nothing tracks a state
+it could report truthfully. `aria-haspopup` is on the trigger and is accurate.
 
 **Nav underline** — the active nav item is *not* hardcoded. An `IntersectionObserver`
 watches every section id in the `OWNER` map and sets `aria-current` on the matching
@@ -325,10 +348,9 @@ These replaced libraries on purpose. Don't swap them back:
 
 - `<details>` — FAQ accordion and the mobile menu (both work with JS disabled)
 - OpenStreetMap `<iframe>` — the contact map, right-hand column of `#kontak` (no API key, no JS)
-- Inline `<symbol>` sprite in the footer — social icons; Chrome does not resolve
-  `<use>` against an external SVG file, so it has to be inline in the document. It is
-  **consumed by `#kontak`, higher up the page**: `<use href="#i-ig">` resolves by id
-  regardless of document order, so deleting the footer would silently blank those icons.
+- ~~Inline `<symbol>` sprite in the footer~~ — gone with the Social Media column. If the
+  icons come back, the sprite has to come back **inline in the document**: Chrome does not
+  resolve `<use>` against an external SVG file.
 
 ## Sections deliberately removed
 

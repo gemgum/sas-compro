@@ -1,3 +1,6 @@
+// Dipakai di dua tempat: gulir ke keterangan form, dan deretan logo di bawah.
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
 // Menu mobile: <details> tidak menutup sendiri saat salah satu tautannya
 // dipilih, jadi panelnya menutupi section yang baru saja dituju.
 const mobileMenu = document.querySelector('header details');
@@ -6,6 +9,12 @@ if (mobileMenu) {
     if (e.target.closest('a')) mobileMenu.open = false;
   });
 }
+
+// Dropdown "More" dibuka CSS lewat :hover/:focus-within — tidak ada state JS
+// yang bisa ditutup, jadi Escape cukup melepas fokusnya.
+document.querySelector('nav .group')?.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.activeElement?.blur();
+});
 
 // Form kontak belum punya backend: action="#" akan mem-POST ke URL yang sama
 // dan me-reload halaman, menghapus semua isian. Tahan submitnya, tampilkan
@@ -16,7 +25,8 @@ if (contactForm && sendStatus) {
   contactForm.addEventListener('submit', e => {
     e.preventDefault();
     sendStatus.hidden = false;
-    sendStatus.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    sendStatus.scrollIntoView({ block: 'nearest',
+      behavior: reduceMotion.matches ? 'auto' : 'smooth' });
   });
 }
 
@@ -41,8 +51,6 @@ if (langButtons.length) {
 // Deretan logo (klien & sertifikasi): jalan terus tanpa berhenti, tapi bisa ditarik
 // kiri-kanan dengan klik-tahan (hanya selama ditarik jalannya ditunda).
 // Satu putaran = setengah lebar track, jadi daftarnya ditulis dua kali di HTML.
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-
 document.querySelectorAll('.marquee').forEach(marquee => {
   const track = marquee.querySelector('.marquee__track');
   let pos = 0, drag = null, frame = 0, onScreen = false;

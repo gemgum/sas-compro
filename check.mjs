@@ -69,6 +69,29 @@ check('OWNER tanpa target', own.filter((k) => !HTML.includes(`id="${k}"`)));
 const inOrder = own.every((k, i) => i === 0 || HTML.indexOf(`id="${k}"`) > HTML.indexOf(`id="${own[i - 1]}"`));
 check('OWNER tidak urut dokumen', inOrder ? [] : own, '.pop() di app.js bergantung pada urutan kunci');
 
+// Nilai OWNER dicocokkan dengan href .nav-link lewat perbandingan string; kalau
+// href di nav diganti, garis bawahnya mati tanpa error apa pun.
+const navHrefs = new Set(all(/<a href="([^"]+)"[^>]*class="[^"]*nav-link/g));
+const ownVals = new Set(all(/\w+: '(#\w+)'/g, APP));
+check('OWNER menunjuk nav-link yang tidak ada', [...ownVals].filter((v) => !navHrefs.has(v)).sort(),
+  'garis bawah nav tidak akan pernah menyala untuk section itu');
+check('nav-link tanpa OWNER', [...navHrefs].filter((v) => !ownVals.has(v)).sort(),
+  'item nav itu tidak akan pernah bergaris bawah');
+
+// ── URL absolut di <head> harus seasal ───────────────────────────────────
+// canonical, og:url, dan og:image wajib absolut (crawler tidak menjalankan JS
+// dan tidak menebak domain). Kalau situs pindah domain dan salah satunya
+// tertinggal, pratinjau WhatsApp/LinkedIn menunjuk berkas yang tidak ada.
+{
+  const head = HTML.slice(0, HTML.indexOf('</head>'));
+  const urls = [...head.matchAll(/(?:href|content)="(https?:\/\/[^"]+)"/g)]
+    .map((m) => m[1])
+    .filter((u) => !/fonts\.(googleapis|gstatic)\.com/.test(u));
+  const origins = [...new Set(urls.map((u) => new URL(u).origin))];
+  check('domain di <head> tidak seasal', origins.length > 1 ? origins : [],
+    'canonical, og:url, dan og:image harus menunjuk domain yang sama');
+}
+
 // ── kelas Tailwind yang belum ikut ter-build ─────────────────────────────
 // Sejak Tailwind dibangun sekali lewat CLI, kelas baru tidak berefek apa pun
 // sampai `npm run css` dijalankan lagi. Ini kegagalan paling senyap di repo.

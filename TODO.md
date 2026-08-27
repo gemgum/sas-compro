@@ -1,21 +1,26 @@
-# Temuan audit — 26 Agustus 2026
+# Temuan audit — status per 27 Agustus 2026
 
-Hasil pemeriksaan `index.html`, `assets/app.js`, `assets/style.css`.
-Yang lulus: HTML valid (tidak ada tag menggantung, id ganda, anchor mati),
-`OWNER` di `app.js` sinkron dan urut dokumen, tidak ada kelas CSS tanpa pemakai.
+## Berhenti di sini — 28 Agustus
 
-**Status 27 Agustus 2026:** A1, A3, B1, B2, C1–C4, D1–D3 dan E1 selesai.
-**A2 dan C5 tidak dikerjakan** — keduanya butuh data dari klien, bukan keputusan teknis;
-alasannya ditulis di butirnya masing-masing.
+Semua temuan dikerjakan kecuali **C5**, yang Anda putuskan dibiarkan apa adanya:
+**A1, A2, A3, B1, B2, C1–C4, D1–D3, E1, E2, F1–F6.** `npm test` hijau.
 
-Verifikasi sekarang otomatis: `npm test` menjalankan `test-marquee.mjs` (12 perilaku
-deretan logo) lalu `check.mjs` (12 pemeriksaan struktur). Keluar 1 kalau ada yang gagal.
+**Satu utang sadar yang tayang ke produksi (C5):** nomor telepon `+62 21 5021 8899`
+masih karangan (komentar `DUMMY` di `index.html`) dan kolase About Us masih memakai
+foto `picsum.photos`. Kirim nomor asli + 4–5 foto kapan saja, keduanya dipasang sekaligus.
 
-**Perkakasnya Node saja, tanpa Python** (27 Agustus). `check.py` diporting ke
-`check.mjs` — keluarannya diadu baris-per-baris dengan versi lama sampai identik, lalu
-diuji ulang dengan enam mutasi. `python3 -m http.server` diganti `serve.mjs`, server
-statis ~50 baris tanpa dependensi. Cuplikan pembaca .docx di CLAUDE.md kini memakai
-`unzip` + `perl`.
+## Cara melanjutkan
+
+```bash
+npm install      # kalau node_modules belum ada
+npm run serve    # → http://localhost:8000
+npm test         # sebelum commit
+```
+
+Kalau menyunting `index.html` dan menambah kelas Tailwind: **`npm run css` dulu**,
+kalau tidak kelasnya mati tanpa suara. `check.mjs` menangkapnya.
+
+Rincian tiap temuan dan apa yang dikerjakan ada di bawah.
 
 ## A. Bug fungsional
 
@@ -27,12 +32,12 @@ statis ~50 baris tanpa dependensi. Cuplikan pembaca .docx di CLAUDE.md kini mema
   salah satu tautannya diklik. Dibatasi ke `header details`, jadi akordeon FAQ
   tidak ikut terpengaruh.
 
-- [ ] **A2 — Empat link sosial mati** (`index.html:583`, empat baris berurutan)
+- [x] **A2 — Empat link sosial mati** (`index.html:583`, empat baris berurutan)
   Instagram, GitHub, Telegram, WhatsApp semuanya `href="#"`.
-  **Tidak dikerjakan: perlu jawaban Anda.** Saya tidak punya URL akunnya, dan
-  menebak (mis. `instagram.com/sarthlutions`) berisiko mengarah ke akun orang
-  lain. Kirim keempat tautannya, atau bilang ikon mana yang dicabut karena
-  akunnya memang belum ada.
+  **Selesai (28 Agustus): dicabut.** Anda memilih mencabutnya karena akunnya belum
+  ada — link mati tidak ikut ke produksi. Seluruh kolom **Social Media** beserta sprite
+  `<symbol>`-nya dihapus, grid footer jadi 3 kolom, dan ada komentar `<!-- SOSIAL -->`
+  di tempatnya. Markup lamanya masih di commit `41456ce` kalau akunnya sudah jadi.
 
 - [x] **A3 — Submit form merusak input**
   `<form action="#" method="post">` mem-POST ke URL yang sama → halaman
@@ -98,7 +103,7 @@ statis ~50 baris tanpa dependensi. Cuplikan pembaca .docx di CLAUDE.md kini mema
   di atas krem. Meta `og:*`, `twitter:card`, `canonical`, dan `theme-color`
   ditambahkan. Cara membuat ulang ada di CLAUDE.md.
 
-- [ ] **C5 — Isian karangan masih hidup di halaman**
+- [~] **C5 — Isian karangan masih hidup di halaman** (dibiarkan, keputusan Anda)
   Nomor telepon `+62 21 5021 8899` (`index.html:562`, ada komentar `DUMMY`)
   dan lima gambar `picsum.photos` di kolase About Us (`index.html:118` dst.).
   **Tidak dikerjakan: perlu data asli.** Nomor telepon justru Anda minta sebagai
@@ -153,19 +158,59 @@ Rasio dihitung dengan rumus WCAG 2.1; ambangnya 4.5:1 untuk teks normal,
   terlalu kontras, satu token `--soft` yang perlu disetel — di **dua** berkas
   (`assets/style.css` dan `assets/tailwind.src.css`), lalu `npm run css`.
 
-- [ ] **E2 — Teks putih di ujung teal gradien footer** ← perlu keputusan Anda
+- [x] **E2 — Teks putih di ujung teal gradien footer**
   `.g-foot` berakhir di `#19b1b4`. Teks putih di sana cuma **2.6:1**, dan
   paragraf `text-white/85` **2.3:1**. Yang kena: kolom kanan footer (Social
   Media), sebagian baris hak cipta, dan sisi kanan blok CTA.
   **Tidak saya ubah sendiri** karena perbaikannya berarti menggelapkan gradien
   brand — blok yang sudah berkali-kali Anda setel. Tiga pilihan:
-  **(a)** ujung gradien digelapkan `#19b1b4` → sekitar `#17808f`, warnanya masih
-  teal tapi teks putih lolos; **(b)** teks di footer diberi lapisan gelap tipis
-  di belakangnya; **(c)** dibiarkan — sadar bahwa footer tidak lolos AA.
-  Sebut a, b, atau c.
+  **Selesai (28 Agustus): pilihan (a).** `.g-foot` berakhir di `#17808f`, bukan
+  `#19b1b4` — masih teal, dan putih solid di atasnya **4.65:1**. Yang tidak terduga:
+  `text-white/85` tetap gagal (3.84:1) walau latarnya sudah digelapkan, karena
+  campuran putih-transparan ikut menaikkan luminansi latar. Jadi semua
+  `text-white/85` dan `text-white/90` di blok CTA + footer dijadikan putih solid.
+  `marker:text-white/45` dibiarkan — bulatan daftar, bukan teks.
+
+## F. Sisir ulang 27 Agustus (semua sudah dikerjakan)
+
+- [x] **F1 — Form berlabel Inggris di halaman Indonesia, dan label hilang saat diketik**
+  Keempat label sebenarnya `sr-only`, jadi satu-satunya teks yang terlihat adalah
+  placeholder berbahasa Inggris (`Your Name`, `Subject`, `Message`) yang tidak
+  ikut sakelar bahasa. Begitu diketik, keterangan kolomnya lenyap.
+  **Selesai.** Label dibuat terlihat dan dua bahasa; placeholder dihapus sama
+  sekali. Ini menyelesaikan ketiga masalahnya tanpa perlu mesin penerjemah
+  placeholder.
+
+- [x] **F2 — `scrollIntoView` mengabaikan `prefers-reduced-motion`**
+  CSS sudah mematikan `scroll-behavior: smooth`, tapi panggilan JS menimpanya.
+  **Selesai.** `behavior` mengikuti `reduceMotion.matches`; konstantanya dinaikkan
+  ke atas berkas karena kini dipakai dua bagian.
+
+- [x] **F3 — Domain absolut di `<head>` bisa berpencar diam-diam**
+  `canonical`, `og:url`, dan `og:image` mengunci `www.sarthlutions.id`. Deploy ke
+  staging tanpa mengganti ketiganya → pratinjau WhatsApp/LinkedIn rusak.
+  **Selesai.** Diberi penanda `<!-- DOMAIN -->`, dan `check.mjs` gagal kalau
+  ketiganya tidak seasal.
+
+- [x] **F4 — `theme-color` navy padahal puncak halaman krem**
+  **Selesai.** Jadi `#fbfdfd`.
+
+- [x] **F5 — Celah di `check.mjs` sendiri**
+  Nilai `OWNER` dicocokkan dengan `href` nav lewat perbandingan string, tapi tak
+  ada yang memverifikasi keduanya cocok. Ganti satu `href` → garis bawah nav mati
+  tanpa error.
+  **Selesai.** Dua pemeriksaan baru, diuji dengan mengganti `href` tombol More.
+
+- [x] **F6 — Kecil-kecil**
+  `aria-haspopup` di tombol More dan Escape untuk menutupnya (blur, karena
+  dropdown-nya CSS murni — `aria-expanded` sengaja tidak dipakai, tidak ada state
+  yang bisa dilaporkan jujur). `<noscript>` untuk form saat JS mati. Kelas
+  `relative` mati dicabut dari `#klien`, `#sertifikat`, dan section CTA — di
+  `<footer>` tetap, sprite `<svg class="absolute">` membutuhkannya.
 
 ## Sisa pekerjaan
 
-1. **A2** — kirim empat URL media sosial (atau sebut yang dicabut).
-2. **C5** — kirim nomor telepon asli dan foto untuk kolase About Us.
-3. **E2** — pilih a, b, atau c di atas.
+1. **C5** — kirim nomor telepon asli (ganti yang berkomentar `DUMMY`) dan 4–5 foto
+   untuk kolase About Us. Sampai itu masuk, keduanya tayang apa adanya.
+2. **A2 (opsional)** — kalau akun sosial sudah jadi, kirim URL-nya; kolomnya dipasang
+   lagi dari commit `41456ce`.
