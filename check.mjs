@@ -24,7 +24,7 @@ const check = (label, bad, hint = '') => {
 const all = (re, s = HTML) => [...s.matchAll(re)].map((m) => m[1]);
 
 // ── id ganda & anchor yang tidak menuju ke mana-mana ──────────────────────
-const ids = all(/\bid="([^"]+)"/g);
+const ids = all(/(?<![\w-])id="([^"]+)"/g);   // atribut id saja, bukan data-id="…"
 const seen = new Map();
 for (const id of ids) seen.set(id, (seen.get(id) ?? 0) + 1);
 check('id ganda', [...seen].filter(([, n]) => n > 1).map(([id]) => id));
@@ -49,12 +49,12 @@ const VOID = new Set(('area base br col embed hr img input link meta param sourc
   check('tag tidak cocok', bad);
 }
 
-// ── data-en yang akan menimpa markup di dalamnya ──────────────────────────
-// app.js menukar innerHTML, jadi elemen ber-data-en tidak boleh memuat elemen
+// ── data-id yang akan menimpa markup di dalamnya ──────────────────────────
+// app.js menukar innerHTML, jadi elemen ber-data-id tidak boleh memuat elemen
 // lain yang ingin dipertahankan. Alamat kantor sengaja dikecualikan: <br>-nya
 // ikut ditulis di dalam atribut.
-check('data-en menimpa markup',
-  [...HTML.matchAll(/<(\w+)[^>]*data-en="[^"]*"[^>]*>([\s\S]*?)<\/\1>/g)]
+check('data-id menimpa markup',
+  [...HTML.matchAll(/<(\w+)[^>]*data-id="[^"]*"[^>]*>([\s\S]*?)<\/\1>/g)]
     .filter((m) => m[2].includes('<') && !m[2].includes('Sarana Artha Solusi<br>'))
     .map((m) => m[2].slice(0, 40).replace(/\n/g, ' ')));
 
@@ -62,8 +62,8 @@ check('data-en menimpa markup',
 check('berkas hilang', all(/(?:src|href)="(assets\/[^"]+)"/g).filter((f) => !existsSync(join(ROOT, f))));
 
 // ── OWNER di app.js ↔ section di halaman ─────────────────────────────────
-const own = all(/(\w+): '#/g, APP);
-const sections = new Set(all(/<section[^>]*id="([a-z]+)"/g));
+const own = all(/'?([\w-]+)'?: '#/g, APP);   // kunci bertanda hubung ditulis berkutip
+const sections = new Set(all(/<section[^>]*id="([a-z-]+)"/g));
 check('section tanpa OWNER', [...sections].filter((s) => !own.includes(s)).sort());
 check('OWNER tanpa target', own.filter((k) => !HTML.includes(`id="${k}"`)));
 const inOrder = own.every((k, i) => i === 0 || HTML.indexOf(`id="${k}"`) > HTML.indexOf(`id="${own[i - 1]}"`));
@@ -72,7 +72,7 @@ check('OWNER tidak urut dokumen', inOrder ? [] : own, '.pop() di app.js bergantu
 // Nilai OWNER dicocokkan dengan href .nav-link lewat perbandingan string; kalau
 // href di nav diganti, garis bawahnya mati tanpa error apa pun.
 const navHrefs = new Set(all(/<a href="([^"]+)"[^>]*class="[^"]*nav-link/g));
-const ownVals = new Set(all(/\w+: '(#\w+)'/g, APP));
+const ownVals = new Set(all(/'?[\w-]+'?: '(#[\w-]+)'/g, APP));
 check('OWNER menunjuk nav-link yang tidak ada', [...ownVals].filter((v) => !navHrefs.has(v)).sort(),
   'garis bawah nav tidak akan pernah menyala untuk section itu');
 check('nav-link tanpa OWNER', [...navHrefs].filter((v) => !ownVals.has(v)).sort(),

@@ -17,10 +17,10 @@ serve.mjs                               dependency-free static server, localhost
 index.html                              the whole site — every section lives here
 assets/tailwind.src.css                 build input: @import + the @theme tokens
 assets/tailwind.css                     BUILT — never edit by hand, `npm run css` overwrites it
-assets/style.css                        hand-written: gradients, dividers, service card, marquee, nav
-assets/app.js                           menu, form guard, language switch, marquee drag, nav scrollspy
-assets/logo.webp                        the PT lockup, client-supplied master — keep full size
-assets/logo-nav.webp                    160px-tall derivative, the one the page loads
+assets/style.css                        hand-written: dark blocks, surfaces, section blends, hero art, service card, marquee, nav
+assets/app.js                           menu, Home-without-hash, language switch, marquee drag, nav scrollspy, scroll progress
+assets/logo.webp                        the "S" mark, transparent master (from client's Logo1.png) — keep full size
+assets/logo-nav.webp                    160px-tall derivative, the one the nav loads
 assets/{favicon,apple-touch-icon,og}.png  generated from the logo, see *Regenerating the icons*
 Company Profile Sarthlutions - EN.docx  the client's own profile deck — content source
 ```
@@ -60,10 +60,19 @@ the Indonesian.
 
 ## What is built
 
-Section headings stand alone — the intro paragraph that used to sit under `Our Services`,
-`How We Work`, `Our Clients`, `Why Choose Us`, `Certificate`, `Technology & Competencies`,
-and `FAQ` was removed on request. Heading → content gap is a uniform `mt-10`; keep it that
-way if a section is added.
+Section headings are **centered** (except About Us, which sits in a two-column layout),
+and most carry a one-sentence description under them (`mt-4 text-center text-lg`,
+bilingual via `data-id`): Our Clients, Our Services, Why Choose Us, Certified Expertise
+(`text-white/80` on the dark block), Technology & Competencies, FAQ, and the CTA. How We
+Work has none. **Each description must fit on one line at desktop width, in both
+languages** — asked for; measured at 1280 and 1024 px. That is why Services, Certificate
+and CTA copy was tightened from the docx wording (e.g. the docx's Services intro ran two
+lines) and the Indonesian Why Choose Us line was shortened. Keep new ones under ~100
+characters. Copy is kept **market-neutral** on request: the Our Clients line and the
+Vision, the About lead ("a technology company", was "an Indonesian technology company")
+and both meta descriptions ("for growing organizations") no longer say "Indonesia" — the
+docx Vision read "…Indonesia's digital ecosystem…". Location stays where it is a fact:
+the hero eyebrow (South Jakarta), the footer address, the globe's Jakarta marker. Heading (or description) → content gap is a uniform `mt-10`.
 
 Every section below is live in `index.html`. "Source" says where its words came from —
 that matters, because roughly half the page is the client's own copy and the rest is
@@ -71,18 +80,17 @@ filler waiting to be replaced (see *Placeholders* near the end).
 
 | # | Section | Holds | Source |
 |---|---|---|---|
-| — | Nav | `assets/logo.webp` lockup (blend-multiply), links, `ID`/`EN` switch |  |
-| — | Hero (`#top`) | full-viewport gradient: eyebrow, `SARTH`+`LUTIONS` wordmark, tagline, four-service line, two CTAs. No scroll cue — removed, do not add one back | docx cover |
-| 1 | About Us (`#tentang`) | 3 paragraphs + rotated photo collage, stats `<dl>`, 3 pillars, Vision, Mission, 5 Values | docx §01–02 |
-| 2 | Our Services (`#layanan`) | 4 `.svc-card`s with line-art icons and tag rows | docx §03 |
-| 3 | How We Work (`#alur`) | 5 numbered steps: Discover → Design → Develop → Deliver → Optimize | docx §04 |
-| 4 | Our Clients (`#klien`) | gradient block, drag-scrollable strip of 17 real logos in `assets/clients/`; also the top-level "Our Clients" nav item | primevora.id (same owner) |
-| 5 | Why Choose Us (`#keunggulan`) | 4 differentiator cards | docx §05 |
-| 6 | Certificate (`#sertifikat`) | gradient block, second logo marquee — 12 badges in `assets/certs/` | primevora.id (same owner) |
-| 7 | Technology (`#teknologi`) | 9 competency chips + standards block | docx §08 |
-| 8 | FAQ (`#faq`) | 7 `<details>` + illustration; the "contact us" link lives inside the cost answer | **invented** |
-| 9 | CTA | gradient block, "Ready when you are" — CTA only now, the contact block moved out | docx CTA page |
-| 10 | Contact Us (`#kontak`) | cream section: heading + the form alone, capped at `max-w-3xl` | docx contact page |
+| — | Nav | `.brand`: `assets/logo-nav.webp` "S" mark + text wordmark `Sarth`/`lutions` in `--logo-blue`/`--logo-cyan` (sampled from the new logo; shrinks ≤360px so it clears the `ID`/`EN` switch), links, `ID`/`EN` switch |  |
+| — | Hero (`#top`) | full-viewport **dark** block (`.g-dark`): eyebrow, `SARTH`+`LUTIONS` wordmark, tagline, two CTAs ("Start a consultation" → WhatsApp, "Explore our services" → `#services`; the second was "See our clients" until Our Clients moved directly under the hero); right column (`lg+` only) is `.hero-art` — a **3D dotted Earth** on `<canvas class="hero-globe">` drawn by `app.js`, nothing else on it: land dots only (continents from `LAND`, a 192×96 equirectangular bitmap rasterised once from world-atlas `land-110m` / Natural Earth and inlined as base64, ~3 KB), atmosphere glow, a pulsing **Jakarta** marker (its "Jakarta, Indonesia" label was removed on request), and data arcs travelling from Jakarta to regional and global cities. The **four services orbit it as satellites**: the Services-card icons (same paths, as `Path2D`) in small navy badges on a tilted dashed ring, one lap ≈ 28 s, brightness eased by depth (smoothstep) so icons fade rather than snap when they cross from back to front — icons only, no text (the names are in the line under the tagline). The ring's back half and back icons are drawn *before* the globe body, which is fully opaque so it hides them; the front half is drawn after. Chosen over replacing the globe with a service carousel: the globe stays the anchor, the orbit adds the "what we do". It **rocks ±55° around Jakarta** on a sine wave rather than spinning — a full spin hid Jakarta half the time. No library; rAF only while on screen; one still frame under reduced motion. The "S" logo and the four service chips were removed from it on request (the logo duplicated the navbar, the chips covered the map); the four-service line under the tagline now shows at every width. Below `lg` the chips are hidden and a plain four-service line (`lg:hidden`) takes their place. No scroll cue — removed, do not add one back | docx cover |
+| 1 | Our Clients (`#clients`) | right after the hero (strongest proof first); light `--surface-alt` section, drag-scrollable strip of 18 real logos in `assets/clients/` (Asaba and Timor Telecom were swapped out for Qoin Digital Indonesia, Baharkam Polri and VocaGame on request — the first two from the Primevora repo, `vocagame.webp` supplied by the user at 96×51, small enough to look soft when upscaled to 56px); also the top-level "Our Clients" nav item | primevora.id (same owner) |
+| 2 | Our Services (`#services`) | 4 `.svc-card`s with line-art icons and tag rows | docx §03 |
+| 3 | About Us (`#about`) | 3 paragraphs + an inline isometric SVG illustration (`.iso-art`: platform with shield, code window, AI chip, device box — the four services), stats `<dl>`, 3 pillars, Vision, Mission, 5 Values | docx §01–02 |
+| 4 | Why Choose Us (`#why-us`) | 4 differentiator cards | docx §05 |
+| 5 | Certified Expertise (`#certified-expertise`; titled "Certificate" / `#certificate` until renamed on request) | dark `.g-dark` block; second logo marquee — 12 badges in `assets/certs/`, bare on the dark with a thin white halo | primevora.id (same owner) |
+| 6 | How We Work (`#how-we-work`) | 5 numbered steps: Discover → Design → Develop → Deliver → Optimize | docx §04 |
+| 7 | Technology (`#technology`) | 9 competency chips (the Standards & Frameworks block was removed on request) | docx §08 |
+| 8 | FAQ (`#faq`) | 7 `<details class="faq">`, **all closed on load** — no `open` attribute, asked for (animated open/close, rotating +/× icon) + an isometric `.iso-art--faq` illustration (Q&A laptop, question/answer bubbles, knowledge-base cards; its viewBox is fitted to the drawing's measured `getBBox()` and the column is `460px` with `lg:gap-0`, so the drawing sits dead-centre between the list and the container edge — 47px each side — at roughly the list's height); the "contact us" link lives inside the cost answer | **invented** |
+| 9 | CTA (`#contact`) | dark `.g-foot` block, **carries `#contact`** since the Contact Us form section was removed — every Contact link lands here; its button opens WhatsApp; "Ready when you are" — CTA only now, the contact block moved out | docx CTA page |
 | — | Footer | 3 columns: Company (address/email/phone), Our Service, Support. The **Social Media** column and its inline `<symbol>` sprite were removed — the four icons were all `href="#"` and the accounts do not exist yet; a `<!-- SOSIAL -->` comment marks the spot, and commit `41456ce` still has the markup | Figma template |
 
 ## Not building: a PDF export
@@ -92,7 +100,7 @@ asked for again. If it is, there are two different jobs and they need to be told
 before any code is written:
 
 - **print-to-PDF of this page** — a `@media print` block: hide nav/forms/scroll cue,
-  force `print-color-adjust: exact` so the gradients and waves survive, set
+  force `print-color-adjust: exact` so the dark blocks and section blends survive, set
   `break-inside: avoid` per section. Cheap; output is a long web page on paper.
 - **a separate A4 deliverable** — its own layout, page furniture, cover. That is closer
   to rebuilding the docx than to styling this page, and it is not a print stylesheet.
@@ -103,15 +111,14 @@ before any code is written:
 `serve.mjs` is a ~50-line static server with no dependencies (binds `127.0.0.1`, refuses
 dotfiles and `node_modules`); `check.mjs` and `test-marquee.mjs` are the lint/test stand-in.
 
-Needs network at runtime: Google Fonts (Outfit) and the remaining `picsum.photos`
-placeholder images. Everything else — CSS, JS, all logos, the icons — is local.
+Needs network at runtime: Google Fonts (Outfit) only. Everything else — CSS, JS, all
+logos, the icons, the About illustration — is local. (The `picsum.photos` collage is gone.)
 
 ### Regenerating the icons
 
 `assets/favicon.png`, `assets/apple-touch-icon.png` and `assets/og.png` are derived from
-`assets/logo.webp`: the favicon pair is the **shield only** (the lockup's wordmark is
-illegible at 32px), cropped at the widest blank row between shield and wordmark, with
-white knocked out to transparent; the OG card is the full lockup centred on cream at
+`assets/logo.webp`: the favicon is the whole mark on transparent, the apple-touch icon
+the same on cream (iOS paints alpha black), and the OG card the mark centred on cream at
 1200×630. If the logo is ever replaced, regenerate all three rather than scaling the new
 file directly.
 
@@ -123,7 +130,7 @@ npm test              # test-marquee.mjs + check.mjs
 
 Nothing here is compiled by hand, so structural mistakes fail silently. `check.mjs`
 catches the ones that have actually happened: duplicate ids, dead anchors, unbalanced
-tags, a `data-en` that would clobber nested markup, a missing local file, `OWNER` drifting
+tags, a `data-id` that would clobber nested markup, a missing local file, `OWNER` drifting
 out of sync (or out of document order), a marquee list that is no longer written twice,
 and — the quietest of all — **a Tailwind class that was never built**. Add a case to it
 rather than inventing a new one-off snippet.
@@ -140,133 +147,204 @@ This is the one thing that will bite you. Changing a brand color means editing b
 
 | Where | Names | Consumed by |
 |---|---|---|
-`.g-band` is gone, and so is the gradient-on-gradient problem it was written for: the
-contact block moved out of the CTA section entirely and is now a **cream** section, so
-the CTA's closing `.wave` carries the only boundary. Its text went back to navy/soft —
-it had been white for the one revision it spent on a gradient.
+`assets/logo.webp` is the client's `Logo1.png` (RGB on a white plate) with the white
+keyed out to real alpha — colour-to-alpha with the edges un-mixed, so it has no white
+fringe and works on the dark blocks too. The old `.brand-logo` multiply-blend trick is
+gone with the plate.
 
-`assets/logo.webp` is an RGB WEBP with a **white plate, no alpha**. `.brand-logo` sets
-`mix-blend-mode: multiply` so the plate melts into the cream header instead of showing
-as a box — no re-cut file needed. That trick only works on a light background: putting
-this logo on `.g-foot` or `.g-hero`'s dark end needs a real transparent or knocked-out
-version.
-
-| `assets/style.css` `:root` | `--navy --navy-deep --navy-mid --teal-deep --teal --cream --soft` | the hand-written classes: `.g-hero .g-band .g-foot .squiggle .svc-card .marquee .nav-link` |
+| `assets/style.css` `:root` | `--navy --navy-deep --navy-mid --teal-deep --teal --cream --soft --ink-dark --surface-alt` | the hand-written classes: `.g-dark .g-foot .surface-alt .from-* .to-* .hero-art .svc-card .marquee .nav-link` |
 | `assets/tailwind.src.css` `@theme` | `--color-blue --color-blue-deep --color-teal --color-cream --color-soft --color-ink` | Tailwind utilities: `text-blue`, `bg-blue`, `text-soft`, `bg-cream`, … |
 
-`--color-teal` (`#19b1b4`) is **not a text colour** — it is 2.6:1 on cream, which fails
-WCAG AA. Text that needs to read as teal uses `--color-teal-deep` (`#21758b`, 5.17:1);
-`--color-teal` stays for borders, the squiggle, and card accents. `--soft` is `#69777d`
-for the same reason — the original `#98a4a9` was 2.5:1 behind roughly every paragraph on
-the page. Re-check any new colour pair against 4.5:1 before using it for text.
+The `teal` names now hold **cyan** from the "S" logo — kept so the hundreds of utility
+classes did not need renaming. `--color-teal` (`#18a8e8`) is **not a text colour** — it
+is 2.6:1 on cream, which fails WCAG AA. Text that needs to read as cyan uses
+`--color-teal-deep` (`#0a64a0`, 5.6:1 on cream, 5.3:1 on alt); `--color-teal` stays for
+borders, the progress bar, and card accents. `--soft` is `#56667a` (5.3:1 on cream, 4.9:1
+on alt). Both were darkened when the background went from near-white `#fbfdfd` to the
+softer `#eef3f8` ("white is too bright"). Re-check any new colour pair against
+4.5:1 before using it for text.
 
-`.g-foot` (CTA block + footer) ends at **`#17808f`**, not `--teal` `#19b1b4`: white text on
-`#19b1b4` is 2.6:1. At `#17808f` solid white is 4.65:1, which is why every `text-white/85`
-and `text-white/90` in those two blocks was flattened to solid `text-white` — at 85% opacity
-the blend drops back to 3.8:1. Keep new footer text solid.
+`.g-foot` (CTA block + footer) runs `--ink-dark` `#071a3d` → navy `#0b3a82` → `#0848c8`,
+never out to the bright cyan: white on `#18a8e8` is 2.7:1, on `#0848c8` 7.6:1. Every `text-white/85` and
+`text-white/90` in those two blocks was flattened to solid `text-white` for the same
+reason — keep new footer text solid.
 
-`--color-blue` is **navy** (`#1b3a6b`), not blue — the name is left over from an
-earlier palette and is used by hundreds of utility classes, so it was not renamed.
+`--color-blue` is **navy** (`#0b3a82`), not the logo's bright blue — the name is left
+over from an earlier palette. The bright blue `#0848c8` is `--navy-mid` / `--logo-blue`.
 
-A third spot: the page background color is hardcoded as `fill="#fbfdfd"` inside
-each wave `<svg>` (5 of them). It must equal `--cream` or the waves show a seam. A fourth:
-`<meta name="theme-color">` is also `#fbfdfd`, because the top of the page is the cream
-header — set it to the gradient navy and Android paints a mismatched bar above it.
+A third spot: `<meta name="theme-color">` is `#eef3f8` (= `--cream`), because the top of the page is the
+cream header — the hero below it is dark, but the header is not; set it to navy and
+Android paints a mismatched bar above a light header. (The waves that used to hardcode
+`fill="#fbfdfd"` are gone; the section blends use `var(--cream)` instead.)
 
 **Deploying to another domain** means changing three values together — `canonical`,
 `og:url`, `og:image` — flagged by a `<!-- DOMAIN -->` comment in `<head>`. They must be
 absolute (crawlers do not run JS or guess a host); `check.mjs` fails if they disagree.
 
-Palette source: sampled from the client's logo — navy `#1b3a6b` → teal `#19b1b4`.
+Palette source: sampled from the "S" logo (`assets/logo.webp`) — navy `#0b3a82` → blue
+`#0848c8` → cyan `#18a8e8`. The earlier navy `#1b3a6b` → teal `#19b1b4` came from the old
+shield lockup. The rgba() values in `.g-dark`, `.hero-art` and `.iso-art` carry palette
+values too — grep for them when the
+palette moves.
 
 ## Layout grammar
 
-Sections are either **cream** (the page background) or a **gradient block**
-(`.g-hero`, `.g-band`, `.g-foot`). Two dividers, and which one to use is not a
-style choice:
+Light in the middle, dark at the top, dark once in the middle as an anchor, dark at the
+bottom — the redesign after the "is this right for an IT company?" audit. Three kinds of
+surface:
 
-- **`.wave`** — organic blob, only where a gradient block meets cream. Placed at the
-  *bottom* of a gradient section, filled cream, so cream carves upward into it.
-  `.wave--flip` + the mirrored path goes at the *top* of a gradient block that
-  follows a cream section (see `#sertifikat`).
-- **`.squiggle`** — three crossing sine strokes, only between two cream sections.
-  Its `path` needs `vector-effect: non-scaling-stroke`; the SVG uses
-  `preserveAspectRatio="none"`, which would otherwise smear the stroke width.
+- **cream** `--cream` `#eef3f8` (the page background, a soft blue-grey — near-white was
+  judged too bright) and **`--surface-alt`** `#dde6f3` (deepened from `#e5ecf5` so neighbours
+  read as different; `--soft` text still 4.66:1 on it) — light
+  sections alternate between the two, so neighbouring sections never share a colour.
+- **`.g-dark`** — `--ink-dark` → navy with a cyan radial glow and a masked 48px
+  blueprint grid (`::before`). Hero and `#certified-expertise`.
+- **`.g-foot`** — calmer horizontal navy gradient, no grid. The CTA only.
+- **`.site-foot`** — the footer: flat `--ink-dark`, darker than the CTA, with a 1px
+  white/10 top border. Asked "change the footer or the section above it?" — the
+  footer, so the CTA stays the last highlight and the footer recedes as information.
 
-Current order: hero (gradient) → about + stats + vision/mission/values → *squiggle* →
-services → *squiggle* → workflow → clients (gradient) → why-choose-us → certificate
-(gradient) → technology → *squiggle* → FAQ → CTA (gradient) → contact (cream) → footer
-(gradient).
+**No divider lines — sections blend.** Each surface class (`.g-dark`, `.g-foot`,
+`.surface-alt`) paints two extra gradient layers on top of its own background: from
+`--from` at its top edge and to `--to` at its bottom edge, each `--fade` (200px) long,
+`transparent` by default. The alpha follows a smoothstep curve (flat at both ends — a
+linear ramp leaves a visible edge where it starts), and on dark blocks a light-blue
+`--tint` band sits under it: cream → navy straight through sRGB goes muddy grey, the tint
+makes it pass through sky blue instead. All of it lives in `--blend`. Modifiers set them: `.from-cream`, `.from-alt`, `.to-cream`.
+Only one side of each boundary fades — dark blocks fade into their light neighbours, alt
+sections fade from/to cream; cream sections are just the body background and need no
+class. Because the blend lives inside the section's own background, there is no seam.
+**Keep text out of the 200px fade zone** in dark sections (white text on a half-cream
+band is unreadable) — that is why the certificate, CTA and footer carry extra top/bottom
+padding.
 
-`#klien` and `#sertifikat` are both `.g-hero` blocks, so their own waves carry every
-boundary they touch — no `*squiggle*` sits next to either, nor between the certificate
-and the FAQ. A squiggle there would divide cream from cream with nothing in between.
+History, so nobody re-litigates it: organic `.wave` / `.squiggle` dividers came out in
+the "right for an IT company?" redesign; diagonal `clip-path` slants replaced them; those
+became straight edges with a gradient *line*; and that was corrected to what was actually
+meant — the section colours themselves blending into each other.
+
+Current order (reordered on request — proof first, nav order = page order): hero (dark,
+to-alt) → clients (alt, to-cream) → services (cream) → about (alt, from/to-cream) →
+why-us (cream) → certified-expertise (dark, from-cream, to-alt) → how-we-work (alt, to-cream) →
+technology (cream) → FAQ (alt, from-cream) → CTA `#contact` (dark, from-alt) → footer
+(`.site-foot`, butts straight onto the CTA — no fade). Neighbours never share a surface.
+Adding a section means picking its surface so that holds, and setting the fade
+modifiers (`.from-cream`, `.from-alt`, `.to-cream`, `.to-alt`) against its neighbours.
 
 ## JS contracts (`assets/app.js`)
 
-No framework, five small behaviours in file order: mobile-menu close, contact-form
-submit guard, language switch, logo marquees, nav underline.
+No framework, eight small behaviours in file order: mobile-menu close, Home without
+`#top`, language switch, logo marquees, nav underline, scroll progress, scroll reveal,
+hero globe. (A seventh, the
+contact-form submit guard, went out with the form.)
+
+**Home without `#top`** — every `a[href="#top"]` (nav Home, the logo, the mobile menu's
+Home) scrolls to the top in JS and `replaceState`s the hash away, so the address bar
+stays clean, as asked. The `href` stays `#top` so it still works with JS off, and `OWNER`
+still keys the Home underline on `'#top'`.
 
 **Mobile menu** — `<details>` in the header does not close itself when a link inside it
 is chosen, so the panel stays over the section just navigated to. One delegated click
 listener sets `open = false`. Scoped to `header details`; the FAQ accordions are also
 `<details>` and must keep their own behaviour.
 
-**Contact form guard** — the form has no backend and `action="#"` would POST to the same
-URL, reloading the page and wiping every field. The submit handler calls
-`preventDefault()`, reveals `#kirim-status`, and leaves the typed text in place so it can
-still be copied. Delete the handler only together with a real endpoint. A `<noscript>`
-block covers the JS-off case, where that POST still happens.
-
-Its fields carry **visible** labels, not `sr-only` ones, and no placeholders. The earlier
-version had it backwards: the only visible text was an English placeholder (`Your Name`,
-`Subject`) on an Indonesian page, the language switch could not reach it, and the label
-vanished the moment anyone typed. Visible label + no placeholder removes all three
-problems and needs no placeholder-translation machinery.
-
 **Escape on the More dropdown** — the dropdown is opened by CSS (`group-hover` /
 `group-focus-within`), so there is no JS state to close. Escape just blurs the active
 element, which drops `:focus-within`. Do not add `aria-expanded`: nothing tracks a state
 it could report truthfully. `aria-haspopup` is on the trigger and is accurate.
 
+The panel opens `mt-4` below its `<li>`, just under the header's bottom edge. Three
+things keep the hover alive on the way down from "More" — each was a real bug:
+
+- a transparent `before:` strip of the same 16px bridges the gap;
+- `.scroll-progress` is `pointer-events: none` — it sits exactly in that gap and used to
+  steal the hover, closing the menu mid-reach;
+- open/close lives in **`.dropdown`** in `style.css`, not Tailwind utilities: closing
+  waits 250ms, and `visibility` is delayed with it. Tailwind's `transition` utility does
+  not cover `visibility`, so the old version went hidden instantly — and a hidden panel
+  cannot be hovered back, so a diagonal cursor path that briefly left the `<li>` lost it.
+
+Verified by driving a real mouse path through CDP (Input.dispatchMouseEvent), not by
+reading the CSS: the panel stayed visible along the whole path and the click landed.
+
+**FAQ accordion** — `.faq` animates `::details-content` from `block-size: 0` to `auto`
+(`interpolate-size: allow-keywords` on `:root`), so open *and* close slide where
+supported; elsewhere a `@keyframes` fade-in covers opening. Measured in real time, it
+eases 60 → 112px over ~400ms both ways. The +/× is one `.faq__icon` whose two bars rotate
+135° — no swapped glyphs.
+
 **Nav underline** — the active nav item is *not* hardcoded. An `IntersectionObserver`
 watches every section id in the `OWNER` map and sets `aria-current` on the matching
 `.nav-link`; the underline itself is drawn by `.nav-link[aria-current="true"]` in
-`style.css`. Nav is `Home · Services · Our Clients · About Us · More ▾ · Contact`:
-`About Us` is a plain link owning only `#tentang`, and the sections behind the **More**
-dropdown (`keunggulan`, `sertifikat`, `teknologi`, `faq`) map to `#alur` — the dropdown
-trigger's own href — so exactly one top-level item is ever active. `OWNER`'s keys are
+`style.css`. Nav follows page order: `Home · Our Clients · Services · About Us · More ▾ ·
+Contact`, and the dropdown lists `Why Choose Us · Certified Expertise · How We Work · Technology ·
+FAQ` in page order too. `About Us` is a plain link owning only `#about`; the five sections
+behind **More** all map to `#why-us` — the dropdown trigger's own href, and the first of
+them on the page — so exactly one top-level item is ever active. The mobile menu lists
+every section, in the same order. `OWNER`'s keys are
 kept in **document order**; the `.pop()` that picks the current section relies on it. **Adding a section with an id means adding it to
 `OWNER`**, or the underline sticks on the previous item while that section is on screen.
 `check.mjs` verifies both directions, plus the key order.
 
-## Bilingual copy (ID / EN)
+**WhatsApp** — eight links carry `data-wa`: one "Discuss this service →" per service card
+(`data-wa="cyber|software|ai|procurement"`, each with its own opener naming that service), the hero's "Start a consultation" (it used to
+scroll to `#contact`; now one click to the chat, asked for), the CTA button, the footer number, and
+`.wa-float` (fixed bottom-right, WhatsApp green, widens into a "Chat on WhatsApp" label on
+hover; a pulse ring that `prefers-reduced-motion` turns off). Each opens
+`wa.me/628388449080?text=…` with a pre-filled opener that says the visitor came from the
+website. The HTML carries the English opener; the language switch rewrites the `text`
+param from `WA_TEXT[data-wa][lang]` in `app.js` (empty key = the general opener), so an
+Indonesian visitor gets an Indonesian message. A new keyed link needs its entry in `WA_TEXT`.
 
-The page ships **Indonesian in the HTML** and carries the English on a `data-en`
-attribute of the same element — no duplicated markup, no second file. `app.js` snapshots
-each element's `innerHTML` on load and swaps `innerHTML` against `data-en`; the choice
-is remembered in `localStorage` under `lang` and sets `<html lang>`. The `ID`/`EN`
-buttons in the nav are `[data-lang]`, styled from `aria-pressed` like every other toggle
-on this page.
+**Scroll reveal** — content fades in and rises 28px as it scrolls into view; the hero
+does the same on load. A tiny inline `<script>` in `<head>` adds `.js-reveal` *before
+first paint* (skipped under `prefers-reduced-motion` or without IntersectionObserver),
+and `.js-reveal:not(.reveal-ready) main` stays at opacity 0 until `app.js` has tagged
+every block in its `REVEAL` selector list with `.reveal` — so nothing flashes visible and
+then vanishes. Blocks entering together get a 90ms stagger in document order (capped at
+8 steps). If `app.js` never runs, the head script adds `.reveal-ready` after 3s and
+untagged content shows. It is a CSS **animation** on `translate`, not a transition on
+`transform`: the service cards own `transition` and a `transform` hover, and either
+would be clobbered. **A new section's blocks need a selector in `REVEAL`** or they just
+appear without the effect (harmless, but inconsistent). Verified in real time via CDP:
+74 targets, hero staggered 0/90/180/270/360ms, nothing left hidden after a full scroll.
+
+**Scroll progress** — a 3px `.scroll-progress` bar along the bottom edge of the sticky
+header fills left to right with how far the page is scrolled (empty at `#top`, full at
+the footer). The gradient (cyan → blue → navy) spans the full width and only its
+`clip-path` moves, so each colour stays at a fixed point instead of squashing the way
+`scaleX` would. Repainted at most once per frame via rAF, also on resize.
+
+## Bilingual copy (EN / ID)
+
+The site **opens in English** — asked for explicitly. English is the markup in the HTML;
+the Indonesian rides on a `data-id` attribute of the same element — no duplicated
+markup, no second file, and with JS off the page is English. `app.js` snapshots each
+element's English `innerHTML` on load and swaps it against `data-id`; `apply('id')` runs
+on load only when `localStorage.lang === 'id'` (a returning visitor who chose it).
+`<html lang="en">`, `og:locale` `en_US` with `id_ID` as alternate, and the meta
+descriptions are English. The `ID`/`EN` buttons are `[data-lang]`, styled from
+`aria-pressed`; `EN` starts pressed. (It used to be the reverse — Indonesian markup with
+`data-en` — and was flipped by script: every element swapped, count checked.)
 
 Consequences worth knowing before editing copy:
 
-- **`data-en` replaces the whole element.** Never put it on an element that also holds
-  markup you care about — the FAQ `<summary>` (it holds the `+`/`×` span), the About Us
-  lead paragraph (it holds the bolded company name), the FAQ intro (it holds a link).
-  Those have a plain `<span data-en="…">` wrapped around the *text* instead — the FAQ
-  cost answer is one of them, since it ends with the link to `#kontak`. The one
-  deliberate exception is the contact-band address, whose `data-en` carries its `<br>`.
+- **`data-id` replaces the whole element.** Never put it on an element that also holds
+  markup you care about — the FAQ `<summary>` (it holds the icon span), the About Us
+  lead paragraph (it holds the bolded company name). Those have a plain
+  `<span data-id="…">` wrapped around the *text* instead — the FAQ cost answer is one
+  of them, since it ends with the link to `#contact`. The one deliberate exception is
+  the footer address, whose `data-id` carries its `<br>`. `check.mjs` enforces this.
 - Section headings, service names, the five step names, the values, the certificate
   names, and the technology chips are English in both languages, so they carry no
-  `data-en` at all.
-- Adding a paragraph means adding its `data-en` in the same edit, or it will stay
-  Indonesian when the page is switched to English.
+  `data-id` at all.
+- Adding a paragraph means writing it in English and adding its `data-id` Indonesian in
+  the same edit, or it will stay English when the page is switched to Indonesian.
 
-## Logo marquees (`#klien`, `#sertifikat`)
+## Logo marquees (`#clients`, `#certified-expertise`)
 
-Two of them, same machinery: `.marquee` in `#klien` for client logos and
-`.marquee.marquee--certs` in `#sertifikat` for certification badges. `app.js` runs
+Two of them, same machinery: `.marquee` in `#clients` for client logos and
+`.marquee.marquee--certs` in `#certified-expertise` for certification badges. `app.js` runs
 `querySelectorAll('.marquee').forEach(…)`, so each strip keeps its own `pos`/`drag` —
 adding a third needs no JS change. `.marquee--certs` only overrides the image size
 (badges are squarer than wordmarks).
@@ -274,7 +352,7 @@ adding a third needs no JS change. `.marquee--certs` only overrides the image si
 Each one is a native scroll container, not a CSS keyframe animation. `.marquee` is
 `overflow-x: auto` with the scrollbar hidden; `app.js` advances `scrollLeft` by 0.5px
 per frame and the same `put()` wraps it modulo **half the scrollWidth** — which only
-lines up because the 17 `<li>` are written **twice** in `index.html` (second copy
+lines up because the 18 `<li>` are written **twice** in `index.html` (second copy
 `aria-hidden`, so a screen reader reads each client once). Add or remove a logo in
 *both* copies or the loop jumps.
 
@@ -292,12 +370,23 @@ possible: pointer events just set the same value. `touch-action: pan-y` hands
 horizontal panning to that handler while leaving vertical page scroll to the browser,
 and `prefers-reduced-motion` skips the rAF loop only — dragging still works.
 
+Both ends of each strip fade out through a `mask-image`: 18% per side (tripled from 6%
+on request, so logos drift in and out instead of being sliced at the edge), on an eased
+ramp of alpha stops rather than a straight line.
+
 It does **not** pause on hover — asked for twice, once to add it and once to take it
 back out. Only an active drag holds it. Hovering scales the logo under the cursor to
 `1.18`, which is why `.marquee` needs its `padding: 22px 0` — the container clips, and
-the enlarged logo would be cut off without that room. Logos stay in full colour: no
-grayscale filter, asked for explicitly. Both strips sit on a `.g-hero` block, so neither
-needs a background of its own.
+the enlarged logo would be cut off without that room. Logos rest **faded grey**
+(`grayscale(1)`, opacity .65) and turn full colour on hover — asked for after an earlier
+"full colour, no filter" request, so this is the current wish. It sits inside
+`@media (hover: hover)`: touch screens have no hover, so there the logos stay in colour.
+The client strip sits on the light `--surface-alt`; the certificate strip sits on the
+dark `.g-dark`. Badges sit bare on it — light plates behind each one were tried and
+removed on request ("no cards") — so each badge gets a thin white `drop-shadow` halo
+instead; without it the black lettering of CEH disappears into the navy. The halo is
+written into the `@media (hover: hover)` greyscale rule too, since `filter` is one
+property and the greyscale rule would otherwise drop it.
 
 Below 640px a media query shrinks both strips — logo height, badge height, track gap and
 container padding — so more than a logo or two fits on a phone.
@@ -317,8 +406,8 @@ but were not on the user's list, so they were not brought over.
 ## Service cards (CSS, not JS)
 
 They follow gamatecha.com, whose CSS was read rather than
-guessed at. The shape is: index (`01 / 04`) → 100px line-art icon in normal flow →
-26px title → body → tag row above a dashed top border. Hover does three things at once,
+guessed at. The shape is (the `01 / 04` index above the icon was removed on request): 100px line-art icon in normal flow →
+26px title → body → tag row above a dashed top border → "Discuss this service →" WhatsApp link. Each card is `row-span-5` on a `grid-rows-subgrid`, so those five rows line up across the four cards (the dashed rule and the links sit level even if a tag row wraps). Tags use `px-2` and `gap-1.5`: at 1280px the AI card's three tags need 200 of 204 px — `gap-2` wrapped "RAG" by a sub-pixel. On card hover the tags take a faint cyan border. Hover does three things at once,
 and all three are the point — dropping any of them is what "nothing happens on hover"
 meant:
 
@@ -347,7 +436,7 @@ buttons whose only job is `rail.scrollBy({left: dir * rail.clientWidth * 0.8})`.
 These replaced libraries on purpose. Don't swap them back:
 
 - `<details>` — FAQ accordion and the mobile menu (both work with JS disabled)
-- OpenStreetMap `<iframe>` — the contact map, right-hand column of `#kontak` (no API key, no JS)
+- OpenStreetMap `<iframe>` — the contact map, right-hand column of `#contact` (no API key, no JS)
 - ~~Inline `<symbol>` sprite in the footer~~ — gone with the Social Media column. If the
   icons come back, the sprite has to come back **inline in the document**: Chrome does not
   resolve `<use>` against an external SVG file.
@@ -359,7 +448,7 @@ invented credibility the company could not point to: quotes from clients who nev
 them, partner logos, and five named engineers with stock-photo faces. The docx names no
 individuals — it says "15+ certified professionals" and nothing more.
 
-**Our Clients** replaced Our Team in the same slot (`#klien`), carrying the docx's own
+**Our Clients** replaced Our Team in the same slot (`#clients`), carrying the docx's own
 structure: two groups, *Software Development* and *Penetration Testing*, nine
 `[ CLIENT LOGO ] / [ Client Name ] / [ Project / Scope ]` placeholders each. They are
 deliberately styled as dashed empty boxes so an unfilled one is obvious on the page
@@ -368,8 +457,8 @@ examples.
 
 Testimonials can come back against a named client who agreed to be quoted — it used a
 `.rail` of white cards (photo / name / role / quote), which now also needs the rail
-CSS restored (see above). It sat between cream sections, so it needs a `*squiggle*`
-divider on each side.
+CSS restored (see above). Give it a surface that keeps the light-section alternation
+and the matching fade modifiers (see *Layout grammar*).
 
 The **stats strip** came out for the same reason, then went back in with the docx's own
 numbers (50+ projects, 30+ organizations, 15+ certified professionals). It now lives
@@ -383,31 +472,29 @@ launch rather than assuming they are current.
 
 Everything below is invented filler that the docx does not cover. Replace before launch:
 
-- the remaining `picsum.photos` images (About Us collage). The **Portfolio** section
-  is gone — the docx has no portfolio; `#klien` took over its slot and its top-level
+- the About Us illustration is a stand-in drawn by a script (isometric SVG in the page);
+  swap it for real company photos when they exist. The **Portfolio** section
+  is gone — the docx has no portfolio; `#clients` took over its slot and its top-level
   nav item, and now carries real logos instead of the docx's blank placeholders
 - the **FAQ**: not in the docx at all. The invented rupiah figures are gone — the cost
-  answer now points at the contact form and `contact@sarthlutions.id` instead. The
-  durations it still quotes (5–10 days for a web app, 2–3 weeks for an internal
-  network, 4-hour incident response) are the remaining guesses
-- the FAQ illustration — a hand-drawn SVG standing in for the Figma asset
-- the contact form, which has no backend and says so on the page
+  answer now ends with a "Get in touch." link to `#contact` (the CTA) instead. The
+  invented durations (5–10 days, 2–3 weeks, 4-hour response) were replaced on request
+  with general wording ("depends on the scope… firm timeline after the scoping
+  session"; "response times are set out in the support agreement"). Do not put numbers
+  back without the client's own figures.
+- the FAQ illustration — script-drawn isometric SVG, same family as About Us
 
 Gone for good, not placeholders: the OSM map, the Join Updates photo collage, the footer
-**Legal** and **Subscription** columns, and the footer's Mail/Website lines. The section
-formerly titled *Join Updates* is now *Contact Us*; note that its right column repeats
-"Contact Us" as a sub-heading — asked for that way.
+**Legal** and **Subscription** columns, the footer's Mail/Website lines, and — last — the
+whole **Contact Us** section with its form (it had no backend). `#contact` moved to the
+CTA block, so the nav, hero, FAQ and footer "Contact" links all still resolve.
 
-Contact details now live in **one** place: the footer's Company column — address, then
-`contact@sarthlutions.id`, then a marked phone placeholder. `#kontak` itself is the form
-and nothing else; the Office block, the Social Media block and the map were all removed
-from it across successive passes. The office hours line (`Senin–Jumat · 09.00–18.00 WIB`)
-is gone from the page entirely.
-
-The **phone number `+62 21 5021 8899` is made up.** The docx has none and neither does
-primevora; a dummy was asked for explicitly as a stand-in. It carries a `<!-- DUMMY -->`
-comment above it — that comment is the only thing separating it from a real number on a
-live page, so replace it before launch and do not delete the marker until you do.
+Contact details live in **one** place: the footer's Company column — address,
+`contact@sarthlutions.id`, and the WhatsApp number **+62 838 8449 080**. The number is
+real (given by the user) and links to `https://wa.me/628388449080` (new tab); the CTA's
+"Schedule a consultation" button opens the same chat. Both carry a `<!-- WHATSAPP -->`
+comment — change them together, along with the floating button. The old `+62 21 5021 8899` dummy and its `DUMMY` marker
+are gone.
 
 Certificate names for **CM-Pen**, **CCEP**, and **C3SA** are unconfirmed — the page
 prints `Penerbit — mohon dilengkapi` for their issuers, and there is a

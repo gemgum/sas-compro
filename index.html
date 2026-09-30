@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sarthlutions — Secure. Smart. Scalable.</title>
-<meta name="description" content="PT Sarana Artha Solusi (Sarthlutions): cyber security, software development, AI agent development, dan IT procurement untuk organisasi di Indonesia.">
+<meta name="description" content="PT Sarana Artha Solusi (Sarthlutions): cyber security, software development, AI agent development, and IT procurement for growing organizations.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
@@ -15,55 +15,68 @@
 <meta property="og:site_name" content="Sarthlutions">
 <meta property="og:url" content="https://sarthlutions.gemgum.fun/">
 <meta property="og:title" content="Sarthlutions — Secure. Smart. Scalable.">
-<meta property="og:description" content="PT Sarana Artha Solusi: cyber security, software development, AI agent development, dan IT procurement untuk organisasi di Indonesia.">
+<meta property="og:description" content="PT Sarana Artha Solusi: cyber security, software development, AI agent development, and IT procurement for growing organizations.">
 <meta property="og:image" content="https://sarthlutions.gemgum.fun/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="id_ID">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="id_ID">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#fbfdfd">
+<meta name="theme-color" content="#eef3f8">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tailwind.css">
 <link rel="stylesheet" href="assets/style.css">
+<!-- Animasi muncul saat digulir: kelas ini dipasang sebelum apa pun dilukis supaya
+     konten tidak sempat tampil lalu hilang. Dilewati bila gerak diminta dikurangi.
+     Jaring pengaman: kalau app.js gagal, reveal-ready menampilkan semuanya setelah 3 detik. -->
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-reveal');
+    setTimeout(() => document.documentElement.classList.add('reveal-ready'), 3000);
+  }
+</script>
 </head>
 <body class="font-sans text-ink">
 
-<a href="#konten" data-en="Skip to content"
-   class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-blue focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">Lewati ke konten</a>
+<a href="#content" data-id="Lewati ke konten"
+   class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-blue focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg">Skip to content</a>
 
 <!-- ═══ NAV ═══ -->
 <header class="sticky top-0 z-50 bg-cream/85 backdrop-blur-sm">
   <nav class="mx-auto flex max-w-[1200px] items-center px-6 py-3">
-    <a href="#top" class="shrink-0"><img width="195" height="160" src="assets/logo-nav.webp" alt="Sarthlutions" class="brand-logo h-12 w-auto"></a>
+    <a href="#top" class="brand"><img width="153" height="160" src="assets/logo-nav.webp" alt=""><span class="wordmark">Sarth<span>lutions</span></span></a>
 
     <ul class="ml-auto hidden items-center gap-9 text-[15px] font-medium text-blue lg:flex">
       <li><a href="#top" class="nav-link inline-flex items-center" aria-current="true">Home</a></li>
-      <li><a href="#layanan" class="nav-link inline-flex items-center">Services</a></li>
-      <li><a href="#klien" class="nav-link inline-flex items-center">Our Clients</a></li>
-      <li><a href="#tentang" class="nav-link inline-flex items-center">About Us</a></li>
+      <li><a href="#clients" class="nav-link inline-flex items-center">Our Clients</a></li>
+      <li><a href="#services" class="nav-link inline-flex items-center">Services</a></li>
+      <li><a href="#about" class="nav-link inline-flex items-center">About Us</a></li>
       <li class="group relative">
-        <a href="#alur" class="nav-link inline-flex items-center gap-1.5" aria-haspopup="true">
+        <a href="#why-us" class="nav-link inline-flex items-center gap-1.5" aria-haspopup="true">
           More
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <ul class="invisible absolute right-0 top-full w-44 rounded-md bg-white py-1.5 text-sm shadow-lg ring-1 ring-blue/10 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-          <li><a href="#alur" class="block px-4 py-2 hover:bg-blue/10">How We Work</a></li>
-          <li><a href="#keunggulan" class="block px-4 py-2 hover:bg-blue/10">Why Choose Us</a></li>
-          <li><a href="#sertifikat" class="block px-4 py-2 hover:bg-blue/10">Certificate</a></li>
-          <li><a href="#teknologi" class="block px-4 py-2 hover:bg-blue/10">Technology</a></li>
+        <!-- mt-4 menurunkan panel tepat ke bawah tepi header (dan garis progres); before:
+             menjembatani celahnya supaya hover tidak putus saat kursor turun dari "More".
+             Buka/tutupnya diatur .dropdown di style.css (menutup dengan jeda). -->
+        <ul class="dropdown absolute right-0 top-full mt-4 before:absolute before:inset-x-0 before:-top-4 before:h-4 before:content-[''] w-44 rounded-md bg-white py-1.5 text-sm shadow-lg ring-1 ring-blue/10">
+          <li><a href="#why-us" class="block px-4 py-2 hover:bg-blue/10">Why Choose Us</a></li>
+          <li><a href="#certified-expertise" class="block px-4 py-2 hover:bg-blue/10">Certified Expertise</a></li>
+          <li><a href="#how-we-work" class="block px-4 py-2 hover:bg-blue/10">How We Work</a></li>
+          <li><a href="#technology" class="block px-4 py-2 hover:bg-blue/10">Technology</a></li>
           <li><a href="#faq" class="block px-4 py-2 hover:bg-blue/10">FAQ</a></li>
         </ul>
       </li>
-      <li><a href="#kontak" class="nav-link inline-flex items-center">Contact</a></li>
+      <li><a href="#contact" class="nav-link inline-flex items-center">Contact</a></li>
     </ul>
 
 
     <div class="lang ml-auto lg:ml-6" role="group" aria-label="Bahasa / Language">
-      <button type="button" data-lang="id" aria-pressed="true">ID</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="id" aria-pressed="false">ID</button>
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
     </div>
 
     <details class="ml-3 lg:hidden">
@@ -73,223 +86,57 @@
       </summary>
       <ul class="absolute right-6 mt-3 w-48 rounded-lg bg-white p-1.5 text-[15px] font-medium text-blue shadow-xl ring-1 ring-blue/10">
         <li><a href="#top" class="block rounded px-3 py-2 hover:bg-blue/10">Home</a></li>
-        <li><a href="#tentang" class="block rounded px-3 py-2 hover:bg-blue/10">About Us</a></li>
-        <li><a href="#layanan" class="block rounded px-3 py-2 hover:bg-blue/10">Services</a></li>
-        <li><a href="#alur" class="block rounded px-3 py-2 hover:bg-blue/10">How We Work</a></li>
-        <li><a href="#klien" class="block rounded px-3 py-2 hover:bg-blue/10">Our Clients</a></li>
+        <li><a href="#clients" class="block rounded px-3 py-2 hover:bg-blue/10">Our Clients</a></li>
+        <li><a href="#services" class="block rounded px-3 py-2 hover:bg-blue/10">Services</a></li>
+        <li><a href="#about" class="block rounded px-3 py-2 hover:bg-blue/10">About Us</a></li>
+        <li><a href="#why-us" class="block rounded px-3 py-2 hover:bg-blue/10">Why Choose Us</a></li>
+        <li><a href="#certified-expertise" class="block rounded px-3 py-2 hover:bg-blue/10">Certified Expertise</a></li>
+        <li><a href="#how-we-work" class="block rounded px-3 py-2 hover:bg-blue/10">How We Work</a></li>
+        <li><a href="#technology" class="block rounded px-3 py-2 hover:bg-blue/10">Technology</a></li>
         <li><a href="#faq" class="block rounded px-3 py-2 hover:bg-blue/10">FAQ</a></li>
-        <li><a href="#kontak" class="block rounded px-3 py-2 hover:bg-blue/10">Contact</a></li>
+        <li><a href="#contact" class="block rounded px-3 py-2 hover:bg-blue/10">Contact</a></li>
       </ul>
     </details>
   </nav>
+  <!-- Garis progres gulir: app.js mengisinya sesuai posisi gulir halaman -->
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
 </header>
 
-<main id="konten">
+<main id="content">
 
-<section id="top" class="g-hero flex min-h-[calc(100vh-72px)] flex-col">
+<section id="top" class="g-dark to-alt flex min-h-[calc(100vh-72px)] flex-col pb-28">
   <div class="flex flex-1 items-center">
-    <div class="mx-auto w-full max-w-[1200px] px-6 py-16">
-      <p class="text-xs font-semibold uppercase tracking-[0.28em] text-blue/60" data-en="PT Sarana Artha Solusi &amp;middot; South Jakarta">PT Sarana Artha Solusi &middot; Jakarta Selatan</p>
-      <h1 class="mt-6 text-[44px] font-extrabold leading-[1.03] tracking-tight text-blue sm:text-7xl lg:text-[88px]">SARTH<wbr>LUTIONS</h1>
-      <p class="mt-5 text-2xl italic text-blue/90 sm:text-3xl">Secure. Smart. Scalable.</p>
-      <p class="mt-4 max-w-xl text-sm font-medium tracking-wide text-blue/70">Cyber Security &middot; Software Development &middot; AI Agent Development &middot; IT Procurement</p>
-      <div class="mt-10 flex flex-wrap gap-3">
-        <a href="#kontak" class="rounded-md bg-blue px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue/20 transition hover:bg-blue-deep" data-en="Start a consultation">Mulai konsultasi</a>
-        <a href="#klien" class="rounded-md border border-blue px-8 py-3.5 text-sm font-semibold text-blue transition hover:bg-blue hover:text-white" data-en="See our clients">Lihat klien kami</a>
+    <div class="mx-auto grid w-full max-w-[1200px] items-center gap-12 px-6 py-16 lg:grid-cols-[1.1fr_1fr]">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-teal" data-id="PT Sarana Artha Solusi &amp;middot; Jakarta Selatan">PT Sarana Artha Solusi &middot; South Jakarta</p>
+        <h1 class="mt-6 whitespace-nowrap text-[clamp(28px,11vw,44px)] font-extrabold leading-[1.03] tracking-tight text-white sm:text-7xl lg:text-[56px] xl:text-[72px]">SARTHLUTIONS</h1>
+        <p class="mt-5 text-2xl italic text-white/90 sm:text-3xl">Secure. Smart. Scalable.</p>
+        <p class="mt-4 max-w-xl text-sm font-medium tracking-wide text-white/75">Cyber Security &middot; Software Development &middot; AI Agent Development &middot; IT Procurement</p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20a%20consultation." data-wa target="_blank" rel="noopener" class="rounded-md bg-white px-8 py-3.5 text-sm font-semibold text-blue shadow-lg shadow-black/20 transition hover:bg-cream" data-id="Mulai konsultasi">Start a consultation</a>
+          <a href="#services" class="rounded-md border border-white/40 px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10" data-id="Lihat layanan kami">Explore our services</a>
+        </div>
+      </div>
+
+      <!-- Globe titik 3D (peta benua, penanda Jakarta, busur data) digambar app.js di <canvas>. -->
+      <div class="hero-art hidden lg:block">
+        <canvas class="hero-globe" aria-hidden="true"></canvas>
       </div>
     </div>
   </div>
-
-  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
-  </svg>
 </section>
 
-<section id="tentang" class="bg-gradient-to-br from-cream via-cream to-[#e3f1f3]">
-  <div class="mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-12 lg:grid-cols-2 lg:py-16">
-    <div>
-      <h2 class="text-5xl font-extrabold text-blue sm:text-6xl">About Us</h2>
-      <div class="mt-8 space-y-4 text-lg leading-relaxed text-soft">
-        <p><span class="font-semibold text-blue">PT Sarana Artha Solusi</span><span data-en=" — known as Sarthlutions — is an Indonesian technology company that helps organizations build, secure, and scale their digital systems."> — dikenal sebagai Sarthlutions — adalah perusahaan teknologi Indonesia yang membantu organisasi membangun, mengamankan, dan menskalakan sistem digitalnya.</span></p>
-        <p data-en="We bring together offensive security expertise, modern software engineering, and applied artificial intelligence, so that every solution we deliver is not only functional, but resilient and ready for what comes next.">Kami menyatukan keahlian offensive security, rekayasa perangkat lunak modern, dan penerapan kecerdasan buatan, sehingga setiap solusi yang kami serahkan bukan sekadar berfungsi, tetapi tahan terhadap gangguan dan siap untuk kebutuhan berikutnya.</p>
-        <p data-en="From hardening critical infrastructure and building intelligent business applications to sourcing the right technology, we work as a long-term partner — not simply a vendor.">Dari mengeraskan infrastruktur kritis dan membangun aplikasi bisnis cerdas sampai pengadaan teknologi yang tepat, kami bekerja sebagai mitra jangka panjang — bukan sekadar vendor.</p>
-      </div>
-    </div>
-    <div class="flex justify-center py-6">
-      <div class="grid w-[300px] rotate-45 scale-[0.707] grid-cols-3 gap-2 sm:w-[440px]">
-        <div></div><img width="500" height="500" src="https://picsum.photos/seed/dia1/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><div></div>
-        <img width="500" height="500" src="https://picsum.photos/seed/dia2/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><img width="500" height="500" src="https://picsum.photos/seed/dia3/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><img width="500" height="500" src="https://picsum.photos/seed/dia4/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy">
-        <div></div><img width="500" height="500" src="https://picsum.photos/seed/dia5/500/500" alt="" class="aspect-square w-full rounded-sm object-cover shadow-lg" loading="lazy"><div></div>
-      </div>
-    </div>
-  </div>
-
-  <dl class="mx-auto grid max-w-3xl grid-cols-3 gap-x-4 gap-y-10 px-6 pb-14 text-center">
-    <div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">50+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-en="projects delivered">proyek diserahkan</dd></div><div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">30+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-en="organizations served">organisasi dilayani</dd></div><div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">15+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-en="certified professionals">profesional bersertifikat</dd></div>
-  </dl>
-
-  <ul class="mx-auto mt-10 grid max-w-[1200px] gap-6 px-6 pb-16 sm:grid-cols-3">
-    <li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h3 class="text-lg font-bold text-blue">Security First</h3>
-      <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Every system we touch is designed to withstand real-world attacks.">Setiap sistem yang kami sentuh dirancang untuk menahan serangan nyata.</p>
-    </li><li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h3 class="text-lg font-bold text-blue">Technology Forward</h3>
-      <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We adopt automation and AI where it creates measurable value.">Kami memakai otomasi dan AI di tempat yang memberi nilai terukur.</p>
-    </li><li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h3 class="text-lg font-bold text-blue">Partnership Driven</h3>
-      <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We stay involved long after go-live, not only until handover.">Kami tetap terlibat lama setelah go-live, bukan sampai serah terima saja.</p>
-    </li>
-  </ul>
-
-  <div class="mx-auto grid max-w-[1200px] gap-6 px-6 sm:grid-cols-2">
-    <div class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h3 class="text-xl font-bold text-blue">Vision</h3>
-      <p class="mt-3 text-soft" data-en="To become a trusted technology partner that makes Indonesia&#x27;s digital ecosystem safer, smarter, and more competitive.">Menjadi mitra teknologi tepercaya yang membuat ekosistem digital Indonesia lebih aman, lebih cerdas, dan lebih berdaya saing.</p>
-    </div>
-    <div class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
-      <h3 class="text-xl font-bold text-blue">Mission</h3>
-      <ul class="mt-3 list-disc space-y-1.5 pl-5 text-soft marker:text-teal-deep">
-        <li data-en="Deliver secure, reliable, and measurable technology solutions.">Menyerahkan solusi teknologi yang aman, andal, dan terukur.</li><li data-en="Make advanced security and AI capabilities accessible to organizations of every size.">Membuat kemampuan keamanan dan AI tingkat lanjut terjangkau bagi organisasi segala ukuran.</li><li data-en="Build long-term partnerships grounded in integrity and transparency.">Membangun kemitraan jangka panjang berlandaskan integritas dan transparansi.</li><li data-en="Grow local talent that can compete at an international standard.">Menumbuhkan talenta lokal yang mampu bersaing di tingkat internasional.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="mx-auto max-w-[1200px] px-6 py-16">
-    <h3 class="text-2xl font-bold text-blue">Our Values</h3>
-    <ol class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-      <li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">01</span>
-        <h4 class="mt-2 text-lg font-bold text-blue">Integrity</h4>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We say what we find, and we find what matters.">Kami menyampaikan apa yang kami temukan, dan mencari yang benar-benar penting.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">02</span>
-        <h4 class="mt-2 text-lg font-bold text-blue">Security First</h4>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Security is a starting requirement, never an add-on.">Keamanan adalah syarat awal, bukan tambahan.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">03</span>
-        <h4 class="mt-2 text-lg font-bold text-blue">Innovation</h4>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We keep pace with technology so our clients do not have to.">Kami mengikuti perkembangan teknologi supaya klien tidak perlu.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">04</span>
-        <h4 class="mt-2 text-lg font-bold text-blue">Collaboration</h4>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We work inside your team, not across a wall.">Kami bekerja di dalam tim Anda, bukan dari seberang tembok.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">05</span>
-        <h4 class="mt-2 text-lg font-bold text-blue">Real Impact</h4>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Success is measured by outcomes, not deliverables.">Keberhasilan diukur dari hasil, bukan dari daftar keluaran.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<svg class="squiggle my-10" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0,45 C90,10 200,10 300,42 C400,74 500,84 620,58 C740,32 860,8 1000,26 C1140,44 1280,78 1440,52"/>
-  <path d="M0,62 C120,86 240,80 380,50 C520,20 660,12 800,36 C940,60 1100,88 1240,70 C1330,58 1390,44 1440,34"/>
-  <path d="M0,28 C140,58 300,72 460,44 C620,16 780,10 940,40 C1100,70 1280,66 1440,40"/>
-</svg>
-
-<section id="layanan" class="pb-6 pt-2">
-  <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Services</h2>
-  </div>
-
-  <ul class="mx-auto mt-10 grid max-w-[1200px] grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-4">
-      <li class="svc-card flex flex-col">
-        <p class="text-[11px] font-semibold tracking-[0.22em] text-soft">01 / 04</p>
-        <svg class="svc-card__art mt-7" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 15 98 29v21c0 23.5-15.4 41.5-38 55.5C37.4 91.5 22 73.5 22 50V29L60 15Z"/>
-        <path class="svc-card__accent" d="M60 30 84 39v15c0 15.8-9.8 27.8-24 37-14.2-9.2-24-21.2-24-37V39l24-9Z"/>
-        <path class="svc-card__accent" d="m48 60 9.5 9.5L76 51" stroke-width="2.2"/></svg>
-        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">Cyber Security</h3>
-        <p class="mt-3.5 flex-1 text-[15px] leading-relaxed text-soft" data-en="Penetration testing, vulnerability assessment, security hardening, and incident response — we find weaknesses before attackers do and help you close them for good.">Uji penetrasi, asesmen kerentanan, hardening, dan respons insiden. Kami temukan celahnya sebelum penyerang, lalu bantu menutupnya untuk seterusnya.</p>
-        <ul class="mt-6 flex flex-wrap gap-2 border-t border-dashed border-blue/15 pt-5 text-[11px]">
-          <li class="rounded border border-blue/15 px-2.5 py-1 text-soft">Pentest</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft">Audit</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft">Hardening</li>
-        </ul>
-      </li>
-      <li class="svc-card flex flex-col">
-        <p class="text-[11px] font-semibold tracking-[0.22em] text-soft">02 / 04</p>
-        <svg class="svc-card__art mt-7" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="26" width="100" height="68" rx="7"/><path d="M10 45h100"/>
-        <circle cx="23" cy="35.5" r="2.4" fill="currentColor" stroke="none"/>
-        <circle cx="32" cy="35.5" r="2.4" fill="currentColor" stroke="none"/>
-        <circle cx="41" cy="35.5" r="2.4" fill="currentColor" stroke="none"/>
-        <path class="svc-card__accent" d="m43 61-9 9 9 9M77 61l9 9-9 9M67 56 53 84" stroke-width="2.2"/></svg>
-        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">Software Development</h3>
-        <p class="mt-3.5 flex-1 text-[15px] leading-relaxed text-soft" data-en="Custom web, mobile, and enterprise systems built to scale, from requirement discovery and design through development, deployment, and long-term support.">Sistem web, mobile, dan enterprise yang dibangun untuk tumbuh — dari penggalian kebutuhan sampai penerapan dan dukungan jangka panjang.</p>
-        <ul class="mt-6 flex flex-wrap gap-2 border-t border-dashed border-blue/15 pt-5 text-[11px]">
-          <li class="rounded border border-blue/15 px-2.5 py-1 text-soft">Web</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft">Mobile</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft">ERP</li>
-        </ul>
-      </li>
-      <li class="svc-card flex flex-col">
-        <p class="text-[11px] font-semibold tracking-[0.22em] text-soft">03 / 04</p>
-        <svg class="svc-card__art mt-7" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="38" y="38" width="44" height="44" rx="7"/>
-        <path d="M49 38V22M60 38V22M71 38V22M49 82v16M60 82v16M71 82v16M38 49H22M38 60H22M38 71H22M82 49h16M82 60h16M82 71h16"/>
-        <path class="svc-card__accent" d="m60 47 3.6 9.4L73 60l-9.4 3.6L60 73l-3.6-9.4L47 60l9.4-3.6L60 47Z" stroke-width="2.2"/></svg>
-        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">AI Agent Development</h3>
-        <p class="mt-3.5 flex-1 text-[15px] leading-relaxed text-soft" data-en="Intelligent agents and automation workflows that plug into your existing systems to cut manual work, speed up decisions, and unlock the data you already own.">Agen cerdas dan alur otomasi yang menyatu dengan sistem yang sudah ada: memangkas kerja manual, mempercepat keputusan, membuka data yang sudah Anda miliki.</p>
-        <ul class="mt-6 flex flex-wrap gap-2 border-t border-dashed border-blue/15 pt-5 text-[11px]">
-          <li class="rounded border border-blue/15 px-2.5 py-1 text-soft" data-en="Automation">Otomasi</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft" data-en="Integration">Integrasi</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft">RAG</li>
-        </ul>
-      </li>
-      <li class="svc-card flex flex-col">
-        <p class="text-[11px] font-semibold tracking-[0.22em] text-soft">04 / 04</p>
-        <svg class="svc-card__art mt-7" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 26 102 48v34L60 104 18 82V48L60 26Z"/><path d="m18 48 42 22 42-22"/><path d="M60 70v34"/>
-        <path class="svc-card__accent" d="M60 6v26m-8-9 8 9 8-9" stroke-width="2.2"/></svg>
-        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">IT Procurement</h3>
-        <p class="mt-3.5 flex-1 text-[15px] leading-relaxed text-soft" data-en="Sourcing, licensing, and delivery of hardware, software, and infrastructure with vendor-neutral advice, transparent pricing, and support through implementation.">Pengadaan, lisensi, dan pengiriman perangkat keras, perangkat lunak, dan infrastruktur. Saran netral-vendor, harga transparan, didampingi sampai terpasang.</p>
-        <ul class="mt-6 flex flex-wrap gap-2 border-t border-dashed border-blue/15 pt-5 text-[11px]">
-          <li class="rounded border border-blue/15 px-2.5 py-1 text-soft">Server</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft" data-en="Network">Jaringan</li><li class="rounded border border-blue/15 px-2.5 py-1 text-soft" data-en="Licensing">Lisensi</li>
-        </ul>
-      </li>
-    </ul>
-</section>
-
-<svg class="squiggle my-10" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0,45 C90,10 200,10 300,42 C400,74 500,84 620,58 C740,32 860,8 1000,26 C1140,44 1280,78 1440,52"/>
-  <path d="M0,62 C120,86 240,80 380,50 C520,20 660,12 800,36 C940,60 1100,88 1240,70 C1330,58 1390,44 1440,34"/>
-  <path d="M0,28 C140,58 300,72 460,44 C620,16 780,10 940,40 C1100,70 1280,66 1440,40"/>
-</svg>
-
-<section id="alur" class="py-6">
-  <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">How We Work</h2>
-    <ol class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
-      <li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">01</span>
-        <h3 class="mt-2 text-xl font-bold text-blue">Discover</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We map your business goals, technical landscape, and risk exposure.">Kami petakan tujuan bisnis, lanskap teknis, dan paparan risiko Anda.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">02</span>
-        <h3 class="mt-2 text-xl font-bold text-blue">Design</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We architect a solution that fits your budget, timeline, and compliance needs.">Kami rancang solusi yang sesuai anggaran, tenggat, dan kebutuhan kepatuhan.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">03</span>
-        <h3 class="mt-2 text-xl font-bold text-blue">Develop</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Our engineers build and test to a defined quality and security standard.">Engineer kami membangun dan menguji dengan standar mutu dan keamanan yang ditetapkan.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">04</span>
-        <h3 class="mt-2 text-xl font-bold text-blue">Deliver</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We implement, migrate, document, and train your team for adoption.">Kami terapkan, migrasikan, dokumentasikan, dan latih tim Anda agar sistemnya benar-benar dipakai.</p>
-      </li><li class="border-t-2 border-teal/30 pt-5">
-        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">05</span>
-        <h3 class="mt-2 text-xl font-bold text-blue">Optimize</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="We monitor, review, and improve continuously after go-live.">Kami pantau, tinjau, dan perbaiki terus-menerus setelah go-live.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section id="klien" class="g-hero">
-  <svg class="wave wave--flip" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,0 H1440 V46 C1360,34 1260,18 1120,14 C900,8 720,48 520,72 C320,96 150,88 0,52 Z"/>
-  </svg>
-  <div class="mx-auto max-w-[1200px] px-6 pt-10">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Clients</h2>
+<section id="clients" class="surface-alt to-cream pb-24">
+  <div class="mx-auto max-w-[1200px] px-6 pt-20">
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Clients</h2>
+    <p class="mt-4 text-center text-lg leading-relaxed text-soft" data-id="Dipercaya oleh perbankan, lembaga keuangan, instansi pemerintah, dan perusahaan teknologi.">Trusted by banks, financial institutions, government agencies, and technology companies.</p>
   </div>
 
   <!-- Deretan berjalan: daftar logo ditulis dua kali; salinan kedua aria-hidden
        supaya lingkarannya mulus tanpa dibacakan ulang oleh screen reader. -->
   <div class="marquee mt-10 mb-4">
     <ul class="marquee__track">
-      <li><img width="640" height="123" src="assets/clients/asaba.png" alt="Asaba" loading="lazy"></li>
+      <li><img width="99" height="132" src="assets/clients/qoin.png" alt="Qoin Digital Indonesia" loading="lazy"></li>
       <li><img width="704" height="160" src="assets/clients/bank_aceh.png" alt="Bank Aceh" loading="lazy"></li>
       <li><img width="552" height="160" src="assets/clients/bank_bni.png" alt="BNI" loading="lazy"></li>
       <li><img width="573" height="160" src="assets/clients/bank_bsi.png" alt="Bank Syariah Indonesia" loading="lazy"></li>
@@ -304,9 +151,10 @@
       <li><img width="213" height="160" src="assets/clients/linc_group.png" alt="Linc Group" loading="lazy"></li>
       <li><img width="161" height="160" src="assets/clients/loyalid.png" alt="LoyalID" loading="lazy"></li>
       <li><img width="250" height="130" src="assets/clients/pegadaian.png" alt="Pegadaian" loading="lazy"></li>
-      <li><img width="210" height="138" src="assets/clients/timor_telecom.png" alt="Timor Telecom" loading="lazy"></li>
+      <li><img width="114" height="132" src="assets/clients/baharkam_polri.png" alt="Baharkam Polri" loading="lazy"></li>
       <li><img width="477" height="160" src="assets/clients/woori.png" alt="Bank Woori Saudara" loading="lazy"></li>
-      <li aria-hidden="true"><img width="640" height="123" src="assets/clients/asaba.png" alt="" loading="lazy"></li>
+      <li><img width="96" height="51" src="assets/clients/vocagame.webp" alt="VocaGame" loading="lazy"></li>
+      <li aria-hidden="true"><img width="99" height="132" src="assets/clients/qoin.png" alt="" loading="lazy"></li>
       <li aria-hidden="true"><img width="704" height="160" src="assets/clients/bank_aceh.png" alt="" loading="lazy"></li>
       <li aria-hidden="true"><img width="552" height="160" src="assets/clients/bank_bni.png" alt="" loading="lazy"></li>
       <li aria-hidden="true"><img width="573" height="160" src="assets/clients/bank_bsi.png" alt="" loading="lazy"></li>
@@ -321,44 +169,221 @@
       <li aria-hidden="true"><img width="213" height="160" src="assets/clients/linc_group.png" alt="" loading="lazy"></li>
       <li aria-hidden="true"><img width="161" height="160" src="assets/clients/loyalid.png" alt="" loading="lazy"></li>
       <li aria-hidden="true"><img width="250" height="130" src="assets/clients/pegadaian.png" alt="" loading="lazy"></li>
-      <li aria-hidden="true"><img width="210" height="138" src="assets/clients/timor_telecom.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="114" height="132" src="assets/clients/baharkam_polri.png" alt="" loading="lazy"></li>
       <li aria-hidden="true"><img width="477" height="160" src="assets/clients/woori.png" alt="" loading="lazy"></li>
+      <li aria-hidden="true"><img width="96" height="51" src="assets/clients/vocagame.webp" alt="" loading="lazy"></li>
     </ul>
   </div>
 
-  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
-  </svg>
 </section>
 
-
-<section id="keunggulan" class="py-6">
+<section id="services" class="py-24">
   <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Why Choose Us</h2>
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Our Services</h2>
+    <p class="mt-4 text-center text-lg leading-relaxed text-soft" data-id="Empat kapabilitas terhubung yang mencakup seluruh siklus hidup sistem digital yang aman.">Four connected capabilities covering the full lifecycle of a secure digital system.</p>
+  </div>
+
+  <!-- Tiap kartu row-span-5 + subgrid: ikon, judul, isi, baris tag, dan tautan WhatsApp berbagi tinggi baris
+       dengan kartu di sebelahnya, jadi garis putus-putus tetap sejajar walau tagnya dua baris. -->
+  <ul class="mx-auto mt-10 grid max-w-[1200px] grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-4">
+      <li class="svc-card row-span-5 grid grid-rows-subgrid gap-0">
+        <svg class="svc-card__art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 15 98 29v21c0 23.5-15.4 41.5-38 55.5C37.4 91.5 22 73.5 22 50V29L60 15Z"/>
+        <path class="svc-card__accent" d="M60 30 84 39v15c0 15.8-9.8 27.8-24 37-14.2-9.2-24-21.2-24-37V39l24-9Z"/>
+        <path class="svc-card__accent" d="m48 60 9.5 9.5L76 51" stroke-width="2.2"/></svg>
+        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">Cyber Security</h3>
+        <p class="mt-3.5 text-[15px] leading-relaxed text-soft" data-id="Uji penetrasi, asesmen kerentanan, hardening, dan respons insiden. Kami temukan celahnya sebelum penyerang, lalu bantu menutupnya untuk seterusnya.">Penetration testing, vulnerability assessment, security hardening, and incident response — we find weaknesses before attackers do and help you close them for good.</p>
+        <ul class="mt-6 flex flex-wrap content-start gap-1.5 border-t border-dashed border-blue/15 pt-5 text-[11px]">
+          <li class="rounded border border-blue/15 px-2 py-1 text-soft">Pentest</li><li class="rounded border border-blue/15 px-2 py-1 text-soft">Audit</li><li class="rounded border border-blue/15 px-2 py-1 text-soft">Hardening</li>
+        </ul>
+        <a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20your%20Cyber%20Security%20services." data-wa="cyber" target="_blank" rel="noopener" class="svc-card__cta" data-id="Diskusikan layanan ini →">Discuss this service →</a>
+      </li>
+      <li class="svc-card row-span-5 grid grid-rows-subgrid gap-0">
+        <svg class="svc-card__art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="26" width="100" height="68" rx="7"/><path d="M10 45h100"/>
+        <circle cx="23" cy="35.5" r="2.4" fill="currentColor" stroke="none"/>
+        <circle cx="32" cy="35.5" r="2.4" fill="currentColor" stroke="none"/>
+        <circle cx="41" cy="35.5" r="2.4" fill="currentColor" stroke="none"/>
+        <path class="svc-card__accent" d="m43 61-9 9 9 9M77 61l9 9-9 9M67 56 53 84" stroke-width="2.2"/></svg>
+        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">Software Development</h3>
+        <p class="mt-3.5 text-[15px] leading-relaxed text-soft" data-id="Sistem web, mobile, dan enterprise yang dibangun untuk tumbuh — dari penggalian kebutuhan sampai penerapan dan dukungan jangka panjang.">Custom web, mobile, and enterprise systems built to scale, from requirement discovery and design through development, deployment, and long-term support.</p>
+        <ul class="mt-6 flex flex-wrap content-start gap-1.5 border-t border-dashed border-blue/15 pt-5 text-[11px]">
+          <li class="rounded border border-blue/15 px-2 py-1 text-soft">Web</li><li class="rounded border border-blue/15 px-2 py-1 text-soft">Mobile</li><li class="rounded border border-blue/15 px-2 py-1 text-soft">ERP</li>
+        </ul>
+        <a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20your%20Software%20Development%20services." data-wa="software" target="_blank" rel="noopener" class="svc-card__cta" data-id="Diskusikan layanan ini →">Discuss this service →</a>
+      </li>
+      <li class="svc-card row-span-5 grid grid-rows-subgrid gap-0">
+        <svg class="svc-card__art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="38" y="38" width="44" height="44" rx="7"/>
+        <path d="M49 38V22M60 38V22M71 38V22M49 82v16M60 82v16M71 82v16M38 49H22M38 60H22M38 71H22M82 49h16M82 60h16M82 71h16"/>
+        <path class="svc-card__accent" d="m60 47 3.6 9.4L73 60l-9.4 3.6L60 73l-3.6-9.4L47 60l9.4-3.6L60 47Z" stroke-width="2.2"/></svg>
+        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">AI Agent Development</h3>
+        <p class="mt-3.5 text-[15px] leading-relaxed text-soft" data-id="Agen cerdas dan alur otomasi yang menyatu dengan sistem yang sudah ada: memangkas kerja manual, mempercepat keputusan, membuka data yang sudah Anda miliki.">Intelligent agents and automation workflows that plug into your existing systems to cut manual work, speed up decisions, and unlock the data you already own.</p>
+        <ul class="mt-6 flex flex-wrap content-start gap-1.5 border-t border-dashed border-blue/15 pt-5 text-[11px]">
+          <li class="rounded border border-blue/15 px-2 py-1 text-soft" data-id="Otomasi">Automation</li><li class="rounded border border-blue/15 px-2 py-1 text-soft" data-id="Integrasi">Integration</li><li class="rounded border border-blue/15 px-2 py-1 text-soft">RAG</li>
+        </ul>
+        <a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20your%20AI%20Agent%20Development%20services." data-wa="ai" target="_blank" rel="noopener" class="svc-card__cta" data-id="Diskusikan layanan ini →">Discuss this service →</a>
+      </li>
+      <li class="svc-card row-span-5 grid grid-rows-subgrid gap-0">
+        <svg class="svc-card__art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 26 102 48v34L60 104 18 82V48L60 26Z"/><path d="m18 48 42 22 42-22"/><path d="M60 70v34"/>
+        <path class="svc-card__accent" d="M60 6v26m-8-9 8 9 8-9" stroke-width="2.2"/></svg>
+        <h3 class="mt-7 text-[26px] font-semibold leading-tight tracking-tight text-blue">IT Procurement</h3>
+        <p class="mt-3.5 text-[15px] leading-relaxed text-soft" data-id="Pengadaan, lisensi, dan pengiriman perangkat keras, perangkat lunak, dan infrastruktur. Saran netral-vendor, harga transparan, didampingi sampai terpasang.">Sourcing, licensing, and delivery of hardware, software, and infrastructure with vendor-neutral advice, transparent pricing, and support through implementation.</p>
+        <ul class="mt-6 flex flex-wrap content-start gap-1.5 border-t border-dashed border-blue/15 pt-5 text-[11px]">
+          <li class="rounded border border-blue/15 px-2 py-1 text-soft">Server</li><li class="rounded border border-blue/15 px-2 py-1 text-soft" data-id="Jaringan">Network</li><li class="rounded border border-blue/15 px-2 py-1 text-soft" data-id="Lisensi">Licensing</li>
+        </ul>
+        <a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20your%20IT%20Procurement%20services." data-wa="procurement" target="_blank" rel="noopener" class="svc-card__cta" data-id="Diskusikan layanan ini →">Discuss this service →</a>
+      </li>
+    </ul>
+</section>
+
+<section id="about" class="surface-alt from-cream to-cream pb-8 pt-24">
+  <div class="mx-auto grid max-w-[1200px] items-center gap-10 px-6 pb-12 lg:grid-cols-[1fr_588px] lg:gap-0 lg:pb-16">
+    <div>
+      <h2 class="text-5xl font-extrabold text-blue sm:text-6xl">About Us</h2>
+      <div class="mt-8 space-y-4 text-lg leading-relaxed text-soft">
+        <p><span class="font-semibold text-blue">PT Sarana Artha Solusi</span><span data-id=" — dikenal sebagai Sarthlutions — adalah perusahaan teknologi yang membantu organisasi membangun, mengamankan, dan menskalakan sistem digitalnya."> — known as Sarthlutions — is a technology company that helps organizations build, secure, and scale their digital systems.</span></p>
+        <p data-id="Kami menyatukan keahlian offensive security, rekayasa perangkat lunak modern, dan penerapan kecerdasan buatan, sehingga setiap solusi yang kami serahkan bukan sekadar berfungsi, tetapi tahan terhadap gangguan dan siap untuk kebutuhan berikutnya.">We bring together offensive security expertise, modern software engineering, and applied artificial intelligence, so that every solution we deliver is not only functional, but resilient and ready for what comes next.</p>
+        <p data-id="Dari mengeraskan infrastruktur kritis dan membangun aplikasi bisnis cerdas sampai pengadaan teknologi yang tepat, kami bekerja sebagai mitra jangka panjang — bukan sekadar vendor.">From hardening critical infrastructure and building intelligent business applications to sourcing the right technology, we work as a long-term partner — not simply a vendor.</p>
+      </div>
+    </div>
+    <!-- Ilustrasi isometrik, digambar dari skrip (bukan foto): perisai = Cyber Security,
+         jendela kode = Software Development, chip = AI Agent, kotak = IT Procurement.
+         Gantilah dengan foto asli perusahaan bila sudah ada. -->
+    <div class="flex justify-center py-6">
+      <svg class="iso-art iso-art--about" viewBox="51 38 399 343" fill="none" aria-hidden="true">
+        <polygon class="a-l" points="63.3,267.0 240.0,369.0 240.0,352.0 63.3,250.0"/>
+        <polygon class="a-r" points="416.7,267.0 240.0,369.0 240.0,352.0 416.7,250.0"/>
+        <polygon class="a-plat" points="240.0,148.0 416.7,250.0 240.0,352.0 63.3,250.0"/>
+        <polyline class="a-grid" points="269.4,165.0 92.8,267.0"/>
+        <polyline class="a-grid" points="210.6,165.0 387.2,267.0"/>
+        <polyline class="a-grid" points="298.9,182.0 122.2,284.0"/>
+        <polyline class="a-grid" points="181.1,182.0 357.8,284.0"/>
+        <polyline class="a-grid" points="328.3,199.0 151.7,301.0"/>
+        <polyline class="a-grid" points="151.7,199.0 328.3,301.0"/>
+        <polyline class="a-grid" points="357.8,216.0 181.1,318.0"/>
+        <polyline class="a-grid" points="122.2,216.0 298.9,318.0"/>
+        <polyline class="a-grid" points="387.2,233.0 210.6,335.0"/>
+        <polyline class="a-grid" points="92.8,233.0 269.4,335.0"/>
+        <polyline class="a-flow" points="240.0,250.0 178.2,214.3 189.9,207.5"/>
+        <polyline class="a-flow" points="240.0,250.0 290.1,221.1 300.4,227.1"/>
+        <polyline class="a-flow" points="240.0,250.0 188.5,279.8 154.6,260.2"/>
+        <ellipse class="a-node" cx="189.9" cy="207.5" rx="5.0" ry="2.9"/>
+        <ellipse class="a-node" cx="300.4" cy="227.1" rx="5.0" ry="2.9"/>
+        <ellipse class="a-node" cx="154.6" cy="260.2" rx="5.0" ry="2.9"/>
+        <polygon class="a-l" points="141.4,213.4 145.5,215.8 145.5,144.4 141.4,142.0"/>
+        <polygon class="a-panel" points="207.3,180.1 145.5,215.8 145.5,144.4 207.3,108.7"/>
+        <polygon class="a-top" points="203.2,106.3 207.3,108.7 145.5,144.4 141.4,142.0"/>
+        <g transform="matrix(29.44,-17.00,0.00,34.00,145.5,144.4)" class="a-local"><line x1="0" y1="0.34" x2="2.1" y2="0.34"/><circle cx="0.2" cy="0.17" r="0.05"/><circle cx="0.37" cy="0.17" r="0.05"/><circle cx="0.54" cy="0.17" r="0.05"/><path class="a-acc" d="M0.75 0.9 0.42 1.2 0.75 1.5M1.35 0.9 1.68 1.2 1.35 1.5M1.2 0.78 0.9 1.62"/></g>
+        <polygon class="a-l" points="278.3,244.9 331.3,275.5 331.3,265.3 278.3,234.7"/>
+        <polygon class="a-r" points="384.3,244.9 331.3,275.5 331.3,265.3 384.3,234.7"/>
+        <polygon class="a-top" points="331.3,204.1 384.3,234.7 331.3,265.3 278.3,234.7"/>
+        <polyline class="a-pin" points="341.6,215.2 350.4,210.1"/>
+        <polyline class="a-pin" points="374.0,245.8 382.8,250.8"/>
+        <polyline class="a-pin" points="353.4,222.0 362.2,216.8"/>
+        <polyline class="a-pin" points="362.2,252.5 371.0,257.6"/>
+        <polyline class="a-pin" points="365.1,228.8 374.0,223.7"/>
+        <polyline class="a-pin" points="350.4,259.3 359.2,264.4"/>
+        <polyline class="a-pin" points="376.9,235.6 385.7,230.5"/>
+        <polyline class="a-pin" points="338.6,266.1 347.5,271.2"/>
+        <g transform="matrix(29.44,17.00,-29.44,17.00,331.3,204.1)" class="a-local"><rect x="0.45" y="0.45" width="0.9" height="0.9" rx="0.08"/><path class="a-acc" d="M0.9 0.6Q0.95 0.85 1.2 0.9Q0.95 0.95 0.9 1.2Q0.85 0.95 0.6 0.9Q0.85 0.85 0.9 0.6Z"/></g>
+        <ellipse class="a-glow" cx="240.0" cy="250.0" rx="37.5" ry="21.6"/>
+        <ellipse class="a-pad" cx="240.0" cy="250.0" rx="22.9" ry="13.2"/>
+        <line class="a-beam" x1="240.0" y1="145.0" x2="240.0" y2="244.0"/>
+        <polygon class="a-l" points="92.8,246.6 131.1,268.7 131.1,224.5 92.8,202.4"/>
+        <polygon class="a-r" points="169.3,246.6 131.1,268.7 131.1,224.5 169.3,202.4"/>
+        <polygon class="a-top" points="131.1,180.3 169.3,202.4 131.1,224.5 92.8,202.4"/>
+        <path class="a-acc a-arrow" d="M131.1 142.4V186.4M122.1 177.4L131.1 186.4L140.1 177.4"/>
+        <g transform="translate(189.0 45.0) scale(0.85)"><path class="a-shield" d="M60 15 98 29v21c0 23.5-15.4 41.5-38 55.5C37.4 91.5 22 73.5 22 50V29L60 15Z"/><path class="a-acc" d="M60 30 84 39v15c0 15.8-9.8 27.8-24 37-14.2-9.2-24-21.2-24-37V39l24-9Z"/><path class="a-acc" stroke-width="3.2" d="m48 60 9.5 9.5L76 51"/></g>
+        <rect class="a-pixel" x="400" y="70" width="16" height="16" rx="2"/>
+        <rect class="a-pixel" x="424" y="52" width="11" height="11" rx="2"/>
+        <rect class="a-pixel" x="378" y="50" width="9" height="9" rx="2"/>
+        <rect class="a-pixel" x="430" y="86" width="8" height="8" rx="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <dl class="mx-auto grid max-w-3xl grid-cols-3 gap-x-4 gap-y-10 px-6 pb-14 text-center">
+    <div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">50+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-id="proyek diserahkan">projects delivered</dd></div><div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">30+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-id="organisasi dilayani">organizations served</dd></div><div><dt class="text-3xl font-extrabold text-blue sm:text-5xl">15+</dt><dd class="mt-2 text-xs leading-snug text-soft sm:text-base" data-id="profesional bersertifikat">certified professionals</dd></div>
+  </dl>
+
+  <ul class="mx-auto mt-10 grid max-w-[1200px] gap-6 px-6 pb-16 sm:grid-cols-3">
+    <li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
+      <h3 class="text-lg font-bold text-blue">Security First</h3>
+      <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Setiap sistem yang kami sentuh dirancang untuk menahan serangan nyata.">Every system we touch is designed to withstand real-world attacks.</p>
+    </li><li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
+      <h3 class="text-lg font-bold text-blue">Technology Forward</h3>
+      <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami memakai otomasi dan AI di tempat yang memberi nilai terukur.">We adopt automation and AI where it creates measurable value.</p>
+    </li><li class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
+      <h3 class="text-lg font-bold text-blue">Partnership Driven</h3>
+      <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami tetap terlibat lama setelah go-live, bukan sampai serah terima saja.">We stay involved long after go-live, not only until handover.</p>
+    </li>
+  </ul>
+
+  <div class="mx-auto grid max-w-[1200px] gap-6 px-6 sm:grid-cols-2">
+    <div class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
+      <h3 class="text-xl font-bold text-blue">Vision</h3>
+      <p class="mt-3 text-soft" data-id="Menjadi mitra teknologi tepercaya yang membuat ekosistem digital lebih aman, lebih cerdas, dan lebih berdaya saing.">To become a trusted technology partner that makes digital ecosystems safer, smarter, and more competitive.</p>
+    </div>
+    <div class="rounded-lg border-l-4 border-teal bg-white/70 p-7">
+      <h3 class="text-xl font-bold text-blue">Mission</h3>
+      <ul class="mt-3 list-disc space-y-1.5 pl-5 text-soft marker:text-teal-deep">
+        <li data-id="Menyerahkan solusi teknologi yang aman, andal, dan terukur.">Deliver secure, reliable, and measurable technology solutions.</li><li data-id="Membuat kemampuan keamanan dan AI tingkat lanjut terjangkau bagi organisasi segala ukuran.">Make advanced security and AI capabilities accessible to organizations of every size.</li><li data-id="Membangun kemitraan jangka panjang berlandaskan integritas dan transparansi.">Build long-term partnerships grounded in integrity and transparency.</li><li data-id="Menumbuhkan talenta lokal yang mampu bersaing di tingkat internasional.">Grow local talent that can compete at an international standard.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-[1200px] px-6 py-16">
+    <h3 class="text-2xl font-bold text-blue">Our Values</h3>
+    <ol class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+      <li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">01</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Integrity</h4>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami menyampaikan apa yang kami temukan, dan mencari yang benar-benar penting.">We say what we find, and we find what matters.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">02</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Security First</h4>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Keamanan adalah syarat awal, bukan tambahan.">Security is a starting requirement, never an add-on.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">03</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Innovation</h4>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami mengikuti perkembangan teknologi supaya klien tidak perlu.">We keep pace with technology so our clients do not have to.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">04</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Collaboration</h4>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami bekerja di dalam tim Anda, bukan dari seberang tembok.">We work inside your team, not across a wall.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">05</span>
+        <h4 class="mt-2 text-lg font-bold text-blue">Real Impact</h4>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Keberhasilan diukur dari hasil, bukan dari daftar keluaran.">Success is measured by outcomes, not deliverables.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="why-us" class="py-24">
+  <div class="mx-auto max-w-[1200px] px-6">
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Why Choose Us</h2>
+    <p class="mt-4 text-center text-lg leading-relaxed text-soft" data-id="Bukan sekadar penyedia teknologi — kami mitra Anda membangun sistem yang tetap aman saat bertumbuh.">We are not just a technology provider — we are your partner in building systems that stay safe as they grow.</p>
     <ul class="mt-10 grid gap-6 sm:grid-cols-2">
       <li class="rounded-lg border-l-4 border-teal bg-white p-7 shadow-sm ring-1 ring-blue/5">
         <h3 class="text-lg font-bold text-blue">Security-First Engineering</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Security is embedded from the first line of code, not bolted on before launch.">Keamanan tertanam sejak baris kode pertama, bukan dipasang menjelang peluncuran.</p>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Keamanan tertanam sejak baris kode pertama, bukan dipasang menjelang peluncuran.">Security is embedded from the first line of code, not bolted on before launch.</p>
       </li><li class="rounded-lg border-l-4 border-teal bg-white p-7 shadow-sm ring-1 ring-blue/5">
         <h3 class="text-lg font-bold text-blue">Certified &amp; Experienced Team</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Practitioners with recognized security and engineering certifications behind every project.">Praktisi dengan sertifikasi keamanan dan rekayasa yang diakui, di balik setiap proyek.</p>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Praktisi dengan sertifikasi keamanan dan rekayasa yang diakui, di balik setiap proyek.">Practitioners with recognized security and engineering certifications behind every project.</p>
       </li><li class="rounded-lg border-l-4 border-teal bg-white p-7 shadow-sm ring-1 ring-blue/5">
         <h3 class="text-lg font-bold text-blue">End-to-End Delivery</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="One accountable partner from assessment and build to procurement and support.">Satu mitra yang bertanggung jawab, dari asesmen dan pembangunan sampai pengadaan dan dukungan.</p>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Satu mitra yang bertanggung jawab, dari asesmen dan pembangunan sampai pengadaan dan dukungan.">One accountable partner from assessment and build to procurement and support.</p>
       </li><li class="rounded-lg border-l-4 border-teal bg-white p-7 shadow-sm ring-1 ring-blue/5">
         <h3 class="text-lg font-bold text-blue">Measurable Impact</h3>
-        <p class="mt-2 text-sm leading-relaxed text-soft" data-en="Clear metrics, honest reporting, and outcomes you can present to your board.">Metrik yang jelas, pelaporan yang jujur, dan hasil yang bisa Anda paparkan ke direksi.</p>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Metrik yang jelas, pelaporan yang jujur, dan hasil yang bisa Anda paparkan ke direksi.">Clear metrics, honest reporting, and outcomes you can present to your board.</p>
       </li>
     </ul>
   </div>
 </section>
 
-<section id="sertifikat" class="g-hero">
-  <svg class="wave wave--flip" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,0 H1440 V46 C1360,34 1260,18 1120,14 C900,8 720,48 520,72 C320,96 150,88 0,52 Z"/>
-  </svg>
-  <div class="mx-auto max-w-[1200px] px-6 pt-10">
-    <h2 class="text-5xl font-extrabold text-blue sm:text-6xl">Certificate</h2>
+<section id="certified-expertise" class="g-dark from-cream to-alt pb-52 pt-32">
+  <div class="mx-auto max-w-[1200px] px-6 pt-16">
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-white sm:text-[46px]">Certified Expertise</h2>
+    <p class="mt-4 text-center text-lg leading-relaxed text-white/80" data-id="Sertifikasi industri yang dipegang tim kami di bidang keamanan ofensif, aplikasi, dan mobile.">Industry certifications held by our team across offensive, application, and mobile security.</p>
   </div>
 
   <!-- VERIFIKASI: CCEP dan C3SA belum punya berkas logo — lengkapi, atau coret dari
@@ -391,182 +416,187 @@
       <li aria-hidden="true"><img width="261" height="193" src="assets/certs/ehe.png" alt="" loading="lazy"></li>
     </ul>
   </div>
-  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
-  </svg>
 </section>
 
-<!-- Testimonials, Our Partners, dan blok statistik dibuang — lihat CLAUDE.md. -->
-<section id="teknologi" class="py-14">
+<section id="how-we-work" class="surface-alt to-cream py-24">
   <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Technology &amp; Competencies</h2>
-    <ul class="mt-10 flex flex-wrap gap-3">
-      <li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Web &amp; Mobile</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Cloud &amp; DevOps</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Data &amp; Analytics</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">AI &amp; Automation</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Offensive Security</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Network &amp; Infrastructure</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">API &amp; Integration</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Identity &amp; Access</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Compliance &amp; Audit</li>
-    </ul>
-    <div class="mt-10 rounded-lg border-l-4 border-teal bg-white p-7 shadow-sm ring-1 ring-blue/5">
-      <h3 class="text-sm font-bold uppercase tracking-[0.15em] text-blue">Standards &amp; Frameworks</h3>
-      <p class="mt-3 text-soft" data-en="OWASP ASVS &amp;middot; OWASP Top 10 &amp;middot; NIST CSF &amp;middot; PTES &amp;middot; ISO/IEC 27001 &amp;middot; Indonesian Personal Data Protection Law (UU PDP)">OWASP ASVS &middot; OWASP Top 10 &middot; NIST CSF &middot; PTES &middot; ISO/IEC 27001 &middot; UU Perlindungan Data Pribadi (UU PDP)</p>
-    </div>
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">How We Work</h2>
+    <ol class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+      <li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">01</span>
+        <h3 class="mt-2 text-xl font-bold text-blue">Discover</h3>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami petakan tujuan bisnis, lanskap teknis, dan paparan risiko Anda.">We map your business goals, technical landscape, and risk exposure.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">02</span>
+        <h3 class="mt-2 text-xl font-bold text-blue">Design</h3>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami rancang solusi yang sesuai anggaran, tenggat, dan kebutuhan kepatuhan.">We architect a solution that fits your budget, timeline, and compliance needs.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">03</span>
+        <h3 class="mt-2 text-xl font-bold text-blue">Develop</h3>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Engineer kami membangun dan menguji dengan standar mutu dan keamanan yang ditetapkan.">Our engineers build and test to a defined quality and security standard.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">04</span>
+        <h3 class="mt-2 text-xl font-bold text-blue">Deliver</h3>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami terapkan, migrasikan, dokumentasikan, dan latih tim Anda agar sistemnya benar-benar dipakai.">We implement, migrate, document, and train your team for adoption.</p>
+      </li><li class="border-t-2 border-teal/30 pt-5">
+        <span class="text-sm font-bold tracking-[0.2em] text-teal-deep">05</span>
+        <h3 class="mt-2 text-xl font-bold text-blue">Optimize</h3>
+        <p class="mt-2 text-sm leading-relaxed text-soft" data-id="Kami pantau, tinjau, dan perbaiki terus-menerus setelah go-live.">We monitor, review, and improve continuously after go-live.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<svg class="squiggle my-10" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0,45 C90,10 200,10 300,42 C400,74 500,84 620,58 C740,32 860,8 1000,26 C1140,44 1280,78 1440,52"/>
-  <path d="M0,62 C120,86 240,80 380,50 C520,20 660,12 800,36 C940,60 1100,88 1240,70 C1330,58 1390,44 1440,34"/>
-  <path d="M0,28 C140,58 300,72 460,44 C620,16 780,10 940,40 C1100,70 1280,66 1440,40"/>
-</svg>
+<!-- Testimonials, Our Partners, dan blok statistik dibuang — lihat CLAUDE.md. -->
+<section id="technology" class="py-24">
+  <div class="mx-auto max-w-[1200px] px-6 text-center">
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Technology &amp; Competencies</h2>
+    <p class="mt-4 text-center text-lg leading-relaxed text-soft" data-id="Perangkat modern dan standar yang teruji, dipilih sesuai kebutuhan masalahnya — bukan karena sedang tren.">Modern tooling and established standards, chosen for what the problem needs — not for what is fashionable.</p>
+    <!-- max-w membagi 9 chip jadi 5 + 4 di layar lebar, bukan 7 + 2 -->
+    <ul class="mx-auto mt-10 flex max-w-[860px] flex-wrap justify-center gap-3">
+      <li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Web &amp; Mobile</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Cloud &amp; DevOps</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Data &amp; Analytics</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">AI &amp; Automation</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Offensive Security</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Network &amp; Infrastructure</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">API &amp; Integration</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Identity &amp; Access</li><li class="rounded-full border border-blue/15 bg-white px-5 py-2.5 text-sm font-medium text-blue shadow-sm">Compliance &amp; Audit</li>
+    </ul>
+  </div>
+</section>
 
-<section id="faq" class="pb-4 pt-8">
+<section id="faq" class="surface-alt from-cream pb-24 pt-28">
   <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">FAQ</h2>
-    <div class="mt-10 grid items-center gap-10 lg:grid-cols-[1fr_380px]">
+    <h2 class="text-center text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">FAQ</h2>
+    <p class="mt-4 text-center text-lg leading-relaxed text-soft" data-id="Jawaban atas pertanyaan yang paling sering kami terima seputar layanan dan cara kerja kami.">Answers to the questions we hear most often about our services and how we work.</p>
+    <div class="mt-10 grid items-center gap-10 lg:grid-cols-[1fr_460px] lg:gap-0">
       <div class="space-y-2.5">
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5" open>
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="What is included in your IT services?">Apa saja yang termasuk layanan IT?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Apa saja yang termasuk layanan IT?">What is included in your IT services?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="Cyber security, software development, AI agent development, and IT procurement. One contract, one accountable partner.">Keamanan siber, pengembangan perangkat lunak, pembuatan agen AI, dan pengadaan perangkat. Satu kontrak, satu penanggung jawab.</p>
+        <p class="mt-3 text-sm text-soft" data-id="Keamanan siber, pengembangan perangkat lunak, pembuatan agen AI, dan pengadaan perangkat. Satu kontrak, satu penanggung jawab.">Cyber security, software development, AI agent development, and IT procurement. One contract, one accountable partner.</p>
       </details>
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="What is the difference between a pentest and a security assessment?">Apa bedanya pentest dan security assessment?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Apa bedanya pentest dan security assessment?">What is the difference between a pentest and a security assessment?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="A pentest simulates a real attack against a running system. An assessment reviews configuration, policy, and process without exploiting anything. Many clients take both.">Pentest mensimulasikan serangan nyata pada sistem yang berjalan. Security assessment memeriksa konfigurasi, kebijakan, dan proses tanpa mengeksploitasi. Banyak klien mengambil keduanya.</p>
+        <p class="mt-3 text-sm text-soft" data-id="Pentest mensimulasikan serangan nyata pada sistem yang berjalan. Security assessment memeriksa konfigurasi, kebijakan, dan proses tanpa mengeksploitasi. Banyak klien mengambil keduanya.">A pentest simulates a real attack against a running system. An assessment reviews configuration, policy, and process without exploiting anything. Many clients take both.</p>
       </details>
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="How long does a penetration test take?">Berapa lama uji penetrasi berlangsung?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Berapa lama uji penetrasi berlangsung?">How long does a penetration test take?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="A single web application takes 5–10 working days. An internal network at one site takes 2–3 weeks. The findings report and a walkthrough session are included.">Satu aplikasi web 5–10 hari kerja. Jaringan internal satu lokasi 2–3 minggu. Laporan temuan dan sesi pemaparan sudah termasuk.</p>
+        <p class="mt-3 text-sm text-soft" data-id="Tergantung lingkupnya — jumlah aplikasi, endpoint, dan lingkungan yang diuji. Estimasi waktu yang pasti kami berikan setelah sesi pemetaan kebutuhan. Laporan temuan dan sesi pemaparan selalu termasuk.">It depends on the scope — how many applications, endpoints, and environments are tested. We give a firm timeline after the scoping session. The findings report and a walkthrough session are always included.</p>
       </details>
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="Will testing disrupt our operations?">Apakah pengujian mengganggu operasional?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Apakah pengujian mengganggu operasional?">Will testing disrupt our operations?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="The window and the boundaries are agreed before we start. Anything potentially disruptive runs against staging or outside working hours.">Jendela waktu dan batasan disepakati sebelum mulai. Uji yang berpotensi mengganggu dijalankan di lingkungan staging atau di luar jam kerja.</p>
+        <p class="mt-3 text-sm text-soft" data-id="Jendela waktu dan batasan disepakati sebelum mulai. Uji yang berpotensi mengganggu dijalankan di lingkungan staging atau di luar jam kerja.">The window and the boundaries are agreed before we start. Anything potentially disruptive runs against staging or outside working hours.</p>
       </details>
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="Who owns the report and the code?">Siapa pemilik laporan dan kodenya?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Siapa pemilik laporan dan kodenya?">Who owns the report and the code?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="Your company does. The findings report, the repositories, and the server access are in your name from day one. We hold nothing back.">Perusahaan Anda. Laporan temuan, repositori, dan akses server atas nama Anda sejak hari pertama. Kami tidak menahan apa pun.</p>
+        <p class="mt-3 text-sm text-soft" data-id="Perusahaan Anda. Laporan temuan, repositori, dan akses server atas nama Anda sejak hari pertama. Kami tidak menahan apa pun.">Your company does. The findings report, the repositories, and the server access are in your name from day one. We hold nothing back.</p>
       </details>
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="What happens if we have an incident?">Bagaimana penanganan kalau terjadi insiden?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Bagaimana penanganan kalau terjadi insiden?">What happens if we have an incident?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft" data-en="Clients on a support contract get a first response within 4 hours for a critical incident: containment, investigation, then recovery and a root-cause report.">Klien dengan kontrak dukungan mendapat respons awal dalam 4 jam untuk insiden kritis: isolasi, investigasi, lalu pemulihan dan laporan akar masalah.</p>
+        <p class="mt-3 text-sm text-soft" data-id="Klien dengan kontrak dukungan mendapat respons prioritas untuk insiden kritis: isolasi, investigasi, lalu pemulihan dan laporan akar masalah. Waktu responsnya diatur dalam perjanjian dukungan.">Clients on a support contract get priority response for a critical incident: containment, investigation, then recovery and a root-cause report. Response times are set out in the support agreement.</p>
       </details>
-      <details class="group rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
+      <details class="faq rounded-md bg-white px-6 py-4 shadow-sm ring-1 ring-blue/5">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-          <span data-en="How much does it cost?">Berapa biayanya?</span><span class="shrink-0 text-xl font-normal text-soft"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">&times;</span></span>
+          <span data-id="Berapa biayanya?">How much does it cost?</span><span class="faq__icon" aria-hidden="true"></span>
         </summary>
-        <p class="mt-3 text-sm text-soft"><span data-en="Every scope is different, so we price per engagement rather than from a rate card. The first scoping session is free.">Tiap lingkup berbeda, jadi biayanya kami hitung per kebutuhan — bukan daftar harga. Sesi pemetaan kebutuhan pertama gratis.</span> <a href="#kontak" class="font-medium text-teal-deep hover:underline" data-en="Send us your question.">Kirim pertanyaan Anda.</a></p>
+        <p class="mt-3 text-sm text-soft"><span data-id="Tiap lingkup berbeda, jadi biayanya kami hitung per kebutuhan — bukan daftar harga. Sesi pemetaan kebutuhan pertama gratis.">Every scope is different, so we price per engagement rather than from a rate card. The first scoping session is free.</span> <a href="#contact" class="font-medium text-teal-deep hover:underline" data-id="Hubungi kami.">Get in touch.</a></p>
       </details>
       </div>
-      <div class="mx-auto"><svg viewBox="0 0 320 250" class="w-full max-w-[300px]" role="img" aria-label="Ilustrasi dukungan pelanggan">
-        <ellipse cx="150" cy="216" rx="122" ry="20" fill="#d6eef0"/>
-        <path d="M262 150c14-6 26-22 22-40-16 2-30 16-30 30M282 128c10-14 8-32-4-42-10 10-12 28-6 40" fill="#cbe9ec"/>
-        <rect x="90" y="150" width="120" height="60" rx="6" fill="#1c2747"/>
-        <rect x="98" y="157" width="104" height="45" rx="3" fill="#2f7f96"/>
-        <rect x="72" y="210" width="156" height="8" rx="4" fill="#0f1830"/>
-        <path d="M116 150c0-19 15-34 34-34s34 15 34 34z" fill="#f5c33b"/>
-        <circle cx="150" cy="100" r="21" fill="#f0b49c"/>
-        <path d="M129 98c0-13 9-23 21-23s21 10 21 23c0-7-9-11-21-11s-21 4-21 11z" fill="#232f57"/>
-        <rect x="122" y="94" width="12" height="20" rx="6" fill="#232f57"/>
-        <rect x="166" y="94" width="12" height="20" rx="6" fill="#232f57"/>
-        <path d="M128 90h44" stroke="#232f57" stroke-width="7" stroke-linecap="round"/>
-        <g fill="#fff">
-          <circle cx="56" cy="46" r="24" fill="#19b1b4"/><circle cx="56" cy="46" r="12" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M56 38v8l6 4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <circle cx="242" cy="40" r="26" fill="#1b3a6b"/><circle cx="242" cy="34" r="7"/><path d="M230 52c0-7 5-11 12-11s12 4 12 11z"/>
-          <circle cx="30" cy="112" r="18" fill="#19b1b4"/><path d="M36 105a6 6 0 0 0-8 8l-6 6 4 4 6-6a6 6 0 0 0 8-8l-4 4-4-4z"/>
-          <circle cx="276" cy="116" r="21" fill="#6fc9cb"/><circle cx="276" cy="116" r="6" fill="#fff"/><path d="M276 100v6M276 126v6M260 116h6M286 116h6M265 105l4 4M283 123l4 4M287 105l-4 4M269 123l-4 4" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-          <rect x="150" y="14" width="66" height="40" rx="14" fill="#1b3a6b"/><path d="M166 54l-6 12 16-12z" fill="#1b3a6b"/>
-          <circle cx="169" cy="34" r="3.5"/><circle cx="183" cy="34" r="3.5"/><circle cx="197" cy="34" r="3.5"/>
-        </g>
+      <!-- Ilustrasi isometrik FAQ, gaya sama dengan About Us: layar Q&A, gelembung tanya
+           dan jawab, tumpukan kartu basis pengetahuan. -->
+      <div class="mx-auto w-full"><svg class="iso-art iso-art--faq" viewBox="24 -38 352 412" fill="none" aria-hidden="true">
+        <polygon class="a-l" points="46.9,270.3 200.0,358.7 200.0,343.4 46.9,255.0"/>
+        <polygon class="a-r" points="353.1,270.3 200.0,358.7 200.0,343.4 353.1,255.0"/>
+        <polygon class="a-plat" points="200.0,166.6 353.1,255.0 200.0,343.4 46.9,255.0"/>
+        <polyline class="a-grid" points="238.3,188.7 85.2,277.1"/>
+        <polyline class="a-grid" points="161.7,188.7 314.8,277.1"/>
+        <polyline class="a-grid" points="276.6,210.8 123.4,299.2"/>
+        <polyline class="a-grid" points="123.4,210.8 276.6,299.2"/>
+        <polyline class="a-grid" points="314.8,232.9 161.7,321.3"/>
+        <polyline class="a-grid" points="85.2,232.9 238.3,321.3"/>
+        <polyline class="a-flow" points="179.4,273.7 220.6,297.5 258.9,275.4"/>
+        <polyline class="a-flow" points="114.6,249.9 91.1,263.5 155.8,300.9"/>
+        <ellipse class="a-node" cx="258.9" cy="275.4" rx="5.0" ry="2.9"/>
+        <ellipse class="a-node" cx="155.8" cy="300.9" rx="5.0" ry="2.9"/>
+        <polygon class="a-l" points="253.0,255.0 297.2,280.5 297.2,276.4 253.0,250.9"/>
+        <polygon class="a-r" points="335.4,258.4 297.2,280.5 297.2,276.4 335.4,254.3"/>
+        <polygon class="a-top" points="291.3,228.8 335.4,254.3 297.2,276.4 253.0,250.9"/>
+        <polygon class="a-l" points="258.3,249.2 302.5,274.7 302.5,270.6 258.3,245.1"/>
+        <polygon class="a-r" points="340.7,252.6 302.5,274.7 302.5,270.6 340.7,248.5"/>
+        <polygon class="a-top" points="296.6,223.0 340.7,248.5 302.5,270.6 258.3,245.1"/>
+        <polygon class="a-l" points="263.6,243.4 307.8,268.9 307.8,264.9 263.6,239.4"/>
+        <polygon class="a-r" points="346.0,246.8 307.8,268.9 307.8,264.9 346.0,242.8"/>
+        <polygon class="a-top" points="301.9,217.3 346.0,242.8 307.8,264.9 263.6,239.4"/>
+        <g transform="matrix(29.44,17.00,-29.44,17.00,301.9,217.3)" class="a-local"><line x1="0.25" y1="0.3" x2="1.2" y2="0.3"/><line x1="0.25" y1="0.6" x2="1.0" y2="0.6"/><line class="a-acc" x1="0.25" y1="0.9" x2="0.8" y2="0.9"/></g>
+        <polygon class="a-l" points="105.8,244.8 167.6,280.5 167.6,276.4 105.8,240.7"/>
+        <polygon class="a-r" points="211.8,255.0 167.6,280.5 167.6,276.4 211.8,250.9"/>
+        <polygon class="a-top" points="149.9,215.2 211.8,250.9 167.6,276.4 105.8,240.7"/>
+        <g transform="matrix(29.44,17.00,-29.44,17.00,149.9,215.2)" class="a-local"><rect x="0.2" y="0.2" width="1.7" height="0.85" rx="0.06"/><rect x="0.65" y="1.15" width="0.8" height="0.22" rx="0.05"/></g>
+        <polygon class="a-panel" points="150.5,214.9 212.4,250.6 212.4,201.3 150.5,165.6"/>
+        <polygon class="a-r" points="216.5,248.2 212.4,250.6 212.4,201.3 216.5,198.9"/>
+        <polygon class="a-top" points="154.7,163.2 216.5,198.9 212.4,201.3 150.5,165.6"/>
+        <g transform="matrix(29.44,17.00,0.00,34.00,150.5,165.6)" class="a-local"><line x1="0.2" y1="0.25" x2="1.9" y2="0.25"/><circle class="a-acc" cx="0.35" cy="0.55" r="0.07"/><line x1="0.55" y1="0.55" x2="1.7" y2="0.55"/><circle class="a-acc" cx="0.35" cy="0.85" r="0.07"/><line x1="0.55" y1="0.85" x2="1.45" y2="0.85"/><circle class="a-acc" cx="0.35" cy="1.15" r="0.07"/><line x1="0.55" y1="1.15" x2="1.6" y2="1.15"/></g>
+        <g transform="translate(119.8 -5.9)"><path class="a-bubble" d="M16 0H96a16 16 0 0 1 16 16V56a16 16 0 0 1-16 16H44L28 88 30 72H16A16 16 0 0 1 0 56V16A16 16 0 0 1 16 0Z"/><path class="a-acc" stroke-width="3.2" d="M46 26a10 10 0 1 1 14 9c-3.5 1.6-4 3.4-4 7"/><circle class="a-dot" cx="56" cy="51" r="2.6"/></g>
+        <g transform="translate(239.8 66.1)"><path class="a-bubble a-bubble--alt" d="M12 0H66a12 12 0 0 1 12 12V40a12 12 0 0 1-12 12H56L58 64 44 52H12A12 12 0 0 1 0 40V12A12 12 0 0 1 12 0Z"/><path class="a-acc" stroke-width="3" d="m27 26 7 7 16-15"/></g>
+        <line class="a-beam" x1="183.8" y1="86.1" x2="183.8" y2="174.1"/>
+        <rect class="a-pixel" x="318" y="-2" width="14" height="14" rx="2"/>
+        <rect class="a-pixel" x="340" y="-18" width="10" height="10" rx="2"/>
+        <rect class="a-pixel" x="296" y="-20" width="8" height="8" rx="2"/>
+        <rect class="a-pixel" x="344" y="8" width="7" height="7" rx="2"/>
       </svg></div>
     </div>
   </div>
 </section>
 
 
-<section class="g-foot text-white">
-  <svg class="wave wave--flip" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,0 H1440 V46 C1360,34 1260,18 1120,14 C900,8 720,48 520,72 C320,96 150,88 0,52 Z"/>
-  </svg>
-  <div class="mx-auto max-w-[1200px] px-6 pb-20 pt-6">
+<!-- #contact pindah ke sini: form Contact Us dihapus (diminta), jadi semua tautan Contact mendarat di
+     CTA ini — tombolnya mailto. Menyambung tanpa jeda ke footer (sama-sama .g-foot). -->
+<section id="contact" class="g-foot from-alt pb-8 pt-40">
+  <div class="mx-auto max-w-[1200px] px-6 py-20 text-center">
     <p class="text-xs font-semibold uppercase tracking-[0.28em] text-white/60">Ready when you are</p>
-    <h2 class="mt-5 max-w-2xl text-4xl font-extrabold leading-[1.1] sm:text-5xl" data-en="Ready to secure and scale your organization?">Siap mengamankan dan menskalakan organisasi Anda?</h2>
-    <p class="mt-5 max-w-xl text-lg text-white" data-en="Let us discuss your challenges and design the right solution — from the first assessment through to delivery and continuous improvement.">Mari bahas tantangan Anda dan rancang solusi yang tepat — dari asesmen pertama sampai penyerahan dan perbaikan berkelanjutan.</p>
-    <a href="mailto:contact@sarthlutions.id" class="mt-9 inline-block rounded-md bg-white px-8 py-3.5 text-sm font-semibold text-blue shadow-lg transition hover:bg-white/90" data-en="Schedule a consultation">Jadwalkan konsultasi</a>
+    <h2 class="mx-auto mt-5 max-w-2xl text-4xl font-extrabold leading-[1.1] sm:text-5xl" data-id="Siap mengamankan dan menskalakan organisasi Anda?">Ready to secure and scale your organization?</h2>
+    <p class="mt-5 text-lg text-white" data-id="Mari bahas tantangan Anda dan rancang solusi yang tepat, dari asesmen pertama hingga penyerahan.">Let's discuss your challenges and design the right solution, from first assessment to delivery.</p>
+    <!-- WHATSAPP: nomor ini juga dipakai di tombol hero, footer, dan tombol melayang (.wa-float) —
+         ganti keempatnya bersamaan. Pesan pembukanya diganti app.js sesuai bahasa (a[data-wa]). -->
+    <a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20a%20consultation." data-wa target="_blank" rel="noopener" class="mt-9 inline-block rounded-md bg-white px-8 py-3.5 text-sm font-semibold text-blue shadow-lg transition hover:bg-white/90" data-id="Jadwalkan konsultasi">Schedule a consultation</a>
   </div>
 
-  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,52 C150,88 320,96 520,72 C720,48 900,8 1120,14 C1260,18 1360,34 1440,46 L1440,120 L0,120 Z"/>
-  </svg>
 </section>
 
-<section id="kontak" class="pb-16 pt-2">
-  <div class="mx-auto max-w-[1200px] px-6">
-    <h2 class="text-[40px] font-extrabold leading-none text-blue sm:text-[46px]">Contact Us</h2>
-    <p class="mt-3 text-soft">Keep in Touch With Us</p>
-
-    <div class="mt-10 max-w-3xl">
-      <form action="#" method="post" class="space-y-5">
-        <div class="grid gap-5 sm:grid-cols-2">
-          <label class="block"><span class="mb-1.5 block text-sm font-medium text-blue" data-en="Name">Nama</span>
-            <input required name="nama" type="text" autocomplete="name" class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none focus:ring-2 focus:ring-blue/30"></label>
-          <label class="block"><span class="mb-1.5 block text-sm font-medium text-blue">Email</span>
-            <input required name="email" type="email" autocomplete="email" class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none focus:ring-2 focus:ring-blue/30"></label>
-        </div>
-        <label class="block"><span class="mb-1.5 block text-sm font-medium text-blue" data-en="Subject">Subjek</span>
-          <input required name="subjek" type="text" class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none focus:ring-2 focus:ring-blue/30"></label>
-        <label class="block"><span class="mb-1.5 block text-sm font-medium text-blue" data-en="Message">Pesan</span>
-          <textarea required name="pesan" rows="8" class="w-full rounded-md border border-blue bg-transparent px-4 py-3 text-blue outline-none focus:ring-2 focus:ring-blue/30"></textarea></label>
-        <div class="flex justify-end">
-          <button type="submit" class="rounded-md bg-blue px-14 py-3 font-semibold text-white transition hover:bg-blue-deep">Send</button>
-        </div>
-        <p class="text-right text-xs text-soft" data-en="This form is not wired to a backend yet.">Form ini belum tersambung ke backend.</p>
-        <noscript>
-          <p class="rounded-md bg-blue/5 px-4 py-3 text-sm text-blue ring-1 ring-blue/10">Form ini butuh JavaScript. Tanpa itu, menekan Send hanya memuat ulang halaman dan isian Anda hilang &mdash; silakan email langsung ke contact@sarthlutions.id. / This form needs JavaScript; email contact@sarthlutions.id instead.</p>
-        </noscript>
-        <p id="kirim-status" hidden role="status" class="rounded-md bg-blue/5 px-4 py-3 text-sm text-blue ring-1 ring-blue/10" data-en="Nothing was sent — this form has no backend yet. Please email contact@sarthlutions.id in the meantime; your text is still in the fields, ready to copy.">Pesan belum terkirim &mdash; form ini memang belum punya backend. Sementara ini silakan email ke contact@sarthlutions.id; isian Anda masih utuh di kolomnya, tinggal disalin.</p>
-      </form>
-
-    </div>
-  </div>
-</section>
 </main>
 
 <!-- ═══ FOOTER ═══ -->
-<footer class="g-foot text-white">
-  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path fill="#fbfdfd" d="M0,0 H1440 V46 C1360,34 1260,18 1120,14 C900,8 720,48 520,72 C320,96 150,88 0,52 Z"/>
-  </svg>
+<footer class="site-foot">
 
   <div class="mx-auto max-w-[1200px] px-6">
-    <div class="grid gap-10 pb-10 pt-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-10 pb-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
       <div>
         <h3 class="text-2xl font-bold">Company</h3>
-        <p class="mt-3 text-sm leading-relaxed text-white" data-en="PT Sarana Artha Solusi&lt;br&gt;South Jakarta, DKI Jakarta">PT Sarana Artha Solusi<br>Jakarta Selatan, DKI Jakarta</p>
+        <p class="mt-3 text-sm leading-relaxed text-white" data-id="PT Sarana Artha Solusi&lt;br&gt;Jakarta Selatan, DKI Jakarta">PT Sarana Artha Solusi<br>South Jakarta, DKI Jakarta</p>
         <p class="mt-4 text-sm text-white"><a class="hover:text-white" href="mailto:contact@sarthlutions.id">contact@sarthlutions.id</a></p>
-        <!-- DUMMY: nomor karangan, diminta sebagai isian sementara. Ganti sebelum rilis. -->
-        <p class="mt-1 text-sm text-white"><a class="hover:text-white" href="tel:+622150218899">+62 21 5021 8899</a></p>
+        <!-- WHATSAPP: nomor asli, membuka chat WhatsApp; sama dengan tombol CTA dan .wa-float. -->
+        <p class="mt-1 text-sm text-white"><a class="hover:text-white" href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20a%20consultation." data-wa target="_blank" rel="noopener">+62 838 8449 080</a></p>
       </div>
       <div>
         <h3 class="text-2xl font-bold">Our Service</h3>
         <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-white marker:text-white/45">
-          <li><a class="hover:text-white" href="#layanan">Cyber Security</a></li>
-          <li><a class="hover:text-white" href="#layanan">Software Development</a></li>
-          <li><a class="hover:text-white" href="#layanan">AI Agent Development</a></li>
-          <li><a class="hover:text-white" href="#layanan">IT Procurement</a></li>
+          <li><a class="hover:text-white" href="#services">Cyber Security</a></li>
+          <li><a class="hover:text-white" href="#services">Software Development</a></li>
+          <li><a class="hover:text-white" href="#services">AI Agent Development</a></li>
+          <li><a class="hover:text-white" href="#services">IT Procurement</a></li>
         </ul>
       </div>
       <div>
         <h3 class="text-2xl font-bold">Support</h3>
         <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-white marker:text-white/45">
           <li><a class="hover:text-white" href="#faq">FAQ</a></li>
-          <li><a class="hover:text-white" href="#kontak">CONTACT</a></li>
+          <li><a class="hover:text-white" href="#contact">Contact</a></li>
         </ul>
       </div>
       <!-- SOSIAL: ikon Instagram/GitHub/Telegram/WhatsApp dicabut &mdash; akun belum ada.
@@ -574,11 +604,16 @@
     </div>
   </div>
 
-  <div class="border-t border-white/25">
+  <div class="border-t border-white/10">
     <p class="mx-auto max-w-[1200px] px-6 py-4 text-xs text-white">Designed by Sarthlutions | Copyright © 2026 PT Sarana Artha Solusi. All Rights Reserved.</p>
   </div>
 </footer>
 
+<!-- Tombol WhatsApp melayang: jalur kontak utama, selalu terjangkau. -->
+<a href="https://wa.me/628388449080?text=Hi%20Sarthlutions%2C%20I%20found%20you%20through%20your%20website%20and%20would%20like%20to%20discuss%20a%20consultation." data-wa target="_blank" rel="noopener" class="wa-float">
+  <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3.2 28.8l7.1-1.8c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.7 12.7-12.7S23 3 16 3Zm0 23.2c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-4.2 1.1 1.1-4.1-.2-.4a10.5 10.5 0 0 1-1.6-5.6C5.5 9.8 10.2 5.2 16 5.2s10.5 4.7 10.5 10.5S21.8 26.2 16 26.2Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.6-1.9-1.7-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"/></svg>
+  <span class="wa-float__label" data-id="Chat lewat WhatsApp">Chat on WhatsApp</span>
+</a>
 <script src="assets/app.js"></script>
 </body>
 </html>

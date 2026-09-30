@@ -71,8 +71,8 @@ Yang tidak boleh disentuh saat update:
 | `.nojekyll` | mematikan pemrosesan Jekyll; tanpa ini Pages bisa menelan berkas tertentu |
 | `assets/tailwind.css` | hasil build — `npm run css` yang menulisnya, bukan tangan |
 
-Dua jebakan isi halaman: paragraf baru **wajib** ikut membawa `data-en`-nya (kalau
-tidak, ia tetap Indonesia saat disetel ke Inggris), dan section baru ber-`id`
+Dua jebakan isi halaman: paragraf baru **wajib** ikut membawa `data-id`-nya (kalau
+tidak, ia tetap Inggris saat disetel ke Indonesia), dan section baru ber-`id`
 **wajib** didaftarkan di `OWNER` (`assets/app.js`) atau garis bawah nav macet.
 `npm test` menangkap yang kedua, tidak yang pertama.
 
@@ -88,15 +88,15 @@ index.html               seluruh halaman — semua section ada di sini
 assets/tailwind.src.css  sumber build: @import + token @theme
 assets/tailwind.css      HASIL BUILD — jangan disunting tangan
 assets/style.css         CSS tulisan tangan: gradien, divider, kartu, marquee
-assets/app.js            menu, form, sakelar bahasa, marquee, garis bawah nav
+assets/app.js            menu, sakelar bahasa, marquee, garis bawah nav, garis progres
 assets/clients/          logo klien        assets/certs/  lencana sertifikasi
 CLAUDE.md                catatan teknis lengkap dan alasan di balik keputusan
 TODO.md                  temuan audit; dua butir masih menunggu data klien
 ```
 
-Halaman ini dwibahasa (ID/EN). Teks Indonesia ada di HTML, versi Inggrisnya di
-atribut `data-en` pada elemen yang sama — **menambah paragraf berarti menambah
-`data-en`-nya sekaligus**, kalau tidak ia akan tetap berbahasa Indonesia saat
-halaman dialihkan ke Inggris.
+Halaman ini dwibahasa (EN/ID) dan **dibuka dalam bahasa Inggris**. Teks Inggris ada
+di HTML, versi Indonesianya di atribut `data-id` pada elemen yang sama — **menambah
+paragraf berarti menambah `data-id`-nya sekaligus**, kalau tidak ia akan tetap
+berbahasa Inggris saat halaman dialihkan ke Indonesia.
 
 Yang masih butuh data dari klien sebelum rilis ada di `TODO.md`.

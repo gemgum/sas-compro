@@ -6,11 +6,11 @@
 
 @theme {
     --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-    --color-blue: #1b3a6b;        /* navy — heading, nav, teks di atas latar terang */
-    --color-blue-deep: #142c52;   /* hover */
-    --color-teal: #19b1b4;        /* aksen non-teks: garis, border, squiggle */
-    --color-teal-deep: #21758b;   /* teal untuk TEKS — #19b1b4 hanya 2.6:1 di krem */
-    --color-cream: #fbfdfd;
-    --color-soft: #69777d;        /* 4.5:1 di krem; #98a4a9 dulu hanya 2.5:1 */
-    --color-ink: #22303a;
+    --color-blue: #0b3a82;        /* navy — heading, nav, teks di atas latar terang */
+    --color-blue-deep: #072a60;   /* hover */
+    --color-teal: #18a8e8;        /* aksen non-teks: garis, border, squiggle */
+    --color-teal-deep: #0a64a0;   /* cyan untuk TEKS — #18a8e8 hanya 2.4:1 di krem */
+    --color-cream: #eef3f8;
+    --color-soft: #56667a;        /* 5.3:1 di krem, 4.9:1 di surface-alt */
+    --color-ink: #16233a;
   }

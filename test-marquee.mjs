@@ -13,7 +13,7 @@ import assert from 'node:assert/strict';
 
 const SRC = readFileSync(new URL('./assets/app.js', import.meta.url), 'utf8');
 const LI_WIDTH = 148;      // logo + gap, kira-kira seperti di halaman
-const LOGOS = 17;
+const LOGOS = 18;
 const COPIES_IN_HTML = 2;  // daftar ditulis dua kali di index.html
 
 const leaf = () => ({

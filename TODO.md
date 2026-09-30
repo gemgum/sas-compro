@@ -45,7 +45,7 @@ Rincian tiap temuan dan apa yang dikerjakan ada di bawah.
   tapi tombolnya tetap melakukan hal yang salah. Minimal `e.preventDefault()`
   plus pesan; idealnya sambungkan ke endpoint.
   **Selesai.** Handler `submit` memanggil `preventDefault()`, memunculkan
-  `#kirim-status` (`role="status"`, dua bahasa), dan membiarkan isian tetap di
+  `#send-status` (`role="status"`, dua bahasa), dan membiarkan isian tetap di
   kolomnya supaya bisa disalin. Hapus handler ini hanya bersamaan dengan
   endpoint sungguhan.
 
@@ -55,13 +55,13 @@ Rincian tiap temuan dan apa yang dikerjakan ada di bawah.
   Lebih bermasalah: About Us memakai `h1 → h2` untuk Vision/Security First,
   sementara Our Services memakai `h2 → h3` untuk hal setara.
   Target: hero `h1`, semua judul section `h2`, isi kartu `h3`.
-  **Selesai.** Sekarang tepat satu `<h1>` (hero). Semua heading di `#tentang`
+  **Selesai.** Sekarang tepat satu `<h1>` (hero). Semua heading di `#about`
   naik satu tingkat (h1→h2, h2→h3, h3→h4) dan Certificate jadi `h2`. Kerangka
   dokumen konsisten dari atas ke bawah.
 
 - [x] **B2 — Tidak ada `<main>`, tidak ada skip link**
   Pengguna keyboard melewati seluruh nav di tiap kunjungan.
-  **Selesai.** `<main id="konten">` membungkus seluruh isi antara header dan
+  **Selesai.** `<main id="content">` membungkus seluruh isi antara header dan
   footer, plus skip link `sr-only focus:not-sr-only` sebagai elemen pertama di
   `<body>` (dua bahasa).
 
@@ -205,7 +205,7 @@ Rasio dihitung dengan rumus WCAG 2.1; ambangnya 4.5:1 untuk teks normal,
   `aria-haspopup` di tombol More dan Escape untuk menutupnya (blur, karena
   dropdown-nya CSS murni — `aria-expanded` sengaja tidak dipakai, tidak ada state
   yang bisa dilaporkan jujur). `<noscript>` untuk form saat JS mati. Kelas
-  `relative` mati dicabut dari `#klien`, `#sertifikat`, dan section CTA — di
+  `relative` mati dicabut dari `#clients`, `#certificate`, dan section CTA — di
   `<footer>` tetap, sprite `<svg class="absolute">` membutuhkannya.
 
 ## Sisa pekerjaan
