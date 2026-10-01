@@ -391,6 +391,17 @@ property and the greyscale rule would otherwise drop it.
 Below 640px a media query shrinks both strips — logo height, badge height, track gap and
 container padding — so more than a logo or two fits on a phone.
 
+**Client logos are sized per logo, not one height for all.** At a flat 56px a square or
+tall mark (Qoin, IDX, Resona, Korlantas) looked tiny next to a wide wordmark (BNI), so each
+`<img>` may carry `style="--h:NN"` — its desktop height in px, `round(sqrt(8500 / aspect))`
+clamped to 56–96 (aspect from the `width`/`height` attributes). No attribute means 56.
+RuangTopup is pinned at 72: it is a solid dark tile and reads heavy at full size.
+FlipFlopTV is pinned at 42, its native height — the only source supplied is 190×42 and
+broke up when upscaled; chosen over redrawing it. Swap in a larger file when one exists. The CSS
+multiplies `--h` by `.68` below 640px, and `max-width` is 240px (160 on mobile) so the
+widest wordmarks are not squeezed. A new logo needs its `--h` worked out the same way, in
+**both** copies — and its file trimmed to the drawing first, or the margin counts as logo.
+
 Both logo sets are the client's own, lifted from **primevora.id** (same owner, a Flutter
 app — the file list came from its `assets/AssetManifest.bin.json`, base64 inside JSON).
 

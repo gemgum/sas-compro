@@ -182,8 +182,10 @@ body { background: var(--cream); }
 .marquee::-webkit-scrollbar { display: none; }
 .marquee.is-dragging { cursor: grabbing; user-select: none; }
 .marquee__track { display: flex; align-items: center; gap: 72px; width: max-content; }
+/* --h (inline, per logo) evens out visual weight: square/tall logos sit taller than
+   wide wordmarks so they don't read as tiny. Unitless px at desktop; mobile scales it. */
 .marquee img {
-  height: 56px; width: auto; max-width: 200px; object-fit: contain;
+  height: calc(var(--h, 56) * 1px); width: auto; max-width: 240px; object-fit: contain;
   -webkit-user-drag: none; user-select: none;
   transition: transform .3s cubic-bezier(.2,.7,.2,1), filter .3s, opacity .3s;
 }
@@ -338,7 +340,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 @media (max-width: 640px) {
   .marquee { padding: 14px 0; }
   .marquee__track { gap: 40px; }
-  .marquee img { height: 38px; max-width: 130px; }
+  .marquee img { height: calc(var(--h, 56) * .68px); max-width: 160px; }
   .marquee--certs img { height: 58px; max-width: 92px; }
 }
 
